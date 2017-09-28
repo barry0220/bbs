@@ -11,6 +11,13 @@
 |
 */
 
+//后台主页面
 Route::get('/', function () {
-    return view('welcome');
+//    return view('Admin.index');
+    redirect('/admin/plates');
 });
+
+
+//板块设置管理
+Route::resource('/admin/plates','Admin\PlatesController');
+Route::post('/admin/upload','Admin\PlatesController@upload');
