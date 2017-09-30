@@ -21,3 +21,9 @@ Route::get('/', function () {
 //板块设置管理
 Route::resource('/admin/plates','Admin\PlatesController');
 Route::post('/admin/upload','Admin\PlatesController@upload');
+
+//添加子类路由
+Route::get('/admin/childadd/{id}','Admin\PlatesController@childadd');
+Route::get('/admin/childedit/{id}','Admin\PlatesController@childedit');
+Route::post('/admin/childdoedit/{id}','Admin\PlatesController@childdoedit');
+Route::post('/admin/childdel/{id}','Admin\PlatesController@childdel');

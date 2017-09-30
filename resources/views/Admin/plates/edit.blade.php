@@ -1,6 +1,6 @@
 @extends('Layouts.admin')
 
-@section("title","论坛管理 | 板块添加")
+@section("title","论坛管理 | 板块修改")
 
 @section("content")
     <style>
@@ -21,24 +21,12 @@
             </ul>
         </div>
     @endif
-    <form method="post" id="art_form" action="{{ url('admin/plates')  }}" class="form-horizontal" enctype="multipart/form-data">
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">上级分类</label>
-            <div class="col-sm-3">
-                <select class="form-control m-b" name="id" id="type">
-                    <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
-                    @foreach($pls as $k => $v)
-                        <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->pname}} </option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
+    <form method="post" id="art_form" action="{{ url('admin/plates/').'/'.$pls->id  }}" class="form-horizontal" enctype="multipart/form-data">
         <div class="hr-line-dashed"></div>
         <div class="form-group">
             <label class="col-sm-2 control-label">板块名称</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="pname" >
+                <input type="text" class="form-control" name="pname" value="{{$pls -> pname}}"">
             </div>
         </div>
         <div class="hr-line-dashed"></div>
@@ -46,8 +34,8 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">板块图像</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="art_thumb" name="imgfile">
-                    <p><img id="img1" alt="上传后显示图片"  style="max-width:350px;max-height:100px;" /></p>
+                    <input type="text" class="form-control" id="art_thumb" name="imgfile" value="{{$pls->imgfile}}">
+                    <p><img id="img1" alt="上传后显示图片"  src="{{$pls->imgfile}}" style="max-width:350px;max-height:100px;" /></p>
                 </div>
                 <div class="col-sm-1">
                     <input id="file_upload" type="file" name="file_upload" multiple="true">
@@ -58,10 +46,10 @@
                 <label class="col-sm-2 control-label">VIP模块</label>
                 <div class="col-sm-3">
                     <label class="radio-inline">
-                        <input type="radio" name="isvip" value="1"> 是
+                        <input type="radio" name="isvip" value="1" {{$pls->isvip == 1 ? 'checked' : ''}}> 是
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="isvip" value="0" checked> 否
+                        <input type="radio" name="isvip" value="0" {{$pls->isvip == 0 ? 'checked' : ''}}> 否
                     </label>
                 </div>
             </div>
@@ -72,22 +60,9 @@
             <button class="btn btn-primary" type="submit">保存</button>
         </div>
         {{csrf_field()}}
+        {{method_field('put')}}
     </form>
     <script>
-        seltype();
-
-        $("#type").change(function(){
-            seltype();
-        });
-
-        function seltype(){
-            var v = $('#type').val();
-            if (v == '0') {
-                $('#one').show();
-            } else {
-                $('#one').hide();
-            }
-        }
 
         $("#file_upload").change(function(){
             uploadImage();
