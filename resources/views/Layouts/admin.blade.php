@@ -83,6 +83,13 @@
                         <li><a href="{{url('admin/plates/create')}}">添加板块栏目</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">友情链接设置</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/links')}}">友情链接列表</a></li>
+                        <li><a href="{{url('admin/links/create')}}">添加友情链接</a></li>
+                    </ul>
+                </li>
             </ul>
 
         </div>

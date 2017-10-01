@@ -14,7 +14,7 @@
 //后台主页面
 Route::get('/', function () {
 //    return view('Admin.index');
-    redirect('/admin/plates');
+    return redirect('/admin/plates');
 });
 
 
