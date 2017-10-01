@@ -14,6 +14,9 @@
         </SOURCES>
       </library>
     </orderEntry>
+<<<<<<< HEAD
     <orderEntry type="module" module-name="mytest" />
+=======
+>>>>>>> wss
   </component>
 </module>
