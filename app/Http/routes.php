@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
 //后台登录页
 Route::get('admin/login','Admin\LoginController@login');
 //后台登录处理页
@@ -30,5 +31,10 @@ Route::group(['middleware'=>'login','namespace'=>'Admin'],function(){
     //用户添加模块
     Route::resource('admin/user','UserController');
 });
+=======
+
+
+Route::resource('admin/post','Admin\PostController');
+>>>>>>> 16ec0cd453b0ab530770443f000088a537164820
 
 
