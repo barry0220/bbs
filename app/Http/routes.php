@@ -16,6 +16,7 @@ Route::get('/', function () {
 //    return view('Admin.index');
     return redirect('/admin/plates');
 });
+
 //后台登录页
 Route::get('admin/login','Admin\LoginController@login');
 //后台登录处理页
@@ -44,7 +45,8 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
     //友情链接设置模块
     Route::resource('/links','LinksController');
+    //帖子管理管理模块
+    Route::resource('/post','PostController');
 });
 
 
-//>>>>>>> wss
