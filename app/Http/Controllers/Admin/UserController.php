@@ -59,8 +59,7 @@ class UserController extends Controller
             'repassword'=>'required|same:password',
             'age'=>'regex:/\d+/',
             'phone'=>'regex:/1[3578]\d{9}/',
-            'email'=>'regex:/^\w+@\w+(\.com|\.cn|\.cc|\.net|\.co|\.top){1,2}$/'
-
+            'email'=>['regex:/^\w+\@[a-zA-Z0-9]+\.(com|cn|cc|net|co|top)$/']
         ];
         $msg = [
             'username.required'=>'用户名必须输入',

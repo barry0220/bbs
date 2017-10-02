@@ -7,11 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-<<<<<<< HEAD
-        "johnlui/aliyun-oss": "~1.0"
-=======
+        "johnlui/aliyun-oss": "~1.0",
         "gregwar/captcha": "^1.1"
->>>>>>> wss
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
