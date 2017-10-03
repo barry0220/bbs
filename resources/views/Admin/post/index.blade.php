@@ -45,25 +45,43 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-sm-2">
+
+
+                        <div class="col-sm-3">
                             <div class="plates" id="editable_length">
                                 <label>
                                     板块查询
-                                    <select name="editable_length" aria-controls="editable" class="form-control input-sm">
-                                        <option value="10">
-                                            10
-                                        </option>
- 
+<!--                                     <select name="editable_length" aria-controls="editable" class="form-control input-sm">
+
+                                  
+                                        <option value=" ">
+                                             
+
+                                         </option>
+                                
+                                    
                                     </select>
-                                     
+                                      -->
+                    <select class="form-control m-b" name="pid" id="type">
+                        <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
+                    @foreach($pls as $k => $v)
+                        <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->pname}} </option>
+                    @endforeach
+                    </select>
                                 </label>
                             </div>
                         </div>
+
+
+
+
+
+
                          <div class="col-sm-2">
-                            <div class="childplates" id="editable_length">
+                            <div class="childplates" id="type">
                                 <label>
                                     类别查询
-                                    <select name="editable_length" aria-controls="editable" class="form-control input-sm">
+                                    <select name="type" aria-controls="editable" class="form-control input-sm">
                                         <option value="10">
                                             10
                                         </option>
@@ -154,11 +172,11 @@
                             </td>                   <td class="center">
                                 {{$statu[$v->status]}}
                             </td>                   <td class="center">
-                            <!-- <a href="{{url('admin/post/'.$v->id)}}">详情</a> -->
-                            <a href="javascript:void()" onclick="detail({{$v->id}})">详情</a>
+                            <a href="{{url('admin/post/'.$v->id)}}">详情</a>
+                            <!-- <a href="javascript:void(0)" onclick="detail({{$v->id}})">详情</a> -->
 
-                                <a href="#">修改</a>
-                                <a href="#">删除</a>
+                                <a href="{{url('admin/post/'.$v->id)}}/edit">修改</a>
+                                <a href="javascript:;" onclick="delPost({{$v->id}})">删除</a>
                             </td>
 
 
@@ -178,7 +196,7 @@
                     <div class="col-sm-6">
                          <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
                           
-                {!! $res->appends(['title'=>$input,'pagea'=>$num])->render() !!}
+                {!! $res->appends(['title'=>$input,'pagea'=>$num,'pid'=>$pid])->render() !!}
                         </div>
                     </div>
                 </div>
@@ -192,11 +210,44 @@
                     }
                 </style>
 @endsection
+    
+ <script>
+
+        function delPost(id){
+
+            //询问框
+            layer.confirm('确认删除？', {
+                btn: ['确认','取消'] //按钮
+            }, function(){
+//                通过ajax 向服务器发送一个删除请求
+//                $.post('请求的路径'，携带的数据参数，执行后返回的数据)
+//                {'key':'value','key1':'value1'}
+                $.post("{{url('admin/post/')}}/"+id,{'_method':'delete','_token':"{{csrf_token()}}"},function(data){
+                    if(data.status == 0){
+                        location.href = location.href;
+                        layer.msg(data.msg, {icon: 6});
+                    }else{
+                        location.href = location.href;
+                        layer.msg(data.msg, {icon: 5});
+                    }
+
+                    // console.log(data);
+
+                })
+//
+
+            });
+        }
+
+    </script>
+<!-- 引入layer 待完成 -->
 <script type="text/javascript">
     function detail(id){
 
     // $('')
         
+        console.log(id);
+
     //页面层
     layer.open({
     type: 1,
@@ -204,8 +255,14 @@
     area: ['80%', '90%'],  
     content: '<iframe name="layr" width="100%" height="100%" src="/admin/post/show" frameborder="0"></iframe>'
     });
-
-
+    // // $.get('admin/post/show',{'id':id},function(){})
+    // $.ajax({
+    //         url : '/admin/post/show',
+    //         type : "post",
+    //         data: {id:id},
+    //         dataType : "json",
+ 
+    //     });
    
     }
 </script>   

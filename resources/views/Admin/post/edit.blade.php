@@ -1,20 +1,20 @@
  
 
-@extends('Layouts.admin') @section('title','帖子详情') 
+@extends('Layouts.admin') @section('title','修改帖子') 
 @section('content')
 
     <body>
-        <a href="/admin/post">放回</a>
+        <a href="/admin/post">返回</a>
         <div class="ibox float-e-margins">
   
             <div class="ibox-content">
-                <form  class="form-horizontal" method="get">
+                <form  class="form-horizontal" action="{{url('admin/post/'.$res[0]->id)}}" method="post" >
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                              标　　题:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->title}}"  disabled="disabled"  class="form-control">
+                            <input type="text" name="title" value="{{$res[0]->title}}"     class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -24,7 +24,7 @@
                              发帖人　:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->username}}" disabled="disabled" class="form-control">
+                            <input type="text" name="uid" value="{{$res[0]->uid}}"   class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -34,7 +34,7 @@
                              发帖时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->posttime}}" disabled="disabled" class="form-control">
+                            <input type="text" value="{{$res[0]->posttime}}" name="posttime"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -44,7 +44,7 @@
                              标　　签:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->tagid}}" disabled="disabled" class="form-control">
+                            <input type="text" value="{{$res[0]->tagid}}" name="tagid"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -54,7 +54,7 @@
                              关键字　:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text"  value="{{$res[0]->keywords}}" disabled="disabled" class="form-control">
+                            <input type="text"  value="{{$res[0]->keywords}}" name="keywords"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -64,7 +64,7 @@
                              板块类别:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->pid}}" disabled="disabled" class="form-control">
+                            <input type="text" value="{{$res[0]->pid}}" name="pid"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -74,7 +74,7 @@
                              分类类别:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->cid}}" disabled="disabled" class="form-control">
+                            <input type="text" value="{{$res[0]->cid}}" name="cid"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -84,7 +84,7 @@
                              内　　容:
                         </label>
                         <div class="col-sm-4">
-                           <textarea disabled="disabled" name="content" id="" cols="30" rows="10">{{$res[0]->content}}</textarea>    
+                           <textarea   name="content" id="" cols="30" rows="10">{{$res[0]->content}}</textarea>    
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -94,7 +94,7 @@
                              回复数　:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->replaycount}}" disabled="disabled" class="form-control">
+                            <input type="text" value="{{$res[0]->replaycount}}" name="replaycount"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -104,7 +104,7 @@
                              点击量　:
                         </label>　
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->clickcount}}" disabled="disabled" class="form-control">
+                            <input type="text" value="{{$res[0]->clickcount}}" name="clickcount"  class="form-control">
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@
 
                                 <label  style="margin-left: 10px">
                                     加　精
-                                     <input type="radio" name="good" 
+                                     <input type="radio" name="good" value="0" 
                                     @if($res[0]->good == 0)
                                         checked="checked"
                                     @endif
@@ -143,7 +143,7 @@
                              加精时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text"  disabled="disabled" value="{{$res[0]->goodtime}}" class="form-control">
+                            <input type="text" name="goodtime"   value="{{$res[0]->goodtime}}" class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -155,7 +155,7 @@
 
                                 <label  style="margin-left: 10px">
                                     置顶
-                                     <input type="radio" name="stick" 
+                                     <input type="radio" name="stick" value="0" 
                                     @if($res[0]->stick == 0)
                                         checked="checked"
                                     @endif
@@ -185,7 +185,7 @@
                              置顶时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text"  value="{{$res[0]->sticktime}}"  disabled="disabled" class="form-control">
+                            <input type="text"  value="{{$res[0]->sticktime}}"  name="sticktime"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -195,7 +195,7 @@
                              点赞数量:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->admire}}"  disabled="disabled" class="form-control">
+                            <input type="text" value="{{$res[0]->admire}}"  name="admire"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -205,7 +205,7 @@
                              点踩数量:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text"  value="{{$res[0]->tread}}"  disabled="disabled" class="form-control">
+                            <input type="text"  value="{{$res[0]->tread}}" name="tread"   class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -216,7 +216,7 @@
 
                                 <label  style="margin-left: 10px">
                                     正常
-                                     <input type="radio" name="status" 
+                                     <input type="radio" name="status"  value="0" 
                                     @if($res[0]->status == 0)
                                         checked="checked"
                                     @endif
@@ -234,17 +234,16 @@
                                </label>                      
                         </div>
                     </div>
- 
+
                     <div class="hr-line-dashed">
                     </div>
- 
                          <div class="form-group">
                         <div class="col-sm-4 control-label" style="margin-left: 20px" >
                        <b>帖子类型:</b>
 
                                 <label  style="margin-left: 10px">
                                     普通帖
-                                     <input type="radio" name="postcode" 
+                                     <input type="radio" name="postcode" value="0" 
                                     @if($res[0]->postcode == 0)
                                         checked="checked"
                                     @endif
@@ -272,10 +271,11 @@
                         </div>
                     </div>
 
+            <div><input type="submit" class="btn btn-primary" style="margin-left: 800px" value="提交"></div>
                     <div class="hr-line-dashed">
                     </div>
-         
-
+        {{csrf_field()}} 
+     {{ method_field('PUT') }}
                 </form>
             </div>
         </div>
