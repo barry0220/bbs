@@ -73,18 +73,20 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
-        // dd($id);    
+        //查询出一条数据的所有内容
         $res = DB::table('post')
             ->leftJoin('user', 'post.uid', '=', 'user.id')
             ->leftJoin('plates','post.pid','=','plates.id')
             ->leftJoin('childplates','post.cid','=','childplates.id')
             ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.id',$id)->get();
         //转换状态
-        $statu = ['普通帖','活动贴','公告贴'];
+        $postcode = ['普通帖','活动贴','公告贴'];
+        $status=['正常','已删除'];
 
+        // echo "<pre>";
+        // print_r($res);
 
-        return view('Admin.post.show',compact('res'));
+        return view('Admin.post.show',compact('res','status','postcode'));
 
     }
 
@@ -97,6 +99,17 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+           $res = DB::table('post')
+            ->leftJoin('user', 'post.uid', '=', 'user.id')
+            ->leftJoin('plates','post.pid','=','plates.id')
+            ->leftJoin('childplates','post.cid','=','childplates.id')
+            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.id',$id)->get();
+        //转换状态
+        $postcode = ['普通帖','活动贴','公告贴'];
+        $status=['正常','已删除'];
+
+        return view('Admin.post.edit',compact('res','status','postcode'));
+
     }
 
     /**
@@ -109,6 +122,16 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = $request->except('_token','_method');
+
+        // dd($data);
+        $res = DB::table('post')->where('id',$id)->update($data);
+        if($res){
+            return "成功";
+
+        } else {
+            return "失败";
+        }
     }
 
     /**

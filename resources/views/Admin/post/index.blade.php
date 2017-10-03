@@ -154,10 +154,10 @@
                             </td>                   <td class="center">
                                 {{$statu[$v->status]}}
                             </td>                   <td class="center">
-                            <!-- <a href="{{url('admin/post/'.$v->id)}}">详情</a> -->
-                            <a href="javascript:void()" onclick="detail({{$v->id}})">详情</a>
+                            <a href="{{url('admin/post/'.$v->id)}}">详情</a>
+                            <!-- <a href="javascript:void(0)" onclick="detail({{$v->id}})">详情</a> -->
 
-                                <a href="#">修改</a>
+                                <a href="{{url('admin/post/'.$v->id)}}/edit">修改</a>
                                 <a href="#">删除</a>
                             </td>
 
@@ -197,6 +197,8 @@
 
     // $('')
         
+        console.log(id);
+
     //页面层
     layer.open({
     type: 1,
@@ -204,8 +206,14 @@
     area: ['80%', '90%'],  
     content: '<iframe name="layr" width="100%" height="100%" src="/admin/post/show" frameborder="0"></iframe>'
     });
-
-
+    // // $.get('admin/post/show',{'id':id},function(){})
+    // $.ajax({
+    //         url : '/admin/post/show',
+    //         type : "post",
+    //         data: {id:id},
+    //         dataType : "json",
+ 
+    //     });
    
     }
 </script>   
