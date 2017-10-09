@@ -16,6 +16,31 @@
 
     <link href="{{asset('/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
 
+
+    <!-- Mainly scripts -->
+    <script src="{{asset('/admin/js/jquery-2.1.1.js')}}"></script>
+    <script src="{{asset('/admin/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('/admin/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
+    <script src="{{asset('/admin/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{{asset('/admin/js/inspinia.js')}}"></script>
+    <script src="{{asset('/admin/js/plugins/pace/pace.min.js')}}"></script>
+
+    <!-- iCheck -->
+    <script src="{{asset('/admin/js/plugins/iCheck/icheck.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
+
+
 </head>
 
 <body>
@@ -46,11 +71,33 @@
                 </li>
                 <!--各种列表区域-->
                 <li>
-                    <a href="{{url('admin/user/index')}}"><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
+                    <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
                     <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/user/index')}}">管理员用户列表</a></li>
                         <li><a href="{{url('/admin/user/create')}}">添加管理员用户</a></li>
-                        <li><a href="dashboard_2.html">前台用户管理</a></li>
-                        <li><a href="dashboard_3.html">VIP用户管理</a></li>
+                    </ul>>
+
+                </li>
+                <li>
+                    <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">板块栏目设置</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/plates')}}">板块栏目列表</a></li>
+                        <li><a href="{{url('admin/plates/create')}}">添加板块栏目</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">友情链接设置</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/links')}}">友情链接列表</a></li>
+                        <li><a href="{{url('admin/links/create')}}">添加友情链接</a></li>
+                    </ul>
+                </li>
+                <!-- 帖子管理 -->
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">帖子管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/post')}}">帖子列表</a></li>
+                        <li><a href="dashboard_3.html">敏感词管理</a></li>
                     </ul>
                 </li>
             </ul>
@@ -165,27 +212,6 @@
 </div>
 
 
-<!-- Mainly scripts -->
-<script src="{{asset('/admin/js/jquery-2.1.1.js')}}"></script>
-<script src="{{asset('/admin/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('/admin/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
-<script src="{{asset('/admin/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="{{asset('/admin/js/inspinia.js')}}"></script>
-<script src="{{asset('/admin/js/plugins/pace/pace.min.js')}}"></script>
-
-<!-- iCheck -->
-<script src="{{asset('/admin/js/plugins/iCheck/icheck.min.js')}}"></script>
-<script>
-    $(document).ready(function () {
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-    });
-
-</script>
 </body>
 
 </html>
