@@ -71,9 +71,7 @@
                 </li>
                 <!--各种列表区域-->
                 <li>
-                    <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span>
-                        <span class="label label-warning pull-right">NEW</span>
-                    </a>
+                    <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{url('admin/user/index')}}">管理员用户列表</a></li>
                         <li><a href="{{url('/admin/user/create')}}">添加管理员用户</a></li>
