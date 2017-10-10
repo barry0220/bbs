@@ -35,7 +35,10 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
     //板块设置管理
     Route::resource('/plates','PlatesController');
-    Route::post('/upload','PlatesController@upload');
+    //单独定义路由用于板块修改提交
+    Route::post('/plates/update/{id}','PlatesController@update');
+    //图像上传OSS控制器方法
+    Route::post('/upload/{type}','UploadController@upload');
 
     //板块设置添加子类路由
     Route::get('/childadd/{id}','PlatesController@childadd');
@@ -47,6 +50,16 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::resource('/links','LinksController');
     //帖子管理管理模块
     Route::resource('/post','PostController');
+
+    //帖子标签设置模块
+    Route::resource('/tags','TagsController');
+    //单独定义路由用于标签修改提交
+    Route::post('/tags/update/{id}','TagsController@update');
+
+    //网站配置模块
+    Route::get('/webconfigs','WebConfigsController@index');
+    //单独定义路由用于标签修改提交
+    Route::post('/webconfigs/update/{id}','WebConfigsController@update');
 });
 
 

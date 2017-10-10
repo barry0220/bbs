@@ -1,6 +1,6 @@
 @extends('Layouts.admin')
 
-@section("title","论坛管理 | 板块修改")
+@section("title","论坛管理 | 网站配置")
 
 @section("content")
     <style>
@@ -21,49 +21,47 @@
             </ul>
         </div>
     @endif
-    <form method="post" id="art_form" action="{{ url('admin/plates/update/').'/'.$pls->id  }}" class="form-horizontal" enctype="multipart/form-data">
+    <form method="post" id="art_form" action="{{ url('admin/webconfigs/update').'/'.$webconfig->id  }}" class="form-horizontal" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">网站标题:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="title" value="{{$webconfig->title}}">
+            </div>
+        </div>
         <div class="hr-line-dashed"></div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">板块名称</label>
+            <label class="col-sm-2 control-label">法律申明:</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="pname" value="{{$pls -> pname}}"">
+                <textarea name="law" class="form-control" cols="30" rows="10" style="width:800px;height:100px;resize:none;">{{$webconfig->law}}</textarea>
             </div>
         </div>
         <div class="hr-line-dashed"></div>
-        <div id="one">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">板块图像</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" id="art_thumb" name="imgfile" value="{{$pls->imgfile}}">
-                    <p><img id="img1" alt="上传后显示图片"  src="{{$pls->imgfile}}" style="max-width:350px;max-height:100px;" /></p>
-                </div>
-                <div class="col-sm-1">
-                    <input id="file_upload" type="file" name="file_upload" multiple="true">
-                </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">版权信息:</label>
+            <div class="col-sm-3">
+                <textarea name="copyright" class="form-control" cols="30"  rows="5" style="width:800px;height:100px;resize:none;">{{$webconfig->copyright}}</textarea>
             </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">VIP模块</label>
-                <div class="col-sm-3">
-                    <label class="radio-inline">
-                        <input type="radio" name="isvip" value="1" {{$pls->isvip == 1 ? 'checked' : ''}}> 是
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="isvip" value="0" {{$pls->isvip == 0 ? 'checked' : ''}}> 否
-                    </label>
-                </div>
-            </div>
-            <div class="hr-line-dashed"></div>
         </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">网站LOGO</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="art_thumb" name="logofile" value="{{$webconfig->logofile}}">
+                <p><img id="img1" alt="上传后显示图片" src="{{$webconfig->logofile}}" style="width:250px" /></p>
+            </div>
+            <div class="col-sm-1">
+                <input id="file_upload" type="file" name="file_upload" multiple="true">
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
         <div class="col-sm-4 col-sm-offset-2">
-            <a href="javascript:history.back();" class="btn btn-white" >取消</a>
             <button class="btn btn-primary" type="submit">保存</button>
         </div>
         {{csrf_field()}}
-{{--        {{method_field('put')}}--}}
+        {{--        {{method_field('put')}}--}}
     </form>
     <script>
-
         $("#file_upload").change(function(){
             uploadImage();
         });
@@ -85,7 +83,7 @@
             var formData = new FormData($('#art_form')[0]);
             $.ajax({
                 type: "POST",
-                url: "/admin/upload/plates",
+                url: "/admin/upload/logo",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -102,8 +100,10 @@
                 }
             });
         }
-
-
-
     </script>
+    <style>
+        #art_form{
+            margin-bottom: 100px;
+        }
+    </style>
 @endsection

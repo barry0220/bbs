@@ -49,9 +49,9 @@
                         <td>{{$sex[$v->sex]}}</td>
                         <td class="center">{{$v->age}}</td>
                         <td class="center">
-                            <a href="/admin/user/{{$v->id}}/edit">修改</a>
+                            <a href="/admin/user/{{$v->id}}/edit" class="btn btn-success btn-sm">修改</a>
 
-                            <a href="">删除</a>
+                            <a href="" class="btn btn-danger btn-sm">删除</a>
                         </td>
                     </tr>
                 @endforeach

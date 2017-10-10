@@ -75,7 +75,7 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{url('admin/user/index')}}">管理员用户列表</a></li>
                         <li><a href="{{url('/admin/user/create')}}">添加管理员用户</a></li>
-                    </ul>>
+                    </ul>
 
                 </li>
                 <li>
@@ -99,6 +99,16 @@
                         <li><a href="{{url('admin/post')}}">帖子列表</a></li>
                         <li><a href="dashboard_3.html">敏感词管理</a></li>
                     </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">帖子标签设置</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/tags')}}">标签列表</a></li>
+                        <li><a href="{{url('admin/tags/create')}}">添加标签</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{url('admin/webconfigs')}}" ><i class="fa fa-th-large"></i> <span class="nav-label">网站设置</span></a>
                 </li>
             </ul>
 
@@ -189,7 +199,7 @@
         </div>
 
         <!--内容区域从这里开始-->
-
+        <div class="container">
         @section("content")
 
 
@@ -198,6 +208,7 @@
 
 
         <!--内容区域到这里结束-->
+        </div>
         <!--脚注部分-->
         <div class="footer">
             <div class="pull-right">
