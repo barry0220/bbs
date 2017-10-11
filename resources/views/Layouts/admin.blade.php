@@ -16,9 +16,35 @@
 
     <link href="{{asset('/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
 
+
+    <!-- Mainly scripts -->
+    <script src="{{asset('/admin/js/jquery-2.1.1.js')}}"></script>
+    <script src="{{asset('/admin/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('/admin/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
+    <script src="{{asset('/admin/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{{asset('/admin/js/inspinia.js')}}"></script>
+    <script src="{{asset('/admin/js/plugins/pace/pace.min.js')}}"></script>
+
+    <!-- iCheck -->
+    <script src="{{asset('/admin/js/plugins/iCheck/icheck.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
+
+
 </head>
 
 <body>
+    
 
 <div id="wrapper">
 
@@ -46,30 +72,53 @@
                 </li>
                 <!--各种列表区域-->
                 <li>
-<<<<<<< HEAD
-                    <a href="{{url('admin/user/index')}}"><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
+                    <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span>
+                        <span class="label label-warning pull-right">NEW</span>
+                    </a>
                     <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/user/index')}}">管理员用户列表</a></li>
                         <li><a href="{{url('/admin/user/create')}}">添加管理员用户</a></li>
-=======
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">板块栏目设置</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="index.html">管理员用户管理</a></li>
->>>>>>> 16ec0cd453b0ab530770443f000088a537164820
-                        <li><a href="dashboard_2.html">前台用户管理</a></li>
-                        <li><a href="dashboard_3.html">VIP用户管理</a></li>
+                        <li><a href="{{url('admin/plates')}}">板块栏目列表</a></li>
+                        <li><a href="{{url('admin/plates/create')}}">添加板块栏目</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
-=======
+                <li>
+                    <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">友情链接设置</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/links')}}">友情链接列表</a></li>
+                        <li><a href="{{url('admin/links/create')}}">添加友情链接</a></li>
+                    </ul>
+                </li>
                 <!-- 帖子管理 -->
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">帖子管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="dashboard_2.html">帖子列表</a></li>
-                        <li><a href="dashboard_3.html">敏感词管理</a></li>
+                        <li><a href="{{url('admin/post')}}">帖子列表</a></li>
+                       
                     </ul>
+
+                    
+
                 </li>
->>>>>>> 16ec0cd453b0ab530770443f000088a537164820
+                                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">敏感词管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
+                    <ul class="nav nav-second-level collapse">
+                
+                     <li><a href="{{url('admin/warwork')}}">敏感词列表</a></li>
+                     <li><a href="{{url('admin/warwork/create')}}">添加敏感词</a></li>
+                       
+                    </ul>
+
+                    
+
+                </li>
+
             </ul>
 
         </div>
@@ -159,58 +208,32 @@
         </div>
 
         <!--内容区域从这里开始-->
-
-        @section("content")
-
-
-        @show
+        
+            @section("content")
 
 
+            @show
+            
 
-        <!--内容区域到这里结束-->
-        <!--脚注部分-->
-        <div class="footer">
-            <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2015
+
+            <!--内容区域到这里结束-->
+            <!--脚注部分-->
+            <div class="container">
+            <div class="row" style="margin-top:50px;">
+                <div class="footer navbar-fixed-bottom">
+                    <div class="pull-right">
+                        10GB of <strong>250GB</strong> Free.
+                    </div>
+                    <div>
+                        <strong>Copyright</strong> Example Company &copy; 2014-2015
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 </div>
 
 
-<!-- Mainly scripts -->
-<script src="{{asset('/admin/js/jquery-2.1.1.js')}}"></script>
-<<<<<<< HEAD
-=======
-<script type="text/javascript" src="{{asset('extension/layer/layer.js')}}"></script>
-
->>>>>>> 16ec0cd453b0ab530770443f000088a537164820
-<script src="{{asset('/admin/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('/admin/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
-<script src="{{asset('/admin/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="{{asset('/admin/js/inspinia.js')}}"></script>
-<script src="{{asset('/admin/js/plugins/pace/pace.min.js')}}"></script>
-
-<!-- iCheck -->
-<script src="{{asset('/admin/js/plugins/iCheck/icheck.min.js')}}"></script>
-<script>
-    $(document).ready(function () {
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green',
-        });
-    });
-<<<<<<< HEAD
-
-=======
->>>>>>> 16ec0cd453b0ab530770443f000088a537164820
-</script>
 </body>
 
 </html>

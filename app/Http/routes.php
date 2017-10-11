@@ -11,30 +11,48 @@
 |
 */
 
+//后台主页面
 Route::get('/', function () {
-    return view('welcome');
+//    return view('Admin.index');
+    return redirect('/admin/plates');
 });
-<<<<<<< HEAD
+
 //后台登录页
 Route::get('admin/login','Admin\LoginController@login');
 //后台登录处理页
 Route::post('admin/dologin','Admin\LoginController@dologin');
 
 Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
-Route::group(['middleware'=>'login','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],function(){
 
     //验证码路由
 //    Route::get('admin/yzm','LoginController@yzm');
     //用户模块路由
-    Route::resource('/admin/user/index','UserController');
+    Route::resource('/user/index','UserController');
 //    Route::get('admin/user','Admin\UserController@index');
     //用户添加模块
-    Route::resource('admin/user','UserController');
+    Route::resource('/user','UserController');
+
+    //板块设置管理
+    Route::resource('/plates','PlatesController');
+    Route::post('/upload','PlatesController@upload');
+
+    //板块设置添加子类路由
+    Route::get('/childadd/{id}','PlatesController@childadd');
+    Route::get('/childedit/{id}','PlatesController@childedit');
+    Route::post('/childdoedit/{id}','PlatesController@childdoedit');
+    Route::post('/childdel/{id}','PlatesController@childdel');
+
+    //友情链接设置模块
+    Route::resource('/links','LinksController');
+    //帖子管理管理模块
+    Route::resource('/post','PostController');
+    Route::post('/post/disables/{id}','PostController@disables');
+    Route::post('/post/open/{id}','PostController@open');
+
+    // 敏感词管理
+    Route::resource('/warwork','WarworkController');
+
 });
-=======
-
-
-Route::resource('admin/post','Admin\PostController');
->>>>>>> 16ec0cd453b0ab530770443f000088a537164820
 
 
