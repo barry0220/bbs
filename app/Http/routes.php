@@ -58,8 +58,13 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
     //网站配置模块
     Route::get('/webconfigs','WebConfigsController@index');
-    //单独定义路由用于标签修改提交
+    //网站配置模块修改提交
     Route::post('/webconfigs/update/{id}','WebConfigsController@update');
+
+    //广告管理设置模块
+    Route::resource('/adspace','AdspaceController');
+    //单独定义路由用于广告管理修改提交
+    Route::post('/adspace/update/{id}','AdspaceController@update');
 });
 
 

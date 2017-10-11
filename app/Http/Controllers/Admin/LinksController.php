@@ -57,9 +57,9 @@ class LinksController extends Controller
             'link.regex'=>'链接地址输入格式错误'
         ];
 
-//        进行手工表单验证
+        //进行手工表单验证
         $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
         if ($validator->fails()) {
             return redirect('admin/links/create')
                 ->withErrors($validator)
@@ -112,11 +112,11 @@ class LinksController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dd(12312312312);
+        //dd(12312312312);
         //接收上传的数据
         $input= $request-> except('_token','_method');
 
-//        dd($input);
+        //dd($input);
         //添加二次板块进行的操作
         $rule=[
             'linkname'=>'required',
@@ -128,9 +128,9 @@ class LinksController extends Controller
             'link.regex'=>'链接地址输入格式错误'
         ];
 
-//        进行手工表单验证
+        //进行手工表单验证
         $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)

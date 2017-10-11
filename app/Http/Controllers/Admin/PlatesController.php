@@ -47,8 +47,8 @@ class PlatesController extends Controller
     public function index()
     {
         //查询板块
-//        $pls = DB::table('plates')->get();
-//        $cpls = DB::table('childplates')->get();
+        //$pls = DB::table('plates')->get();
+        //$cpls = DB::table('childplates')->get();
 
         $pls = Plates::get();
         $cpls = ChildPlates::get();
@@ -82,7 +82,7 @@ class PlatesController extends Controller
     public function childadd($id)
     {
         $pls = Plates::get();
-//        $mes = "这是自定义方法";
+        //$mes = "这是自定义方法";
         return view('admin.plates.add',compact('pls','id'));
     }
     /**
@@ -114,9 +114,9 @@ class PlatesController extends Controller
                 'imgfile.required'=>'图片名称不存在'
             ];
 
-//        进行手工表单验证
+        //进行手工表单验证
             $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
             if ($validator->fails()) {
                 return redirect('admin/plates/create')
                     ->withErrors($validator)
@@ -128,9 +128,9 @@ class PlatesController extends Controller
             $plates = new Plates();
 
             $plates -> pname = $input['pname'];
-//        本地服务器存储字段
-            $plates -> imgfile = $input['imgfile'];
-//        阿里云OSS存储字段
+        //    本地服务器存储字段
+        //    $plates -> imgfile = $input['imgfile'];
+        //阿里云OSS存储字段
             $plates -> imgfile = 'http://bbs189.oss-cn-beijing.aliyuncs.com'.$input['imgfile'];
             $plates -> isvip = $input['isvip'];
             $res = $plates -> save();
@@ -144,9 +144,9 @@ class PlatesController extends Controller
                 'pname.required'=>'板块名必须输入'
             ];
 
-//        进行手工表单验证
+        //进行手工表单验证
             $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
             if ($validator->fails()) {
                 return redirect('admin/plates/create')
                     ->withErrors($validator)
@@ -200,9 +200,9 @@ class PlatesController extends Controller
         $cpls = ChildPlates::find($id);
         $pls = Plates::get();
 
-//        dd($pls);
-//        var_dump($cpls);
-//        die;
+        //dd($pls);
+        //var_dump($cpls);
+        //die;
 
         return view('admin.plates.childedit',compact('cpls','pls'));
     }
@@ -230,9 +230,9 @@ class PlatesController extends Controller
             'imgfile.required'=>'图片名称不存在'
         ];
 
-//        进行手工表单验证
+        //进行手工表单验证
         $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
         if ($validator->fails()) {
             return redirect('admin/plates/'.$id.'/edit')
                 ->withErrors($validator)
@@ -277,9 +277,9 @@ class PlatesController extends Controller
             'cname.required'=>'板块名必须输入'
         ];
 
-//        进行手工表单验证
+        //进行手工表单验证
         $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
         if ($validator->fails()) {
             return redirect('admin/childedit/'.$id)
                 ->withErrors($validator)

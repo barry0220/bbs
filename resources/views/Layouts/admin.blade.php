@@ -13,12 +13,16 @@
     <link href="{{asset('/admin/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
     <link href="{{asset('/admin/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('/admin/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('/admin/css/datepicker.css')}}" rel="stylesheet">
 
     <link href="{{asset('/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
 
 
     <!-- Mainly scripts -->
     <script src="{{asset('/admin/js/jquery-2.1.1.js')}}"></script>
+{{--    <script src="{{asset('/admin/js/jquery-ui-1.10.4.min.js')}}"></script>--}}
+    <script src="{{asset('/admin/js/bootstrap-datepicker.js')}}"></script>
+    {{--<script src="{{asset('/admin/js/locales/bootstrap-datepicker.zh-CN.js')}}"></script>--}}
     <script src="{{asset('/admin/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/admin/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('/admin/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
@@ -105,6 +109,20 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{url('admin/tags')}}">标签列表</a></li>
                         <li><a href="{{url('admin/tags/create')}}">添加标签</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">广告管理设置</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/adspace')}}">广告列表</a></li>
+                        <li><a href="{{url('admin/adspace/create')}}">添加广告</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">轮播图设置</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{url('admin/adspace')}}">广告列表</a></li>
+                        <li><a href="{{url('admin/adspace/create')}}">添加广告</a></li>
                     </ul>
                 </li>
                 <li>

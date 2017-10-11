@@ -16,7 +16,7 @@ class TagsController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * 帖子标签管理控制器
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,14 +52,14 @@ class TagsController extends Controller
         //接收表单数据
         $input = $request->except('_token','file_upload');
 
-            //添加标签进行的操作
-            //判断是否存在图片
-//        dd($_FILES);
-//        if($request->hasFile('file_upload')){
-//            dd('有');
-//        } else {
-//            dd('没有');
-//        }
+        //    添加标签进行的操作
+        //    判断是否存在图片
+        //dd($_FILES);
+        //if($request->hasFile('file_upload')){
+        //    dd('有');
+        //} else {
+        //    dd('没有');
+        //}
             if (!$request -> hasFile('file_upload')) {
                 return back()->with('errors', '没有选择图片')->withInput();
             }
@@ -73,10 +73,10 @@ class TagsController extends Controller
                 'imgfile.required'=>'图片名称不存在'
             ];
 
-//        进行手工表单验证
+        //进行手工表单验证
 
             $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
             if ($validator->fails()) {
                 return redirect('admin/tags/create')
                     ->withErrors($validator)
@@ -88,9 +88,9 @@ class TagsController extends Controller
             $tags = new Tags();
 
             $tags -> tagname = $input['tagname'];
-//        本地服务器存储字段
-//            $plates -> imgfile = $input['imgfile'];
-//        阿里云OSS存储字段
+        //本地服务器存储字段
+        //    $plates -> imgfile = $input['imgfile'];
+        //阿里云OSS存储字段
             $tags -> imgfile = 'http://bbs189.oss-cn-beijing.aliyuncs.com'.$input['imgfile'];
 
             $res = $tags -> save();
@@ -149,9 +149,9 @@ class TagsController extends Controller
             'imgfile.required'=>'图片名称不存在'
         ];
 
-//        进行手工表单验证
+        //进行手工表单验证
         $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
         if ($validator->fails()) {
             return redirect('admin/tags/'.$id.'/edit')
                 ->withErrors($validator)

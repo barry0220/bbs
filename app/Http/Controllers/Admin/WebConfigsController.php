@@ -95,9 +95,9 @@ class WebConfigsController extends Controller
             'logofile.required'=>'图片名称不存在'
         ];
 
-//        进行手工表单验证
+        //进行手工表单验证
         $validator = Validator::make($input,$rule,$msg);
-//        如果验证失败
+        //如果验证失败
         if ($validator->fails()) {
             return redirect('admin/webconfigs/')
                 ->withErrors($validator)
@@ -136,14 +136,14 @@ class WebConfigsController extends Controller
      */
     public function putFile()
     {
-//        将配置文件中的内容写入config目录下的webconfig.php文件   方便后期读取网站配置
+        //将配置文件中的内容写入config目录下的webconfig.php文件   方便后期读取网站配置
         $config = WebConfigs::first()['attributes'];
-//        dd($config);
-//        die;
+        //dd($config);
+        //die;
         $str = '<?php return '.var_export($config,true).';';
         //要写入的路径
         $path = base_path().'\config\webconfig.php';
-//        参数1 写入的文件的路径  参数2  向文件中写入的内容
+        //参数1 写入的文件的路径  参数2  向文件中写入的内容
         file_put_contents($path,$str);
     }
     /**
