@@ -78,7 +78,7 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{url('admin/user/index')}}">管理员用户列表</a></li>
                         <li><a href="{{url('/admin/user/create')}}">添加管理员用户</a></li>
-                    </ul>>
+                    </ul>
 
                 </li>
                 <li>
