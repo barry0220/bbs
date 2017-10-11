@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Plates;
+use App\Models\ChildPlates;
 use App\User;
 use DB;
 
@@ -26,30 +27,45 @@ class PostController extends Controller
 
 
           $pid = $request->input('pid')?$request->input('pid'):'';
+
+          $cid = $request->input('cid')?$request->input('cid'):'';
         // $_GET
+          // $pid = $pid!=0?$pid:'';
           
           $num = $request->input('pagea')?$request->input('pagea'): 10;
 
-        $res = DB::table('post')
+        if ($pid == '0' || $pid == '' ||$cid == '0'|| $cid == '') {
+            $res = DB::table('post')
             ->leftJoin('user', 'post.uid', '=', 'user.id')
             ->leftJoin('plates','post.pid','=','plates.id')
             ->leftJoin('childplates','post.cid','=','childplates.id')
-            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid',$pid)->where('title','like','%'.$input.'%')->paginate($num);
+            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid','>',$pid)->where('post.cid','>',$cid)->where('title','like','%'.$input.'%')->paginate($num);
+        } else {
+            $res = DB::table('post')
+            ->leftJoin('user', 'post.uid', '=', 'user.id')
+            ->leftJoin('plates','post.pid','=','plates.id')
+            ->leftJoin('childplates','post.cid','=','childplates.id')
+            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid',$pid)->where('post.cid',$cid)->where('title','like','%'.$input.'%')->paginate($num);
+        }
         //转换状态
         $statu = ['普通帖','活动贴','公告贴'];
 
        // print_r($_GET);
+
         $plates = new Plates();
+
 
         // $pla = $plates->treeName();
         $pls = $plates->get();
+        $childPlates = new ChildPlates();
+        $cls = $childPlates ->get();
         // echo "<pre>";
-        // var_dump($pla);
+        // var_dump($res);
         $id = 0;
 
 
         //显示视图
-        return view('Admin.post.index',compact('res','statu','num','input','pls','id','pid'));
+        return view('Admin.post.index',compact('res','statu','num','input','pls','cls','id','pid','cid'));
     }
 
     /**
@@ -107,17 +123,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
-           $res = DB::table('post')
-            ->leftJoin('user', 'post.uid', '=', 'user.id')
-            ->leftJoin('plates','post.pid','=','plates.id')
-            ->leftJoin('childplates','post.cid','=','childplates.id')
-            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.id',$id)->get();
-        //转换状态
-        $postcode = ['普通帖','活动贴','公告贴'];
-        $status=['正常','已删除'];
+     
 
-        return view('Admin.post.edit',compact('res','status','postcode'));
 
     }
 
@@ -131,16 +138,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = $request->except('_token','_method');
-
-        // dd($data);
-        $res = DB::table('post')->where('id',$id)->update($data);
-        if($res){
-            return "成功";
-
-        } else {
-            return "失败";
-        }
+      
     }
 
     /**
@@ -172,4 +170,54 @@ class PostController extends Controller
         }
           return  $data;
     }
+    //更改状态为禁用
+    public function disables($id)
+    {
+        # code...
+
+        $re = Post::where('id',$id)->update(['status'=>'1']); 
+       
+         if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'禁用成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'禁用失败'
+            ];
+        }
+          return  $data;
+
+
+
+
+    }
+
+     //更改状态为开启
+    public function open($id)
+    {
+        # code...
+
+        $re = Post::where('id',$id)->update(['status'=>'0']); 
+       
+         if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'禁用成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'禁用失败'
+            ];
+        }
+          return  $data;
+
+
+
+
+    }
+
 }

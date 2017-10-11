@@ -18,33 +18,13 @@
                         </div>
                     </div>
                     <div class="hr-line-dashed">
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">
-                             发帖人　:
-                        </label>
-                        <div class="col-sm-4">
-                            <input type="text" name="uid" value="{{$res[0]->uid}}"   class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed">
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">
-                             发帖时间:
-                        </label>
-                        <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->posttime}}" name="posttime"  class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed">
-                    </div>
+                    </div> 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                              标　　签:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->tagid}}" name="tagid"  class="form-control">
+                            <input type="text" value="{{$res[0]->tagname}}" name="tagid"  class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -59,13 +39,20 @@
                     </div>
                     <div class="hr-line-dashed">
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                              板块类别:
                         </label>
-                        <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->pid}}" name="pid"  class="form-control">
+                        <div class="col-sm-3">
+                              <select class="form-control m-b" name="pid" id="type">
+                                <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
+                            @foreach($pls as $k => $v)
+                                <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->pname}} </option>
+                            @endforeach
+                            </select>
                         </div>
+
                     </div>
                     <div class="hr-line-dashed">
                     </div>
@@ -73,19 +60,15 @@
                         <label class="col-sm-2 control-label">
                              分类类别:
                         </label>
-                        <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->cid}}" name="cid"  class="form-control">
+                        <div class="col-sm-3">
+                              <select class="form-control m-b" name="pid" id="type">
+                                <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
+                            @foreach($pls as $k => $v)
+                                <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->pname}} </option>
+                            @endforeach
+                            </select>
                         </div>
-                    </div>
-                    <div class="hr-line-dashed">
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">
-                             内　　容:
-                        </label>
-                        <div class="col-sm-4">
-                           <textarea   name="content" id="" cols="30" rows="10">{{$res[0]->content}}</textarea>    
-                        </div>
+
                     </div>
                     <div class="hr-line-dashed">
                     </div>
@@ -111,7 +94,7 @@
                     <div class="hr-line-dashed">
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-3 control-label" style="margin-left: 50px" >
+                        <div class="col-sm-4 control-label"  >
                        <b>是否加精:</b>
 
                                 <label  style="margin-left: 10px">
@@ -150,11 +133,11 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-3 control-label" style="margin-left: 50px" >
+                        <div class="col-sm-4 control-label"   >
                        <b>是否置顶:</b>
 
                                 <label  style="margin-left: 10px">
-                                    置顶
+                                    置　顶
                                      <input type="radio" name="stick" value="0" 
                                     @if($res[0]->stick == 0)
                                         checked="checked"
@@ -211,7 +194,7 @@
                     <div class="hr-line-dashed">
                     </div>
                           <div class="form-group">
-                        <div class="col-sm-3 control-label" style="margin-left: 30px" >
+                        <div class="col-sm-4 control-label"   >
                        <b>状　　态:</b>
 
                                 <label  style="margin-left: 10px">
@@ -238,7 +221,7 @@
                     <div class="hr-line-dashed">
                     </div>
                          <div class="form-group">
-                        <div class="col-sm-4 control-label" style="margin-left: 20px" >
+                        <div class="col-sm-5 control-label"  >
                        <b>帖子类型:</b>
 
                                 <label  style="margin-left: 10px">

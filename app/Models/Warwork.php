@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Warwork extends Model
 {
     //
-    //设置表名
-    protected $table = 'post';
+    protected $table = "warwork";
     public $timestamps = false;
 
 }
