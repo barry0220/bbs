@@ -48,6 +48,7 @@
 </head>
 
 <body>
+    
 
 <div id="wrapper">
 
@@ -101,8 +102,21 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">帖子管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{url('admin/post')}}">帖子列表</a></li>
-                        <li><a href="dashboard_3.html">敏感词管理</a></li>
+                       
                     </ul>
+
+                    
+
+                </li>
+                                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">敏感词管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
+                    <ul class="nav nav-second-level collapse">
+                
+                     <li><a href="{{url('admin/warwork')}}">敏感词列表</a></li>
+                     <li><a href="{{url('admin/warwork/create')}}">添加敏感词</a></li>
+                       
+                    </ul>
+
                 </li>
                 <li>
                     <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">帖子标签设置</span> <span class="fa arrow"></span></a>
@@ -217,26 +231,25 @@
         </div>
 
         <!--内容区域从这里开始-->
-        <div class="container">
+
         @section("content")
 
 
         @show
-
-
-
-        <!--内容区域到这里结束-->
-        </div>
-        <!--脚注部分-->
-        <div class="footer">
-            <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
+            <!--内容区域到这里结束-->
+            <!--脚注部分-->
+            <div class="container">
+            <div class="row" style="margin-top:50px;">
+                <div class="footer navbar-fixed-bottom">
+                    <div class="pull-right">
+                        10GB of <strong>250GB</strong> Free.
+                    </div>
+                    <div>
+                        <strong>Copyright</strong> Example Company &copy; 2014-2015
+                    </div>
+                </div>
             </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2015
-            </div>
         </div>
-
     </div>
 </div>
 

@@ -50,6 +50,11 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::resource('/links','LinksController');
     //帖子管理管理模块
     Route::resource('/post','PostController');
+    Route::post('/post/disables/{id}','PostController@disables');
+    Route::post('/post/open/{id}','PostController@open');
+
+    // 敏感词管理
+    Route::resource('/warwork','WarworkController');
 
     //帖子标签设置模块
     Route::resource('/tags','TagsController');
@@ -65,6 +70,7 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::resource('/adspace','AdspaceController');
     //单独定义路由用于广告管理修改提交
     Route::post('/adspace/update/{id}','AdspaceController@update');
+
 });
 
 

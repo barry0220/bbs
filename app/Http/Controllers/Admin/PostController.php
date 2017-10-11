@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Model\Admin\Post;
-use App\Model\Admin\User;
+use App\Models\Post;
+use App\Models\Plates;
+use App\Models\ChildPlates;
+use App\User;
 use DB;
 
 class PostController extends Controller
@@ -22,26 +24,48 @@ class PostController extends Controller
         // 查询
 
           $input = $request->input('title')?$request->input('title'):'';
+
+
+          $pid = $request->input('pid')?$request->input('pid'):'';
+
+          $cid = $request->input('cid')?$request->input('cid'):'';
         // $_GET
+          // $pid = $pid!=0?$pid:'';
           
           $num = $request->input('pagea')?$request->input('pagea'): 10;
 
-        $res = DB::table('post')
+        if ($pid == '0' || $pid == '' ||$cid == '0'|| $cid == '') {
+            $res = DB::table('post')
             ->leftJoin('user', 'post.uid', '=', 'user.id')
             ->leftJoin('plates','post.pid','=','plates.id')
             ->leftJoin('childplates','post.cid','=','childplates.id')
-            ->select('post.*','plates.pname','user.username','childplates.cname')->where('title','like','%'.$input.'%')->paginate($num);
+            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid','>',$pid)->where('post.cid','>',$cid)->where('title','like','%'.$input.'%')->paginate($num);
+        } else {
+            $res = DB::table('post')
+            ->leftJoin('user', 'post.uid', '=', 'user.id')
+            ->leftJoin('plates','post.pid','=','plates.id')
+            ->leftJoin('childplates','post.cid','=','childplates.id')
+            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid',$pid)->where('post.cid',$cid)->where('title','like','%'.$input.'%')->paginate($num);
+        }
         //转换状态
         $statu = ['普通帖','活动贴','公告贴'];
 
        // print_r($_GET);
 
+        $plates = new Plates();
 
 
+        // $pla = $plates->treeName();
+        $pls = $plates->get();
+        $childPlates = new ChildPlates();
+        $cls = $childPlates ->get();
+        // echo "<pre>";
+        // var_dump($res);
+        $id = 0;
 
 
         //显示视图
-        return view('admin.post.index',compact('res','statu','num','input'));
+        return view('Admin.post.index',compact('res','statu','num','input','pls','cls','id','pid','cid'));
     }
 
     /**
@@ -73,18 +97,21 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
-        // dd($id);    
+        // dd(Post::find($id));
+        //查询出一条数据的所有内容
         $res = DB::table('post')
             ->leftJoin('user', 'post.uid', '=', 'user.id')
             ->leftJoin('plates','post.pid','=','plates.id')
             ->leftJoin('childplates','post.cid','=','childplates.id')
             ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.id',$id)->get();
         //转换状态
-        $statu = ['普通帖','活动贴','公告贴'];
+        $postcode = ['普通帖','活动贴','公告贴'];
+        $status=['正常','已删除'];
 
+        // echo "<pre>";
+        // print_r($res);
 
-        return view('admin.post.show',compact('res'));
+        return view('Admin.post.show',compact('res','status','postcode'));
 
     }
 
@@ -96,7 +123,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+     
+
+
     }
 
     /**
@@ -109,6 +138,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+      
     }
 
     /**
@@ -119,6 +149,75 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $re = DB::table('post')->where('id',$id)->delete();
+     //查询要删除的记录的模型
+        // $post = Post::find($id);
+
+        //执行删除操作
+        // $re = $post->delete();
+        //根据返回的结果处理成功和失败
+        if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'删除成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'删除失败'
+            ];
+        }
+          return  $data;
     }
+    //更改状态为禁用
+    public function disables($id)
+    {
+        # code...
+
+        $re = Post::where('id',$id)->update(['status'=>'1']); 
+       
+         if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'禁用成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'禁用失败'
+            ];
+        }
+          return  $data;
+
+
+
+
+    }
+
+     //更改状态为开启
+    public function open($id)
+    {
+        # code...
+
+        $re = Post::where('id',$id)->update(['status'=>'0']); 
+       
+         if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'禁用成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'禁用失败'
+            ];
+        }
+          return  $data;
+
+
+
+
+    }
+
 }
