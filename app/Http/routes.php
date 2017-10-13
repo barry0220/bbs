@@ -17,6 +17,11 @@ Route::get('/', function () {
     return redirect('/admin/plates');
 });
 
+Route::resource('/home/index','Home\PostController');
+Route::get('/home/hottoday','Home\PostController@hottoday');
+
+
+
 //后台登录页
 Route::get('admin/login','Admin\LoginController@login');
 //后台登录处理页
@@ -52,7 +57,9 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
     // 敏感词管理
     Route::resource('/warwork','WarworkController');
-
+    //活动贴管理
+    Route::resource('/active','ActiveController');
+    
 });
 
 

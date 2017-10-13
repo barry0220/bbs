@@ -106,7 +106,7 @@
                     
 
                 </li>
-                                <li>
+                <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">敏感词管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
                     <ul class="nav nav-second-level collapse">
                 
@@ -117,6 +117,15 @@
 
                     
 
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">活动帖管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
+                    <ul class="nav nav-second-level collapse">
+                
+                     <li><a href="{{url('admin/active')}}">活动贴列表</a></li>
+                     <li><a href="{{url('admin/active/create')}}">添加活动贴</a></li>
+                       
+                    </ul>
                 </li>
 
             </ul>

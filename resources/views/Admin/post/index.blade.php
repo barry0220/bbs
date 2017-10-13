@@ -143,7 +143,7 @@
                                     {{$v->id}}
                                 </td>
                                 <td class="center">
-                                    {{$v->title}}
+                                    <a href="#">{{$v->title}}</a>
                                 </td>
                                 <td class="center">
                                     {{$v->username}}
@@ -199,7 +199,7 @@
             layer.confirm('确认禁用？', {
                             btn: ['确认','取消'] //按钮
                         }, function(){
-                            $.post("{{url('admin/post/disables')}}"+'/'+id,{'_token':'{{csrf_token()}}','status':'{{$v->status}}'},function(data){
+                            $.post("{{url('admin/post/disables')}}"+'/'+id,{'_token':'{{csrf_token()}}'},function(data){
                                 if(data.status == 0){
                                     location.href = location.href;
                                     layer.msg(data.msg, {icon: 6});
@@ -217,7 +217,7 @@
             layer.confirm('确认开启？', {
                             btn: ['确认','取消'] //按钮
                         }, function(){
-                            $.post("{{url('admin/post/open')}}"+'/'+id,{'_token':'{{csrf_token()}}','status':'{{$v->status}}'},function(data){
+                            $.post("{{url('admin/post/open')}}"+'/'+id,{'_token':'{{csrf_token()}}'},function(data){
                                 if(data.status == 0){
                                     location.href = location.href;
                                     layer.msg(data.msg, {icon: 6});
