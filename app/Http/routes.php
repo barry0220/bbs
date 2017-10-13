@@ -11,8 +11,9 @@
 |
 */
 
+
 //后台主页面
-Route::get('/', function () {
+Route::get('/admin/index', function () {
 //    return view('Admin.index');
     return redirect('/home/login');
 });
@@ -28,15 +29,31 @@ Route::get('admin/login','Admin\LoginController@login');
 Route::post('admin/dologin','Admin\LoginController@dologin');
 
 Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
+
+//Route::get('admin/user/repass','Admin\UserController@repass');
 Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],function(){
 
     //验证码路由
 //    Route::get('admin/yzm','LoginController@yzm');
-    //用户模块路由
-    Route::resource('/user/index','UserController');
-//    Route::get('admin/user','Admin\UserController@index');
-    //用户添加模块
+
+
+    //后台用户模块
     Route::resource('/user','UserController');
+    //检查用户名 邮箱是否存在
+    Route::post('/checkuser','UserController@checkuser');
+
+    //前台用户模块
+    Route::resource('/userhome','UserHomeController');
+
+    Route::post('/disables/{id}','UserHomeController@disables');
+    Route::post('/open/{id}','UserHomeController@open');
+
+
+    //管理员修改密码
+    Route::get('/repass','UserController@repass');
+    Route::post('/dorepass/{id}','UserController@dorepass');
+    //管理员退出登录
+    Route::post('/loginout','LoginController@loginOut');
 
     //板块设置管理
     Route::resource('/plates','PlatesController');
@@ -55,6 +72,7 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::resource('/links','LinksController');
     //帖子管理管理模块
     Route::resource('/post','PostController');
+
     Route::post('/post/disables/{id}','PostController@disables');
     Route::post('/post/open/{id}','PostController@open');
 
@@ -65,6 +83,8 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::resource('/tags','TagsController');
     //单独定义路由用于标签修改提交
     Route::post('/tags/update/{id}','TagsController@update');
+    //活动贴管理
+    Route::resource('/active','ActiveController');
 
     //网站配置模块
     Route::get('/webconfigs','WebConfigsController@index');
@@ -96,9 +116,9 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
     // 网络服务协议和声明
     Route::get('/agreement','CommonController@agreement');
 
-    //活动贴管理
-    Route::resource('/active','ActiveController');
 
 });
 
 
+//前台首页
+Route::resource('/','Home\IndexController@index');

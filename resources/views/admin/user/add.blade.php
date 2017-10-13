@@ -6,7 +6,24 @@
             margin-top:20px;
         }
     </style>
+<<<<<<< HEAD
     {{--<div class="ibox-content">--}}
+=======
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @if(is_object($errors))
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                @else
+                    <li>{{ session('errors') }}</li>
+                @endif
+            </ul>
+        </div>
+    @endif
+    <div class="ibox-content">
+>>>>>>> wss
         <form method="post" class="form-horizontal" action="{{url('admin/user')}}">
             {{csrf_field()}}
 
@@ -33,8 +50,8 @@
 
             <div class="form-group"><label class="col-sm-2 control-label">性　　别:</label>
                 <div class="col-sm-3">
-                    <label><input type="radio" checked="" id="optionsRadios1" name="sex" value="nan">男</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label> <input type="radio" id="optionsRadios2" name="sex" value="nv">女</label>
+                    <label><input type="radio" checked="" id="optionsRadios1" name="sex" value="1">男</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label> <input type="radio" id="optionsRadios2" name="sex" value="0">女</label>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -65,5 +82,34 @@
             </div>
             <div class="hr-line-dashed"></div>
         </form>
+<<<<<<< HEAD
     {{--</div>--}}
+=======
+    </div>
+    <script>
+
+
+        $("input[name=username],input[name=email]").blur(function(){
+
+//             alert($(this).val());
+            var val = $(this).val();
+            var type = $(this).attr('name');
+            var th = $(this);
+
+            $.post('/admin/checkuser',{'_token':'{{csrf_token()}}','type':type,'val':val},function(data){
+                if(data.status == 0){
+                    layer.msg(data.msg, {icon: 5});
+                    th.attr('style','border:1px solid red');
+                } else {
+                    th.attr('style',false );
+                }
+            });
+
+
+
+        })
+
+
+    </script>
+>>>>>>> wss
 @endsection
