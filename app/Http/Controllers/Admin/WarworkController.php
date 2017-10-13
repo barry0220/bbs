@@ -24,10 +24,10 @@ class WarworkController extends Controller
         //
         $input = $request->input('works')?$request->input('works'):'';
 
-        $war = Warwork::where('works',$works)->paginate($num);
+        $war = Warwork::where('works','like','%'.$input.'%')->paginate($num);
         // dd($war);
 
-        return view('Admin.warwork.list',compact('war','input'));
+        return view('Admin.warwork.list',compact('war','input','num'));
     }
 
     /**

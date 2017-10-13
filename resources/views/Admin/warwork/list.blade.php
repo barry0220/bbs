@@ -7,20 +7,40 @@
     <div class="ibox float-e-margins">
         <div class="ibox-content">
             <div id="editable_wrapper" class="dataTables_wrapper form-inline">
+                <form action="{{url('admin/warwork')}}" method="get">
+                    
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div class="dataTables_length" id="editable_length">
-                            <label>
-                                <select name="editable_length" aria-controls="editable" class="form-control input-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                每页记录
-                            </label>
+                         <div class="col-md-3">
+                            <div class="dataTables_length" id="editable_length">
+                                <label>
+                                    每页显示
+                                    <select name="pagea" aria-controls="editable" class="form-control input-sm">
+                                        <option value="5"
+                                         @if($num==5) 
+                                            selected="selected"
+                                          @endif>
+                                            5
+                                        </option>
+                                        <option value="10"    @if($num==10) 
+                                            selected="selected"
+                                          @endif>
+                                            10
+                                        </option>
+                                        <option value="15"@if($num==15) 
+                                            selected="selected"
+                                          @endif>
+                                            15
+                                        </option>
+                                        <option value="20"@if($num==20) 
+                                            selected="selected"
+                                          @endif>
+                                            20
+                                        </option>
+                                    </select>
+                                    
+                                </label>
+                            </div>
                         </div>
-                    </div>
                     <div class="col-sm-3">
                         <a href="{{url('admin/warwork/create')}}" class="btn btn-info btn-sm" style="font-size:16px;">添加敏感词</a>
 
@@ -30,12 +50,20 @@
                             <label>
                                 搜索：<input type="search" class="form-control input-sm" name="works" placeholder="输入敏感词">
                             </label>
+    
+                        <!-- <input type="submit" value="提交"> -->
+                    <!-- <div class="col-md-">   -->
+                        <input type="submit" class="btn btn-primary btn-sm" value="查询">
+                    
+                     <!-- </div> -->
 
-                            <input type="submit" value="提交">
-                        
+
+
                         </div>
                     </div>
                 </div>
+            </form>
+
                 <style>
                    #editable  tr > td {
                         vertical-align: middle;
@@ -72,7 +100,9 @@
                     <div class="col-sm-6">
                         <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
 
-                        {!! $war->render() !!}
+                        {!! $war->appends(['works'=>$input,'pagea'=>$num])->render()!!}
+
+
                          </div>
                     </div>
                 </div>
