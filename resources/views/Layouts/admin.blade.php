@@ -44,8 +44,7 @@
 </head>
 
 <body>
-
-<div id="wrapper">
+    <div id="wrapper">
 
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -60,10 +59,11 @@
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">用户名</strong>
                              </span> <span class="text-muted text-xs block">管理员<b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">个人信息</a></li>
-                            <li><a href="contacts.html">下拉列表</a></li>
+                            <li><a href="#">个人信息</a></li>
+{{--                            {{url('admin/user/'.session('user')->id)--}}
+                            <li><a href="{{url('admin/repass')}}">修改密码</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">退出登录</a></li>
+                            <li><a href="javascript:;" onclick="loginOut()">退出登录</a></li>
                         </ul>
                         <div class="logo-element">
                             IN+
@@ -73,9 +73,10 @@
                 <li>
                     <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span><span class="label label-warning pull-right">NEW</span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="{{url('admin/user/index')}}">管理员用户列表</a></li>
+                        <li><a href="{{url('admin/userhome')}}">前台用户列表</a></li>
+                        <li><a href="{{url('admin/user')}}">管理员用户列表</a></li>
                         <li><a href="{{url('/admin/user/create')}}">添加管理员用户</a></li>
-                    </ul>>
+                    </ul>
 
                 </li>
                 <li>
@@ -180,7 +181,7 @@
 
                     <li>
                         <a href="login.html">
-                            <i class="fa fa-sign-out"></i> 退出登录
+                            <i class="fa fa-sign-out"></i> <a href="javascript:;" onclick="loginOut()">退出登录</a>
                         </a>
                     </li>
                 </ul>
@@ -210,7 +211,30 @@
 
     </div>
 </div>
+<script>
+    function loginOut(){
+        //询问框
+        layer.confirm('确认退出登录吗？', {
+            btn: ['确认','取消']
+        }, function(){
+            //                通过ajax 向服务器发送一个删除请求
+            $.post("{{url('/admin/loginout')}}",{"_token":"{{csrf_token()}}"},function(data){
 
+                if(data.status == 0){
+                    layer.msg(data.msg, {icon: 6});
+                    setTimeout(function(){
+                        location.href = "{{url('/admin/login')}}";
+                    },3000)
+                }else{
+
+                    layer.msg(data.msg, {icon: 5});
+                }
+
+            })
+
+        });
+    }
+</script>
 
 </body>
 
