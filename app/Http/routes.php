@@ -11,24 +11,63 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+//后台主页面
+Route::get('/admin/index', function () {
+//    return view('Admin.index');
+    return redirect('/admin/plates');
 });
+
 //后台登录页
 Route::get('admin/login','Admin\LoginController@login');
 //后台登录处理页
 Route::post('admin/dologin','Admin\LoginController@dologin');
 
 Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
-Route::group(['middleware'=>'login','namespace'=>'Admin'],function(){
+
+//Route::get('admin/user/repass','Admin\UserController@repass');
+Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],function(){
 
     //验证码路由
 //    Route::get('admin/yzm','LoginController@yzm');
-    //用户模块路由
-    Route::resource('/admin/user/index','UserController');
-//    Route::get('admin/user','Admin\UserController@index');
-    //用户添加模块
-    Route::resource('admin/user','UserController');
+
+
+    //后台用户模块
+    Route::resource('/user','UserController');
+    //检查用户名 邮箱是否存在
+    Route::post('/checkuser','UserController@checkuser');
+
+    //前台用户模块
+    Route::resource('/userhome','UserHomeController');
+
+    Route::post('/disables/{id}','UserHomeController@disables');
+    Route::post('/open/{id}','UserHomeController@open');
+
+
+    //管理员修改密码
+    Route::get('/repass','UserController@repass');
+    Route::post('/dorepass/{id}','UserController@dorepass');
+    //管理员退出登录
+    Route::post('/loginout','LoginController@loginOut');
+
+    //板块设置管理
+    Route::resource('/plates','PlatesController');
+    Route::post('/upload','PlatesController@upload');
+
+    //板块设置添加子类路由
+    Route::get('/childadd/{id}','PlatesController@childadd');
+    Route::get('/childedit/{id}','PlatesController@childedit');
+    Route::post('/childdoedit/{id}','PlatesController@childdoedit');
+    Route::post('/childdel/{id}','PlatesController@childdel');
+
+    //友情链接设置模块
+    Route::resource('/links','LinksController');
+    //帖子管理管理模块
+    Route::resource('/post','PostController');
+
+
 });
 
 
+//前台首页
+Route::resource('/','Home\IndexController@index');
