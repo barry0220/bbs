@@ -469,13 +469,13 @@
                                     <img src="{{asset('/home//img/59dc45910faf4.jpg')}}" tppabs="{{asset('/home//img/59dc45910faf4.jpg')}}">
                                 </a>
                                 <div class="list-title">
-                                    <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
+                                    <a target="_blank" href="/home/index/{{$v->id}}" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
                                         {{$v->title}}
                                     </a>
                                 </div>
                                 <div class="list-desc">
                                     <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
-                                       {{$v->keyworks}}
+                                       {{$v->keywords}}
                                     </a>
                                 </div>
                                 <div class="list-author">
@@ -488,18 +488,18 @@
                                     <span>
                                         点击
                                         <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
-                                            9576
+                                            {{$v->clickcount}}
                                         </a>
                                     </span>
                                     <span>
                                         回复
                                         <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
-                                            49
+                                            {{$v->replaycount}}
                                         </a>
                                     </span>
                                     <a href="list.asp-boardid=1.htm" tppabs="http://club.kdnet.net/list.asp?boardid=1"
                                     class="plate">
-                                        来自：猫眼看人
+                                        来自：{{$v->pid}}
                                     </a>
                                 </div>
                             </li>

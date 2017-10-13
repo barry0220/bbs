@@ -29,6 +29,8 @@ class PostController extends Controller
         $post = Post::get();
 
 
+        // dd($post);
+
 
 
 
