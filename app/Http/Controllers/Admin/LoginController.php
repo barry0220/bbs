@@ -13,7 +13,9 @@ use App\Http\Org\code\Code;
 
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -105,7 +107,7 @@ class LoginController extends Controller
             return redirect('admin/login')->with('errors','用户不存在')->withInput();
         }
         //3.2 密码是否正确
-        if($input['password'] != $user->password){
+        if( !Hash::check($input['password'],$user->password)){
             return redirect('admin/login')->with('errors','密码不正确')->withInput();
         }
 
@@ -113,10 +115,29 @@ class LoginController extends Controller
 
         session(['user'=>$user]);
         //5.进入后台首页
-        return redirect('/admin/user/index');
+        return redirect('/admin/user');
     }
 //    public function index(){
 //       return view('admin/user/index');
 //
 //    }
+
+    public function loginOut()
+    {
+        Session::forget('user');
+
+        if(Session::has('user')){
+            $data=[
+                'status'=>1,
+                'msg'=>'退出登录失败'
+            ];
+        }else{
+            $data=[
+                'status'=>0,
+                'msg'=>'退出登录成功'
+            ];
+        }
+
+        return  $data;
+    }
 }

@@ -11,11 +11,17 @@
 |
 */
 
+
 //后台主页面
-Route::get('/', function () {
+Route::get('/admin/index', function () {
 //    return view('Admin.index');
-    return redirect('/admin/plates');
+    return redirect('/home/login');
 });
+
+Route::resource('/home/index','Home\PostController');
+Route::get('/home/hottoday','Home\PostController@hottoday');
+
+
 
 //后台登录页
 Route::get('admin/login','Admin\LoginController@login');
@@ -23,19 +29,38 @@ Route::get('admin/login','Admin\LoginController@login');
 Route::post('admin/dologin','Admin\LoginController@dologin');
 
 Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
+
+//Route::get('admin/user/repass','Admin\UserController@repass');
 Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],function(){
 
     //验证码路由
 //    Route::get('admin/yzm','LoginController@yzm');
-    //用户模块路由
-    Route::resource('/user/index','UserController');
-//    Route::get('admin/user','Admin\UserController@index');
-    //用户添加模块
+
+
+    //后台用户模块
     Route::resource('/user','UserController');
+    //检查用户名 邮箱是否存在
+    Route::post('/checkuser','UserController@checkuser');
+
+    //前台用户模块
+    Route::resource('/userhome','UserHomeController');
+
+    Route::post('/disables/{id}','UserHomeController@disables');
+    Route::post('/open/{id}','UserHomeController@open');
+
+
+    //管理员修改密码
+    Route::get('/repass','UserController@repass');
+    Route::post('/dorepass/{id}','UserController@dorepass');
+    //管理员退出登录
+    Route::post('/loginout','LoginController@loginOut');
 
     //板块设置管理
     Route::resource('/plates','PlatesController');
-    Route::post('/upload','PlatesController@upload');
+    //单独定义路由用于板块修改提交
+    Route::post('/plates/update/{id}','PlatesController@update');
+    //图像上传OSS控制器方法
+    Route::post('/upload/{type}','UploadController@upload');
 
     //板块设置添加子类路由
     Route::get('/childadd/{id}','PlatesController@childadd');
@@ -47,6 +72,56 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::resource('/links','LinksController');
     //帖子管理管理模块
     Route::resource('/post','PostController');
+
+    Route::post('/post/disables/{id}','PostController@disables');
+    Route::post('/post/open/{id}','PostController@open');
+
+    // 敏感词管理
+    Route::resource('/warwork','WarworkController');
+
+    //帖子标签设置模块
+    Route::resource('/tags','TagsController');
+    //单独定义路由用于标签修改提交
+    Route::post('/tags/update/{id}','TagsController@update');
+    //活动贴管理
+    Route::resource('/active','ActiveController');
+
+    //网站配置模块
+    Route::get('/webconfigs','WebConfigsController@index');
+    //网站配置模块修改提交
+    Route::post('/webconfigs/update/{id}','WebConfigsController@update');
+
+    //广告管理设置模块
+    Route::resource('/adspace','AdspaceController');
+    //单独定义路由用于广告管理修改提交
+    Route::post('/adspace/update/{id}','AdspaceController@update');
+
+    //轮播图管理设置模块
+    Route::resource('/runimg','RunImgController');
+    //单独定义路由用于轮播图管理修改提交
+    Route::post('/runimg/update/{id}','RunImgController@update');
+
+});
+
+//前台页面路由规则
+
+Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
+
+    // 登录路由
+    Route::resource('/login','LoginController');
+    //用户路由
+    Route::resource('/user','UserController');
+    // 忘记密码路由
+    Route::get('/forget','CommonController@forget');
+    // 网络服务协议和声明
+    Route::get('/agreement','CommonController@agreement');
+
+
 });
 
 
+//前台首页
+//Route::resource('/','Home\IndexController@index');
+Route::resource('/',function () {
+    return redirect('/home/login');
+});

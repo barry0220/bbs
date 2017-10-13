@@ -110,7 +110,7 @@
             var formData = new FormData($('#art_form')[0]);
             $.ajax({
                 type: "POST",
-                url: "/admin/upload",
+                url: "/admin/upload/plates",
                 data: formData,
                 contentType: false,
                 processData: false,

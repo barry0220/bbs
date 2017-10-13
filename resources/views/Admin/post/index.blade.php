@@ -2,22 +2,24 @@
 * Time: 15:44 */ ?>
 @extends('Layouts.admin') @section('title','帖子管理') 
 @section('content')
-    <div class="ibox float-e-margins">
-    <form action="{{url('admin/post')}}" method="get">
-
-            <div class="ibox-content">
-                <div id="editable_wrapper" class="dataTables_wrapper form-inline">
-                    <style>
-                        .row label{
-                            color:#1ab394;
-                        }
-                    </style>
-                    <div class="row">
-     
-                        <div class="col-sm-2">
+    <!-- <div class="ibox float-e-margins"> -->
+        <!-- <div class="ibox-content"> -->
+            <!-- <div class="container"> -->
+    <style>
+        .row label{
+            color:#1ab394;
+            font-size:13px;
+        }
+        .input-sm{
+            font-size:12px;
+        }
+    </style>
+    <div class="row">
+        <form action="{{url('admin/post')}}" method="get">
+            <div class="col-md-2">
                             <div class="dataTables_length" id="editable_length">
                                 <label>
-                                    每页显示
+                                    每页显示<br>
                                     <select name="pagea" aria-controls="editable" class="form-control input-sm">
                                         <option value="5"
                                          @if($num==5) 
@@ -44,159 +46,225 @@
                                     
                                 </label>
                             </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="plates" id="editable_length">
-                                <label>
-                                    板块查询
-                                    <select name="editable_length" aria-controls="editable" class="form-control input-sm">
-                                        <option value="10">
-                                            10
-                                        </option>
- 
-                                    </select>
-                                     
-                                </label>
-                            </div>
-                        </div>
-                         <div class="col-sm-2">
-                            <div class="childplates" id="editable_length">
-                                <label>
-                                    类别查询
-                                    <select name="editable_length" aria-controls="editable" class="form-control input-sm">
-                                        <option value="10">
-                                            10
-                                        </option>
-                                         
-                                    </select>
-                                    
-                                </label>
-                            </div>
-                        </div> 
-                        <div class="col-sm-4">
-                            <div id="keywords" class="dataTables_filter ">
-                                <label>
-                                    标题查询:
-                                    <input type="search" name="title" class="form-control input-sm" placeholder="请输入关键字" aria-controls="editable">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-1">  
-                            <input type="submit" class="btn btn-primary" value="查询">
-                        </div>
-                    </div>
-</form>
+            </div>
+            <div class="col-md-2">
+                <div class="plates" id="editable_length">
+                    <label>板块查询<br>
+                        <select class="form-control m-b input-sm" name="pid" id="type">
+                            <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
+                            @foreach($pls as $k => $v)
 
-                    <table id="editable" class="table table-striped table-bordered table-hover  dataTable"
-                    role="grid" aria-describedby="editable_info">
-                        <thead>
-                            <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 72px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                                    ID
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 234px;" aria-label="Browser: activate to sort column ascending">
-                                    标题
-                                </th> 
-                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 212px;" aria-label="Platform(s): activate to sort column ascending">
-                                     发帖人
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 212px;" aria-label="Platform(s): activate to sort column ascending">
-                                     发帖时间
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 146px;" aria-label="Engine version: activate to sort column ascending">
-                                    板块类别
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 103px;" aria-label="CSS grade: activate to sort column ascending">
-                                    分类类别
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 103px;" aria-label="CSS grade: activate to sort column ascending">
-                                    回复数
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 103px;" aria-label="CSS grade: activate to sort column ascending">
-                                    状态
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="editable" rowspan="1"
-                                colspan="1" style="width: 103px;" aria-label="CSS grade: activate to sort column ascending">
-                                    操作
-                                </th>
-                            </tr>
-                        </thead>
-                        
-
-                    <tbody>
-@foreach($res as $k => $v)
-                        <tr class="gradeA odd" role="row">
-                            <td class="sorting_1">
-                                {{$v->id}}
-                            </td>
-                            <td>
-                                {{$v->title}}
-                            </td>
-                            <td class="center">
-                                {{$v->username}}
-                            </td>
-                            <td class="center">
-                                {{$v->posttime}}
-                            </td>                   <td class="center">
-                                {{$v->pname}}
-                            </td>                   <td class="center">
-                                {{$v->cname}}
-                            </td>                   <td class="center">
-                                {{$v->replaycount}}
-                            </td>                   <td class="center">
-                                {{$statu[$v->status]}}
-                            </td>                   <td class="center">
-                            <!-- <a href="{{url('admin/post/'.$v->id)}}">详情</a> -->
-                            <a href="javascript:void()" onclick="detail({{$v->id}})">详情</a>
-
-                                <a href="#">修改</a>
-                                <a href="#">删除</a>
-                            </td>
-
-
-
-                        </tr>
-@endforeach
-                        
-                    </tbody>
- 
-                </table>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="dataTables_info" id="editable_info" role="status" aria-live="polite">
-                            Showing 1 to 10 of 57 entries
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                         <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
-                          
-                {!! $res->appends(['title'=>$input,'pagea'=>$num])->render() !!}
-                        </div>
-                    </div>
+                                <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->pname}} </option>
+                            @endforeach
+                        </select>
+                    </label>
                 </div>
+            </div>
+            <div class="col-md-2">
+                            <div class="plates" id="editable_length">
+                                <label>类别查询<br>
+                                    <select class="form-control m-b input-sm" name="cid" id="type">
+                                         <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
+                                            @foreach($cls as $k => $v)
 
-                <style>
-                #editable_paginate{
-                     margin-left: 175px; 
+                                            <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->cname}} </option>
+                                            @endforeach
+                                    </select>
+                                </label>
+                            </div>
+            </div>            
+            <div class="col-md-2">
+                <div id="keywords" class="dataTables_filter ">
+                    <label>标题查询:<br>
+                        <input type="search" name="title" class="form-control input-sm" placeholder="请输入关键字" aria-controls="editable">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-1">  
+                <br>
+                    <input type="submit" class="btn btn-primary btn-sm" value="查询">
+            </div>
+        </form> 
+    </div>
+    
+                    <!-- <div class="row"> -->
+                  <!-- <div class="col-sm-11"> -->
+    <!-- <div class="row"> -->
+        <div class="table-responsive">
+                <table id="editable" class="table table-striped table-bordered table-hover  dataTable text-nowrap"
+                        role="grid" aria-describedby="editable_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 72px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                                        ID
+                                    </th>
+                                    <th  tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 234px;" aria-label="Browser: activate to sort column ascending">
+                                        标题
+                                    </th> 
+                                    <th    tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 212px;" aria-label="Platform(s): activate to sort column ascending">
+                                         发帖人
+                                    </th>
+                                    <th    tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 212px;" aria-label="Platform(s): activate to sort column ascending">
+                                         发帖时间
+                                    </th>
+                                    <th    tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 146px;" aria-label="Engine version: activate to sort column ascending">
+                                        板块类别
+                                    </th>
+                                    <th    tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 103px;" aria-label="CSS grade: activate to sort column ascending">
+                                        分类类别
+                                    </th>
+                                    <th    tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 103px;" aria-label="CSS grade: activate to sort column ascending">
+                                        回复数
+                                    </th>
+                                    <th    tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 103px;" aria-label="CSS grade: activate to sort column ascending">
+                                        状态
+                                    </th>
+                                    <th    tabindex="0" aria-controls="editable" rowspan="1"
+                                    colspan="1" style="width: 103px;" aria-label="CSS grade: activate to sort column ascending">
+                                        操作
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            
+
+                        <tbody>
+                            @foreach($res as $k => $v)
+                            <tr class="gradeA odd" role="row">
+                                <td class="sorting_1">
+                                    {{$v->id}}
+                                </td>
+                                <td class="center">
+                                    <a href="#">{{$v->title}}</a>
+                                </td>
+                                <td class="center">
+                                    {{$v->username}}
+                                </td>
+                                <td class="center">
+                                    {{$v->posttime}}
+                                </td>                   
+                                <td class="center">
+                                    {{$v->pname}}
+                                </td>                   
+                                <td class="center">
+                                    {{$v->cname}}
+                                </td>                   
+                                <td class="center">
+                                    {{$v->replaycount}}
+                                </td>                   
+                                <td class="center">
+                                    {{$statu[$v->status]}}
+                                </td>                   
+                                <td class="center">
+                                <a href="{{url('admin/post/'.$v->id)}}" class="btn btn-info btn-sm">详情</a>
+                                <!-- <a href="javascript:void(0)" onclick="detail({{$v->id}})">详情</a> -->
+                            @if($v->status == 0)
+                                <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="sta({{$v->id}})">禁用</a>
+                            @else 
+                                <a href="javascript:void(0);" onclick="stat({{$v->id}})" class="btn btn-success btn-sm">开启</a>
+                            @endif
+                                  <!--   <a href="{{url('admin/post/'.$v->id)}}/edit">禁用</a> -->
+                                    <a href="javascript:;" onclick="delPost({{$v->id}})" class="btn btn-danger btn-sm">删除</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                            
+                        </tbody>
+     
+                </table>
+        </div>
+    <!-- </div> -->
+    
+    <div align="center">
+        <!-- <div class="col-sm-6 col-sm-offset-3"> -->
+            <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+                          
+                {!! $res->appends(['title'=>$input,'pagea'=>$num,'pid'=>$pid,'cid'=>$cid])->render() !!}
+            </div>
+        <!-- </div> -->
+    </div>
+    <div class="row"></div>
+
+ <script>
+    // 禁用帖子
+        function sta(id){
+            layer.confirm('确认禁用？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(){
+                            $.post("{{url('admin/post/disables')}}"+'/'+id,{'_token':'{{csrf_token()}}'},function(data){
+                                if(data.status == 0){
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 6});
+                                }else{
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 5});
+                                }
+                            })
+                        });
+
+        }
+
+   // 开启帖子
+        function stat(id){
+            layer.confirm('确认开启？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(){
+                            $.post("{{url('admin/post/open')}}"+'/'+id,{'_token':'{{csrf_token()}}'},function(data){
+                                if(data.status == 0){
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 6});
+                                }else{
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 5});
+                                }
+                            })
+                        });
+
+        }
+        //删除帖子
+        function delPost(id){
+
+            //询问框
+            layer.confirm('确认删除？', {
+                btn: ['确认','取消'] //按钮
+            }, function(){
+//                通过ajax 向服务器发送一个删除请求
+//                $.post('请求的路径'，携带的数据参数，执行后返回的数据)
+//                {'key':'value','key1':'value1'}
+                $.post("{{url('admin/post/')}}/"+id,{'_method':'delete','_token':"{{csrf_token()}}"},function(data){
+                    if(data.status == 0){
+                        location.href = location.href;
+                        layer.msg(data.msg, {icon: 6});
+                    }else{
+                        location.href = location.href;
+                        layer.msg(data.msg, {icon: 5});
                     }
-                div ul.pagination{ margin: 2px 0;
-                    white-space: nowrap;
-                    }
-                </style>
-@endsection
+
+                    // console.log(data);
+
+                })
+//
+
+            });
+        }
+
+    </script>
+<!-- 引入layer 待完成 -->
 <script type="text/javascript">
     function detail(id){
 
     // $('')
         
+        // console.log(id);
+
     //页面层
     layer.open({
     type: 1,
@@ -204,8 +272,17 @@
     area: ['80%', '90%'],  
     content: '<iframe name="layr" width="100%" height="100%" src="/admin/post/show" frameborder="0"></iframe>'
     });
-
-
+    // // $.get('admin/post/show',{'id':id},function(){})
+    // $.ajax({
+    //         url : '/admin/post/show',
+    //         type : "post",
+    //         data: {id:id},
+    //         dataType : "json",
+ 
+    //     });
    
     }
-</script>   
+</script>  
+    <!-- </div>
+</div> -->
+@endsection 

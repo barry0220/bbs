@@ -21,7 +21,7 @@
             </ul>
         </div>
     @endif
-    <form method="post" id="art_form" action="{{ url('admin/plates/').'/'.$pls->id  }}" class="form-horizontal" enctype="multipart/form-data">
+    <form method="post" id="art_form" action="{{ url('admin/plates/update/').'/'.$pls->id  }}" class="form-horizontal" enctype="multipart/form-data">
         <div class="hr-line-dashed"></div>
         <div class="form-group">
             <label class="col-sm-2 control-label">板块名称</label>
@@ -60,7 +60,7 @@
             <button class="btn btn-primary" type="submit">保存</button>
         </div>
         {{csrf_field()}}
-        {{method_field('put')}}
+{{--        {{method_field('put')}}--}}
     </form>
     <script>
 
@@ -85,7 +85,7 @@
             var formData = new FormData($('#art_form')[0]);
             $.ajax({
                 type: "POST",
-                url: "/admin/upload",
+                url: "/admin/upload/plates",
                 data: formData,
                 contentType: false,
                 processData: false,
