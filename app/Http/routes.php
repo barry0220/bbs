@@ -13,7 +13,7 @@
 
 
 //后台主页面
-Route::get('/', function () {
+Route::get('/admin/index', function () {
 //    return view('Admin.index');
     return redirect('/admin/plates');
 });
@@ -70,4 +70,4 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
 
 //前台首页
-Route::resource('/index','Home\IndexController@index');
+Route::resource('/','Home\IndexController@index');
