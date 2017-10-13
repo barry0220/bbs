@@ -11,4 +11,11 @@ class Post extends Model
     protected $table = 'post';
     public $timestamps = false;
 
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\UserHome','id','uid');
+    }
 }
+
+

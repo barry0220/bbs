@@ -17,6 +17,11 @@ Route::get('/', function () {
     return redirect('/home/login');
 });
 
+Route::resource('/home/index','Home\PostController');
+Route::get('/home/hottoday','Home\PostController@hottoday');
+
+
+
 //后台登录页
 Route::get('admin/login','Admin\LoginController@login');
 //后台登录处理页
@@ -91,10 +96,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
     // 网络服务协议和声明
     Route::get('/agreement','CommonController@agreement');
 
-
-
-
-
+    //活动贴管理
+    Route::resource('/active','ActiveController');
 
 });
 
