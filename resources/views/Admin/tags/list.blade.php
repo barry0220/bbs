@@ -8,30 +8,24 @@
         <div class="ibox-content">
             <div id="editable_wrapper" class="dataTables_wrapper form-inline">
                 <div class="row">
-                    <div class="col-sm-2">
-                        <div class="dataTables_length" id="editable_length">
-                            <label>
-                                <select name="editable_length" aria-controls="editable" class="form-control input-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                每页记录
-                            </label>
+                    <form action="/admin/tags" method="get">
+                        <div class="col-sm-3">
+                            <div id="editable_filter" class="dataTables_filter">
+                                <label>
+                                    搜索：<input type="search" class="form-control input-sm" name="searchname" style="width:180px;" placeholder="{{$searchname ? $searchname:'输入标签名称'}}">
+                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="{{url('admin/tags/create')}}" class="btn btn-info btn-sm" style="font-size:16px;">添加标签</a>
+                        <div class="col-sm-1">
+                            <button class="btn btn-success btn-md">查询</button>
+                        </div>
 
+                    </form>
+
+                    <div class="col-sm-3">
+                        <a href="{{url('admin/tags/create')}}" class="btn btn-info btn-sm" style="font-size:14px;">添加标签</a>
                     </div>
-                    <div class="col-sm-4">
-                        <div id="editable_filter" class="dataTables_filter">
-                            <label>
-                                搜索：<input type="search" class="form-control input-sm" placeholder="输入板块名称">
-                            </label>
-                        </div>
-                    </div>
+
                 </div>
                 <style>
                    #editable  tr > td {
@@ -69,7 +63,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
-                            {!! $tags->render() !!}
+                            {!! $tags->appends(['searchname'=>$searchname])->render() !!}
                         </div>
                     </div>
                 </div>

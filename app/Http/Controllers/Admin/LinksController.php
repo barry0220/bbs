@@ -17,12 +17,15 @@ class LinksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // 如果存在条件接收条件
+        $input = $request -> all();
+        $searchname = isset($input['searchname']) ? $input['searchname'] : '';
         //显示链接界面
-        $links = Links::paginate(6);
+        $links = Links::where('linkname','like','%'.$searchname.'%')->paginate(6);
 
-        return view('admin.links.list',compact('links'));
+        return view('admin.links.list',compact('links','searchname'));
     }
 
     /**

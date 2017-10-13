@@ -14,7 +14,7 @@
 //后台主页面
 Route::get('/', function () {
 //    return view('Admin.index');
-    return redirect('/admin/plates');
+    return redirect('/home/login');
 });
 
 //后台登录页
@@ -70,6 +70,31 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::resource('/adspace','AdspaceController');
     //单独定义路由用于广告管理修改提交
     Route::post('/adspace/update/{id}','AdspaceController@update');
+
+    //轮播图管理设置模块
+    Route::resource('/runimg','RunImgController');
+    //单独定义路由用于轮播图管理修改提交
+    Route::post('/runimg/update/{id}','RunImgController@update');
+
+});
+
+//前台页面路由规则
+
+Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
+
+    // 登录路由
+    Route::resource('/login','LoginController');
+    //用户路由
+    Route::resource('/user','UserController');
+    // 忘记密码路由
+    Route::get('/forget','CommonController@forget');
+    // 网络服务协议和声明
+    Route::get('/agreement','CommonController@agreement');
+
+
+
+
+
 
 });
 

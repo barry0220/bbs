@@ -20,12 +20,15 @@ class TagsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // 如果存在条件接收条件
+        $input = $request -> all();
+        $searchname = isset($input['searchname']) ? $input['searchname'] : '';
         //显示标签界面
-        $tags = Tags::paginate(6);
+        $tags = Tags::where('tagname','like','%'.$searchname.'%')->paginate(6);
 
-        return view('admin.tags.list',compact('tags'));
+        return view('admin.tags.list',compact('tags','searchname'));
     }
 
     /**

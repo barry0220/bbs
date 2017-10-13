@@ -48,7 +48,7 @@
             <label class="col-sm-2 control-label">网站LOGO</label>
             <div class="col-sm-3">
                 <input type="text" class="form-control" id="art_thumb" name="logofile" value="{{$webconfig->logofile}}">
-                <p><img id="img1" alt="上传后显示图片" src="{{$webconfig->logofile}}" style="width:250px" /></p>
+                <p><img id="img1" alt="上传后显示图片" src="{{$webconfig->logofile}}" style="width:150px;height:150px;" /></p>
             </div>
             <div class="col-sm-1">
                 <input id="file_upload" type="file" name="file_upload" multiple="true">

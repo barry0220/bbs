@@ -44,13 +44,13 @@ class PlatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // 如果存在条件接收条件
+        $input = $request -> all();
+        $searchname = isset($input['searchname']) ? $input['searchname'] : '';
         //查询板块
-        //$pls = DB::table('plates')->get();
-        //$cpls = DB::table('childplates')->get();
-
-        $pls = Plates::get();
+        $pls = Plates::where('pname','like','%'.$searchname.'%')->get();
         $cpls = ChildPlates::get();
 
         $ncpls = array();
@@ -60,7 +60,7 @@ class PlatesController extends Controller
         }
 
         //引入页面
-        return view('admin.plates.list',compact('pls','cpls'));
+        return view('admin.plates.list',compact('pls','cpls','searchname'));
 
     }
 

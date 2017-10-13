@@ -135,8 +135,8 @@
                 <li>
                     <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">轮播图设置</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="{{url('admin/adspace')}}">广告列表</a></li>
-                        <li><a href="{{url('admin/adspace/create')}}">添加广告</a></li>
+                        <li><a href="{{url('admin/runimg')}}">轮播图列表</a></li>
+                        <li><a href="{{url('admin/runimg/create')}}">添加轮播图</a></li>
                     </ul>
                 </li>
                 <li>

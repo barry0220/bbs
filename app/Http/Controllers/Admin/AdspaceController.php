@@ -16,12 +16,18 @@ class adspaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //显示标签界面
-        $adspaces = Adspace::paginate(6);
+        // 如果存在条件接收条件
+        $input = $request -> all();
 
-        return view('admin.adspace.list',compact('adspaces'));
+        $mindate = isset($input['mindate']) ? strtotime($input['mindate']) : time()-60*60*24*30;   //默认查询向前一月时间
+        $maxdate = isset($input['maxdate']) ? strtotime($input['maxdate']) : time()+60*60*24*30; //默认查询向后一月的时间
+        $searchname = isset($input['searchname']) ? $input['searchname'] : '';
+        //显示广告界面
+        $adspaces = Adspace::where('adpost','like','%'.$searchname.'%')->whereBetween('expiretime',[$mindate,$maxdate])->paginate(6);
+
+        return view('admin.adspace.list',compact('adspaces','mindate','maxdate','searchname'));
     }
 
     /**
@@ -155,7 +161,7 @@ class adspaceController extends Controller
         $validator = Validator::make($input,$rule,$msg);
         //如果验证失败
         if ($validator->fails()) {
-            return redirect('admin/adspace/create')
+            return redirect('admin/adspace/'.$id.'/edit')
                 ->withErrors($validator)
                 ->withInput();
         }
