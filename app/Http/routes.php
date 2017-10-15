@@ -28,7 +28,10 @@ Route::get('admin/login','Admin\LoginController@login');
 //后台登录处理页
 Route::post('admin/dologin','Admin\LoginController@dologin');
 
+//后台验证码
 Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
+//前台验证码
+Route::get('/homecode/captcha/{tmp}', 'Home\LoginController@captcha');
 
 //Route::get('admin/user/repass','Admin\UserController@repass');
 Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],function(){
@@ -108,7 +111,8 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
     // 登录路由
-    Route::resource('/login','LoginController');
+    Route::get('/login','LoginController@login');
+    Route::post('/dologin','LoginController@dologin');
     //用户路由
     Route::resource('/user','UserController');
     // 忘记密码路由
@@ -122,6 +126,6 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
 //前台首页
 //Route::resource('/','Home\IndexController@index');
-Route::resource('/',function () {
+Route::get('/',function () {
     return redirect('/home/login');
 });

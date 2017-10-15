@@ -105,6 +105,7 @@
             </div>
             <div class="modal-body login-wrap">
                 <div id="qrcode" class="row" style="text-align: center;">
+                    这里放一个二维码
                 </div>
             </div>
         </div>
@@ -147,15 +148,30 @@
                         <a href="#formRegister" data-target="#formRegister">注册</a>
                     </li>
                 </ul>
+                <div class="row">
+                @if (count($errors) > 0)
+                    <div class="alert" style="color:red;list-style: circle;">
+                        <ul>
+                            @if(is_object($errors))
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            @else
+                                <li>{{  $errors }}</li>
+                            @endif
+                        </ul>
+                    </div>
+                @endif
+                </div>
                 <div class="tab-content">
-                    <form class="tab-pane fade in active" id="formLogin">
+                    <form class="tab-pane fade in active" id="formLogin" method="post" action="{{url('/home/dologin')}}">
                         <div class="form-group">
                             <label class="sr-only" for="EmailPhoneNcke">手机/邮箱/凯迪昵称</label>
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <span class="fa fa-user"></span>
                                 </div>
-                                <input type="text" class="form-control" id="EmailPhoneNcke" name="EmailPhoneNcke" placeholder="手机/邮箱/凯迪昵称" aria-invalid="true">
+                                <input type="text" class="form-control" id="EmailPhoneNcke" name="EmailPhoneNcke" placeholder="手机/邮箱/凯迪昵称" value="{{old('EmailPhoneNcke')}}" aria-invalid="true">
                                 <i></i>
                             </div>
                         </div>
@@ -165,11 +181,32 @@
                                 <div class="input-group-addon">
                                     <span class="fa fa-unlock-alt"></span>
                                 </div>
-                                <input type="password" class="form-control" id="Password" name="Password" placeholder="登录密码" required>
+                                <input type="password" class="form-control" id="Password" name="Password" placeholder="登录密码" value="{{old('password')}}" required>
                                 <i></i>
                             </div>
                         </div>
                         <div class="form-group">
+                                <label class="sr-only" for="EmailPhoneNcke">验证码</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <span class="fa fa-cog"></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="homecode" name="homecode" placeholder="请输入验证码" value="{{old('homecode')}}" aria-invalid="true">
+                                    {{--<a onclick="javascript:re_captcha();">--}}
+                                        {{--<img src="{{ URL('/code/captcha/1') }}" id="127ddf0de5a04167a9e427d883690ff6">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">看不清？点击图片换一张</a>--}}
+                                    {{--</a>--}}
+                                    <i></i>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" style="padding-top:10px;">
+                                            <img src="{{ URL('/code/captcha/1') }}" onclick="javascript:re_captcha();" id="code">&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="javasript:;" onclick="javascript:re_captcha();">看不清？点击更换</a>
+                                        <i></i>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            {{csrf_field()}}
                             <button class="btn btn-primary btn-block btn-lg" type="submit" name="submit"
                                     data-loading-text="<i class='fa fa-refresh fa-spin'></i> 正在登录…">登录
                             </button>
@@ -178,7 +215,8 @@
                             <a href="{{url('/home/forget')}}">忘记登录密码?</a>
                         </p>
                     </form>
-                    <form class="tab-pane" id="formRegister">
+                    <form class="tab-pane" id="formRegister" action="{{url("/home/doregister")}}">
+                        {{csrf_field()}}
                         <div class="form-group">
                             <input type="text" class="form-control" id="inputEmailPhone" name="inputEmailPhone" placeholder="手机(仅支持大陆手机)">
                             <i></i>
@@ -296,39 +334,46 @@
 <script type="text/javascript" src="{{asset('/home/js/gt.js')}}"></script>
 <script type="text/javascript" src="{{asset('/home/js/login.js')}}"></script>
 <script type="text/javascript">
-    !function() {
-            require('login:static/util/code.validate.js');
-            require('login:static/util/login.validate.js').init({
-                    "kdnetapiformat": "json",
-                    "register": {
-                        "uri": "i.kdnet.net\/api\/passport\/register"
-                    },
-                    "only": {
-                        "uri": "i.kdnet.net\/api\/passport\/query"
-                    },
-                    "activating": {
-                        "uri": "i.kdnet.net\/api\/passport\/activating"
-                    },
-                    "examine": {
-                        "uri": "i.kdnet.net\/api\/passport\/examine"
-                    },
-                    "captcha": {
-                        "uri": "i.kdnet.net\/api\/passport\/captcha"
-                    },
-                    "sendCode": {
-                        "uri": "i.kdnet.net\/api\/passport\/sendCode"
-                    },
-                    "authorize": {
-                        "uri": "i.kdnet.net\/api\/passport\/authorize"
-                    },
-                    "forget": {
-                        "uri": "i.kdnet.net\/api\/passport\/forget"
-                    },
-                    "modify": {
-                        "uri": "i.kdnet.net\/api\/passport\/modify"
-                    }
-                },
-                "");
+
+    function re_captcha() {
+        $url = "{{ URL('/homecode/captcha') }}";
+        $url = $url + "/" + Math.random();
+        document.getElementById('code').src = $url;
+    }
+
+//    !function() {
+//            require('login:static/util/code.validate.js');
+//            require('login:static/util/login.validate.js').init({
+//                    "kdnetapiformat": "json",
+//                    "register": {
+//                        "uri": "i.kdnet.net\/api\/passport\/register"
+//                    },
+//                    "only": {
+//                        "uri": "i.kdnet.net\/api\/passport\/query"
+//                    },
+//                    "activating": {
+//                        "uri": "i.kdnet.net\/api\/passport\/activating"
+//                    },
+//                    "examine": {
+//                        "uri": "i.kdnet.net\/api\/passport\/examine"
+//                    },
+//                    "captcha": {
+//                        "uri": "i.kdnet.net\/api\/passport\/captcha"
+//                    },
+//                    "sendCode": {
+//                        "uri": "i.kdnet.net\/api\/passport\/sendCode"
+//                    },
+//                    "authorize": {
+//                        "uri": "i.kdnet.net\/api\/passport\/authorize"
+//                    },
+//                    "forget": {
+//                        "uri": "i.kdnet.net\/api\/passport\/forget"
+//                    },
+//                    "modify": {
+//                        "uri": "i.kdnet.net\/api\/passport\/modify"
+//                    }
+//                },
+//                "");
 
             $(function() {
                 $('.j-logintabs a').click(function (e) {

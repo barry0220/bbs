@@ -1,88 +1,96 @@
 <?php
 
 namespace App\Http\Controllers\Home;
-
+require_once app_path().'/Http/Org/code/Code.class.php';
 use Illuminate\Http\Request;
 
+use Gregwar\Captcha\CaptchaBuilder;
+use Gregwar\Captcha\PhraseBuilder;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function login()
     {
         //引入登录页面
         return view('home.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    // 验证码生成
+    public function captcha($tmp)
     {
-        //
+        $phrase = new PhraseBuilder;
+        // 设置验证码位数
+        $code = $phrase->build(4);
+        // 生成验证码图片的Builder对象，配置相应属性
+        $builder = new CaptchaBuilder($code, $phrase);
+        // 设置背景颜色
+        $builder->setBackgroundColor(220, 210, 230);
+        $builder->setMaxAngle(25);
+        $builder->setMaxBehindLines(0);
+        $builder->setMaxFrontLines(0);
+        // 可以设置图片宽高及字体
+        $builder->build($width = 100, $height = 40, $font = null);
+        // 获取验证码的内容
+        $phrase = $builder->getPhrase();
+        // 把内容存入session
+        \Session::flash('homecode', $phrase);
+        // 生成图片
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Content-Type:image/jpeg");
+        $builder->output();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function dologin(Request $request)
     {
-        //
-    }
+        //1.接手前台提交过来的数据
+        $input = $request->except('_token');
+        //2.对提交过来的数据进行表单验证
+        $rule=[
+            'EmailPhoneNcke'=>'required',
+            'password'=>'required',
+            'homecode'=>'required'
+        ];
+        $msg = [
+            'EmailPhoneNcke.required'=>'用户名必须输入',
+            'password.required'=>'密码必须输入',
+            'homecode.required'=>'验证码必须输入'
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        ];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        //进行手工表单验证
+        $validator = Validator::make($input,$rule,$msg);
+        //如果验证失败
+        if($validator->fails()){
+            return redirect('/home/login')
+                ->withErrors($validator)
+                ->withInput();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        }
+        //3.0 验证码是否正确
+        if($input['code'] != session('code')){
+            return redirect('home/login')->with('errors','验证码错误')->withInput();
+        }
+        //3.进行逻辑验证
+//        var_dump($input['username']);
+        $user = DB::table('admins')->where('username',$input['username'])->first();
+//        dd($user);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if (!$user){
+            return redirect('admin/login')->with('errors','用户不存在')->withInput();
+        }
+        //3.2 密码是否正确
+        if( !Hash::check($input['password'],$user->password)){
+            return redirect('admin/login')->with('errors','密码不正确')->withInput();
+        }
+
+        //4.将登录用户的状态值保存到session中
+
+        session(['user'=>$user]);
+        //5.进入后台首页
+        return redirect('/admin/user');
     }
 }
