@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN">
+<html>
 
 <head>
 
@@ -72,7 +72,7 @@
 </form>
 </div>
 <ul class="nav navbar-nav login-nav">
-<li><a id="login" href="javascript:void(0);">登录</a></li>
+<li><a id="login" href="{{url('/home/login')}}">登录</a></li>
 <li><a href="javascript:if(confirm('http://uc.kdnet.net/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://uc.kdnet.net/#formRegister'" tppabs="http://uc.kdnet.net/#formRegister">注册</a></li>
 </ul>
 </div>
