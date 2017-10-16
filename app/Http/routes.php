@@ -18,8 +18,10 @@ Route::get('/admin/index', function () {
     return redirect('/home/login');
 });
 
-Route::resource('/home/index','Home\PostController');
-Route::get('/home/hottoday','Home\PostController@hottoday');
+Route::resource('/home/post','Home\PostController');
+Route::get('/home/cateye','Home\PostController@cateye');
+Route::get('/home/list/{id}','Home\PostController@list');
+Route::get('/home/plateslist/{id}','Home\PostController@plateslist');
 
 
 
@@ -85,6 +87,8 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::post('/tags/update/{id}','TagsController@update');
     //活动贴管理
     Route::resource('/active','ActiveController');
+    Route::post('/active/disables/{id}','ActiveController@disables');
+    Route::post('/active/open/{id}','ActiveController@open');
 
     //网站配置模块
     Route::get('/webconfigs','WebConfigsController@index');

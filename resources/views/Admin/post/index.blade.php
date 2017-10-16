@@ -143,7 +143,7 @@
                                     {{$v->id}}
                                 </td>
                                 <td class="center">
-                                    <a href="#">{{$v->title}}</a>
+                                    <a href="/home/post/{{$v->id}}">{{$v->title}}</a>
                                 </td>
                                 <td class="center">
                                     {{$v->username}}
@@ -161,7 +161,7 @@
                                     {{$v->replaycount}}
                                 </td>                   
                                 <td class="center">
-                                    {{$statu[$v->status]}}
+                                    {{$statu[$v->postcode]}}
                                 </td>                   
                                 <td class="center">
                                 <a href="{{url('admin/post/'.$v->id)}}" class="btn btn-info btn-sm">详情</a>

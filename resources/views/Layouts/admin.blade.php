@@ -55,7 +55,7 @@
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <!--左侧列表区域位置-->
-            < class="nav metismenu" id="side-menu">
+            <ul class="nav metismenu" id="side-menu">
                 <!--用户头像信息位置-->
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
@@ -65,8 +65,8 @@
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">用户名</strong>
                              </span> <span class="text-muted text-xs block">管理员<b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="{{url('admin/user/'.(isset(session('user')) ? session('user')->id : '1') )}}">个人信息</a></li>
-
+                            <li><a href="#">个人信息</a></li>
+                           
                             <li><a href="{{url('admin/repass')}}">修改密码</a></li>
                             <li class="divider"></li>
                             <li><a href="javascript:;" onclick="loginOut()">退出登录</a></li>
@@ -74,6 +74,7 @@
                         <div class="logo-element">
                             IN+
                         </div>
+                    </div>
                 </li>
                 <!--各种列表区域-->
                 <li>
@@ -135,7 +136,7 @@
                     <li><a href="{{url('admin/active/create')}}">添加活动贴</a></li>
 
                 </ul>
-            </li>
+                </li>
                 <li>
                     <a href="javascript:;" ><i class="fa fa-th-large"></i> <span class="nav-label">广告管理设置</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">

@@ -104,6 +104,7 @@ class PlatesController extends Controller
             if (!$request -> hasFile('file_upload')) {
                 return back()->with('errors', '没有选择图片')->withInput();
             }
+            
 
             $rule=[
                 'pname'=>'required',

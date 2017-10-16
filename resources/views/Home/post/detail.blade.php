@@ -25,14 +25,14 @@
         <!-- sunny modify 20130710 收藏 begin -->
         <!-- link href="http://imgcdn.kdnet.net/webset/www/g_style/base8.css"
         rel="stylesheet" type="text/css" / -->
-        <link href="{{asset('/home/css/base10_v5_20140516.css')}}"
-        tppabs="{{asset('/home/css/base10_v5_20140516.css')}}"
+        <link href="{{asset('/home/css/base.css')}}"
+        tppabs="{{asset('/home/css/base.css')}}"
         rel="stylesheet" type="text/css" />
         <!-- sunny modify 20130710 收藏 end -->
         <link href="{{asset('/home/css/face.css')}}" tppabs="{{asset('/home/css/face.css')}}"
         rel="stylesheet" type="text/css" />
-        <link href="{{asset('/home/css/club_v5.1.4_20141022.css')}}"
-        tppabs="{{asset('/home/css/club_v5.1.4_20141022.css')}}"
+        <link href="{{asset('/home/css/club.css')}}"
+        tppabs="{{asset('/home/css/club.css')}}"
         rel="stylesheet" type="text/css" />
         <!-- sunny 20131021 share-->
         <style type="text/css">
@@ -441,7 +441,7 @@
                     <style>
                         .wechat-share{ background-color: #fff; text-align: center; padding: 13px
                         0; margin-top: 10px; border: 1px solid #BAD8D8; width: 113px; position:
-                        absolute; right: 0px; } .wechat-share i{ background: url("../qc-static.kdnet.net/resource/20160229/icon-wetcha.png"/*tpa=http://qc-static.kdnet.net/resource/20160229/icon-wetcha.png*/)
+                        absolute; right: 0px; } .wechat-share i{ background: url("{{asset('/home/img/icon-wetcha.png')}}")
                         no-repeat; width: 15px; height: 13px; display: inline-block; float: left;
                         margin-top: 3px; } .wechat-share p{ color: #555659; font-size: 13px; text-align:
                         left; margin-left:20px; margin-top: 12px; } .wetchat-share-txt{ padding:
@@ -1006,7 +1006,7 @@
                 <!--发帖等操作-->
                 <div class="operating clearfix">
                     <div class="btn-publish" title="发布新帖">
-                        <a target="_blank" href="javascript:if(confirm('http://upfile2.kdnet.net/textareaeditor/post_ubb.asp?action=new&boardid=1  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile2.kdnet.net/textareaeditor/post_ubb.asp?action=new&boardid=1'"
+                        <a target="_blank" href="{{url('/home/post/create')}}"
                         tppabs="http://upfile2.kdnet.net/textareaeditor/post_ubb.asp?action=new&boardid=1">
                             发布新帖
                         </a>
@@ -1177,13 +1177,13 @@
                             <div class="posts-stat-c">
                                 <div>
                                     <span class="f10px fB c-alarm">
-                                        12138
+                                        {{$postinfo[0]->clickcount}}
                                     </span>
                                     次点击
                                 </div>
                                 <div class="forward-wblog">
                                     <span class="f10px fB c-alarm">
-                                        61
+                                       {{$postinfo[0]->replaycount}}
                                     </span>
                                     个回复
                                 </div>
@@ -1199,73 +1199,38 @@
                             <span class="c-main">
                                 <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=11849785  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=11849785'"
                                 tppabs="http://user.kdnet.net/index.asp?userid=11849785" target="_blank">
-                                    风青杨
+                                    {{$users[$postinfo[0]->uid]}}
                                 </a>
                             </span>
-                            于 2017/10/10 10:14:24 发布在
+                            于 {{$postinfo[0]->posttime}}发布在
                             <span class="c-main">
-                                <a href="javascript:if(confirm('http://club.kdnet.net/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://club.kdnet.net/'"
+                                <a href="{{url('/admin')}}"
                                 tppabs="http://club.kdnet.net/">
-                                    凯迪社区
+                                    迷之社区
                                 </a>
                                 &gt;
-                                <a href="javascript:if(confirm('http://club.kdnet.net/list.asp?boardid=1  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://club.kdnet.net/list.asp?boardid=1'"
+                                <a href="{{url('admin')}}"
                                 tppabs="http://club.kdnet.net/list.asp?boardid=1">
-                                    猫眼看人
+                                    {{$postplates[$postinfo[0]->pid]}}
                                 </a>
                             </span>
                         </div>
                         <div class="posts-cont" style="word-spacing: 2px;">
                             <br>
-                            <img src="../qc-cache.kdnet.net/upload/2017/10/10/15076016546630413.jpg-imageView2-0-h-600.jpg"
+                            <img src="{{asset('/home/img/15076016546630413.jpg-imageView2-0-h-600.jpg')}}"
                             tppabs="http://qc-cache.kdnet.net/upload/2017/10/10/15076016546630413.jpg?imageView2/0/h/600"
                             onclick="if(this.width==600) window.open('/home/img/15076016546630413.jpg')"
                             onload="imgload(this, 600)">
                             <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;文 风青杨
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;一名中国男子在日本考驾照，他从二月考到现在都没有成功通过考试。最后他想到了一个非常“中国”的方式，就在考驾照的时候，他给面前的考官递了一万日元，约500多元人民币，“请收下，请多多关照”，结果当场被逮捕了…
-                            (中新网）
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;也许以中国人的眼光来看，这跟本不算什么事，至少没严重到要当场逮捕。在国内的驾校里，以前考驾照的人，谁不是争着给教练买烟请吃，还私下里塞个红包。就算是有人给官员送礼人家并未收受，在国内怎会判定送礼人有罪？通常是官员受贿事发后交代出行贿人，行贿人才可能受到处罚，而多数时候在我国行贿人是不被追究的。而学员贿赂教练为通过考试，在我们这个处处讲人情，随时得准备给人好处才好办事的国度，不说很普遍至少不稀奇。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;但在国外，尤其是欧美等国家，中国人因行贿被判刑的新闻比比皆是。2011年，英国曼彻斯特一名华裔妇女4次考驾照都未通过，在第五次路考时，她试图塞给考官500英镑。结果考官立即中止考试，并以贿赂罪将她告上法庭。华裔妇女起初还辩称这些钱是为了“带来好运”，后来才承认试图“贿赂”考官。法庭判决惩罚她做50小时社会服务，并赔偿考官100英镑。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;甭说欧美，就算是在香港，也是对贿赂行为的“零容忍”，只要是行贿受贿，不论数额多寡都属于犯罪。此有一例，电影《2046》拍摄时，有一个娱乐记者为了进入拍摄现场拍照，塞给门卫300港元，结果被判入狱三个月才有了香港有口皆碑的“清廉指数”。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;行贿当然应被追究责任，这在哪里都是基本的法律准则，但在国内，在潜规则之下，行贿成为一种常态——大家都行贿，你不行贿就吃亏了，或者违法成本低，行贿了就可能拿到利润丰厚的订单，不行贿就是傻帽儿。纵观中国悠久的历史，其中总有一根“贿赂文化”之线贯穿始终。甚至在许多重大的历史事件中，“贿赂文化”有时能发挥至关重要的决定性作用。有学者就曾举例子：假如在“鸿门宴”之前，刘邦手下的谋士张良等不去预先用重金贿赂项羽的叔叔，那刘邦必定死于项庄所舞之剑下。若刘邦真的被项庄杀了，历史就必定重新改写。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;在某个企业家论坛上，一名企业家嘉宾说，“王石先生不行贿，我很佩服，但那只是个案，因为在中国不行贿，一事无成，比如说我自己就行贿。”该嘉宾说完这句话，台下300多位听众报以热烈掌声，而王石却没有赢得任何掌声，行贿的反而成英雄了？行贿者成为英雄，倒也未必，但行贿者罕有被追责的，并非新闻。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;这几年，“外国帮中国反腐”的笑谈颇为常见——一些跨国公司的高管，在中国行贿没被发现，却被本国调查。如美国朗讯科技公司曾因安排近千人次中国官员和电信高管赴美旅游而被罚款250万美元;美国德普公司因长期向中国医院行贿以获得销售合同而被罚款479万美元……“大胆行贿只因中国处罚轻”，这是驻华公司的普遍心态还是少数人的心理写照，抑或是大家心知肚明的潜规则。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;但在欧美日，华人“花钱就能办成事”的想法经常碰壁。比如，很多美国大学有规定，如果学生贿赂教授，教授必须向学校报告，这从一定程度上遏制了此类事件发生。另外一方面，教授一旦被发现收受贿赂也会被学校开除，甚至导致牢狱之灾。在国外名誉对一个教授来说是非常的重要，很少有教授会因为一些蝇头小利而做出这些违反法律和社会个人道德的事情，而且，他们会认为自己的人格受到了侮辱。因此，在美国贿赂教授的可行性和成功率无限趋近于零。如果你尝试贿赂教授，不仅不容易成功，还非常有可能被学校开除，面临着被遣送回国或者被起诉的危险。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;造成贿赂产生的根本原因首先在于行贿，其次才是受贿。如果人们都没有想方设法去摆脱法规约束来达到个人不正当目的的欲望，就不需要去行贿，如果没有人去行贿，自然就不会产生受贿现象。行贿是起因，受贿才是后果。正因有此理念，所以在西欧一些国家中，贿赂现象很少见，与其说是执法者清正廉洁，不如说是国民素质中没有行贿的动机。人人都自觉遵守法规的秩序，人人都不去想投机取巧之事，没有了滋生腐败的土壤和形成腐败的气候，这样的话，社会上的公正、公平、公开风气就自然而然地形成了。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;但在中国，送礼已是长久以来形成的不良风气，学校也不例外。每到教师节，学生家长都会以各种方式给孩子的老师送礼。在大部分家长看来，为了孩子不吃亏，少不了必要的“人情世故”。哲学家卡尔·洛维特有一段话：由于人们不断被迫妥协，这种软弱扩大为一种普遍的人格特质：一种由于对善的荒废而来的罪行。这样解释有一定合理性，你不行贿就办不了事，大家都行贿了，也就对行贿习以为常。
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;从这一点上来说，日本法律对于行贿行为的零容忍值得我们学习。在我国，法律规定行贿、受贿均为犯罪行为，但在对待两者的处罚上通常受贿更严厉，对行贿却相对宽容。中国男子在日本花钱买通过，不管是不是属于他的一厢情愿，对不起，一个行贿意图，证据齐全，便让该男子当场被捕。这种对贿赂近乎零容忍的态度，对那些心存歪念，以为任何事情都可靠钱权交易摆平的人产生震慑。如此法治，权钱交易怎会大行其道？
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;作者：风青杨 ：知名评论人。一个有趣的人，分享一些有趣的事。嫉恶如仇，从善如流！ 微博
+                            
+                           {{$postinfo[0]->content}}
+                           <br>
                             <span class="name c-main">
                                 <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/?username=风青杨V  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/?username=风青杨V'"
                                 tppabs="http://user.kdnet.net/?username=风青杨V" class="tips" title="风青杨V"
                                 onMouseOut="mOut();">
-                                    @风青杨V
+                                    @
+                                        {{$users[$postinfo[0]->uid]}}V
                                 </a>
                             </span>
                             &nbsp;&nbsp;
@@ -1337,7 +1302,7 @@
                         <a href="javascript:void(0)" onclick="postToWb('sina', '1', '12447302');" title="分享到新浪微博"><img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_16x16.png" style="margin-bottom:-4px"></a>
                         <span class="change_btn"><span class="type3 showNum"><span id="count_p" class="number"><em id="count">1</em><img src="http://simg.sinajs.cn/platformstyle/images/common/transparent.gif" class="arrow" alt="" /></span></span></span>
                         </div>
-                        Sunny Modify End -->
+                        Sunny Modify E于 2017/10/10 10:14:24 发布在nd -->
                         <!--转贴结束-->
                         <!--sunny 打赏 B -->
                         <!--chung 打赏 B -->
@@ -1430,7 +1395,7 @@
                                                     <p class="reward-user-name">
                                                         <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=11849785  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=11849785'"
                                                         tppabs="http://user.kdnet.net/index.asp?userid=11849785" target="_blank">
-                                                            风青杨
+                                                            {{$users[$postinfo[0]->uid]}}
                                                         </a>
                                                     </p>
                                                 </div>
@@ -1752,6 +1717,8 @@
     <script>
         x.personalInfo('userinfo_1', 'detailinfo_1', '11849785', 'arrow');
     </script>
+
+@foreach($replay as $k => $v)
     <!--回复-->
     <div class="reply-box" id="72000998" style="display:block">
         <div class="posted-box clearfix">
@@ -1763,12 +1730,12 @@
                     <div class="usertips clearfix box1" id="detailinfo_2">
                     </div>
                     <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=8439893  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=8439893'"
+                        <a href="#"
                         tppabs="http://user.kdnet.net/index.asp?userid=8439893" target="_blank">
-                            yeeypc
+                            {{$users[$replay[0]->uid]}}
                         </a>
                     </span>
-                    <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=8439893  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=8439893'"
+                    <a href="#"
                     tppabs="http://user.kdnet.net/index.asp?userid=8439893" target="_blank">
                         <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
                         tppabs="{{asset('/home/img/transparent.gif')}}"
@@ -1822,7 +1789,14 @@
             </div>
             <div class="replycont-box-r">
                 <div class="replycont-text" style="word-spacing: 2px;">
-                    慢慢来，只要坚持不懈，会行的通的。
+                   
+                    {{$replay[0]->content}}
+
+
+
+
+
+
                 </div>
                 <!--sunny 打赏 B -->
                 <!--sunny 打赏 E -->
@@ -1856,1309 +1830,9 @@
         </div>
     </div>
     <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_2', 'detailinfo_2', '8439893', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box nobg" id="72002118" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72002118">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_3">
-                    <div class="usertips clearfix box1" id="detailinfo_3">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15836186  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15836186'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=15836186" target="_blank">
-                            山空不见人
-                        </a>
-                    </span>
-                    <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15836186  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15836186'"
-                    tppabs="http://user.kdnet.net/index.asp?userid=15836186" target="_blank">
-                        <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
-                        tppabs="{{asset('/home/img/transparent.gif')}}"
-                        />
-                    </a>
-                    &nbsp;
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:06:54 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    跟帖回复：
-                </a>
-            </div>
-            <div class="posted-floor">
-                <span class="rf">
-                    &nbsp;&nbsp;&nbsp;第
-                    <span class="c-alarm">
-                        <a href="#" onclick="javascript:showExposeMask('72002118', '3');return false;"
-                        id="floor3">
-                            3
-                        </a>
-                    </span>
-                    楼
-                </span>
-                <span class="rf" id="dispbbs35" style="width:0;height:0;visibility:hidden;overflow:hidden;">
-                    <!-- iframe src=" http://wake.hiapk.com/iframe/ibbs.html" scrolling="no"
-                    width="200px" height="15px" allowtransparency="true" frameborder="0" style="padding-top:3px;overflow:hidden;"></iframe -->
-                </span>
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    不送礼怎么办？寸步难行那，
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72002118">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002118&rootid=12447302&lay=3  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002118&rootid=12447302&lay=3'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002118&rootid=12447302&lay=3">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_3', 'detailinfo_3', '15836186', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box" id="72002636" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72002636">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_4">
-                    <div class="usertips clearfix box1" id="detailinfo_4">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15707109  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15707109'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=15707109" target="_blank">
-                            目田地飞
-                        </a>
-                    </span>
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:27:50 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    android
-                </a>
-            </div>
-            <div class="posted-floor">
-                <span class="c-sub">
-                    <span id="dispbbs36" style="width:0;height:0;visibility:hidden;overflow:hidden;">
-                    </span>
-                </span>
-                &nbsp;&nbsp;&nbsp;第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72002636', '4');return false;"
-                    id="floor4">
-                        4
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    正常事能办谁去行贿？就是正常办不了才被迫行贿。
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72002636">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002636&rootid=12447302&lay=4  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002636&rootid=12447302&lay=4'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002636&rootid=12447302&lay=4">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_4', 'detailinfo_4', '15707109', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box nobg" id="72002686" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72002686">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_5">
-                    <div class="usertips clearfix box1" id="detailinfo_5">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15925252  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15925252'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=15925252" target="_blank">
-                            CCvT0
-                        </a>
-                    </span>
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:30:12 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    跟帖回复：
-                </a>
-            </div>
-            <div class="posted-floor">
-                <!--<span class="c-sub"><span id="dispbbs37" style="width:0;height:0;visibility:hidden;overflow:hidden;"></span></span>-->
-                &nbsp;&nbsp;&nbsp;第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72002686', '5');return false;"
-                    id="floor5">
-                        5
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;行贿与受贿同罪这种恶法，不给钱能办事吗？
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72002686">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002686&rootid=12447302&lay=5  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002686&rootid=12447302&lay=5'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002686&rootid=12447302&lay=5">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_5', 'detailinfo_5', '15925252', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box" id="72002687" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72002687">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_6">
-                    <div class="usertips clearfix box1" id="detailinfo_6">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=5760900  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=5760900'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=5760900" target="_blank">
-                            256257282931
-                        </a>
-                    </span>
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:30:17 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    跟帖回复：
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72002687', '6');return false;"
-                    id="floor6">
-                        6
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    人家的官员没那么坏呗
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72002687">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002687&rootid=12447302&lay=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002687&rootid=12447302&lay=6'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002687&rootid=12447302&lay=6">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_6', 'detailinfo_6', '5760900', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box nobg" id="72002811" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72002811">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_7">
-                    <div class="usertips clearfix box1" id="detailinfo_7">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=14506277  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=14506277'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=14506277" target="_blank">
-                            cdw1950
-                        </a>
-                    </span>
-                    <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=14506277  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=14506277'"
-                    tppabs="http://user.kdnet.net/index.asp?userid=14506277" target="_blank">
-                        <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
-                        tppabs="{{asset('/home/img/transparent.gif')}}"
-                        />
-                    </a>
-                    &nbsp;
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:35:45 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    跟帖回复：
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72002811', '7');return false;"
-                    id="floor7">
-                        7
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;索贿常有，并非都想行贿，送出去心也痛。
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72002811">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002811&rootid=12447302&lay=7  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002811&rootid=12447302&lay=7'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002811&rootid=12447302&lay=7">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_7', 'detailinfo_7', '14506277', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box" id="72002850" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72002850">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_8">
-                    <div class="usertips clearfix box1" id="detailinfo_8">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15643954  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15643954'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=15643954" target="_blank">
-                            洪红要个真相
-                        </a>
-                    </span>
-                    <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15643954  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15643954'"
-                    tppabs="http://user.kdnet.net/index.asp?userid=15643954" target="_blank">
-                        <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
-                        tppabs="{{asset('/home/img/transparent.gif')}}"
-                        />
-                    </a>
-                    &nbsp;
-                </div>
-                <a href="javascript:if(confirm('http://user.kdnet.net/index.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp#vip'"
-                tppabs="http://user.kdnet.net/index.asp#vip" target="_blank">
-                    <img class="member-icon" title="凯迪会员" src="{{asset('/home/img/transparent.gif')}}"
-                    tppabs="{{asset('/home/img/transparent.gif')}}"
-                    />
-                </a>
-                &nbsp;
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:38:38 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    引用回复：
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72002850', '8');return false;"
-                    id="floor8">
-                        8
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    <span class="quote-cont-box">
-                        <span class="quote-cont2">
-                            <span class="quote-title">
-                                <span>
-                                    <a href="dispbbs.asp-boardid=1&id=12447302&replyid=72002636&page=1&1=1.htm#72002636"
-                                    tppabs="http://club.kdnet.net/dispbbs.asp?boardid=1&id=12447302&replyid=72002636#72002636"
-                                    onclick="return checkurl(this);">
-                                        转至第4楼
-                                    </a>
-                                </span>
-                                第 4 楼
-                                <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?username=目田地飞  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?username=目田地飞'"
-                                tppabs="http://user.kdnet.net/index.asp?username=目田地飞" target="_blank"
-                                onclick="return checkurl(this);">
-                                    目田地飞
-                                </a>
-                                2017/10/10 11:27:50&nbsp;&nbsp;的原帖：
-                            </span>
-                            正常事能办谁去行贿？就是正常办不了才被迫行贿。
-                        </span>
-                    </span>
-                    天朝特色
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72002850">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002850&rootid=12447302&lay=8  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002850&rootid=12447302&lay=8'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72002850&rootid=12447302&lay=8">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_8', 'detailinfo_8', '15643954', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box nobg" id="72002950" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72002950">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_9">
-                    <div class="usertips clearfix box1" id="detailinfo_9">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15818298  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15818298'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=15818298" target="_blank">
-                            往事随封
-                        </a>
-                    </span>
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:44:26 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    android
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72002950', '9');return false;"
-                    id="floor9">
-                        9
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    <!-- 屏蔽信息 -->
-                    <p>
-                        <img src="{{asset('/home/img/14925075115843294.png')}}"
-                        tppabs="{{asset('/home/img/14925075115843294.png')}}">
-                    </p>
-                    <!-- 屏蔽信息 end -->
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72002950">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_9', 'detailinfo_9', '15818298', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box" id="72003086" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72003086">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_10">
-                    <div class="usertips clearfix box1" id="detailinfo_10">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=1877573  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=1877573'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=1877573" target="_blank">
-                            糊适芝
-                        </a>
-                    </span>
-                    <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=1877573  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=1877573'"
-                    tppabs="http://user.kdnet.net/index.asp?userid=1877573" target="_blank">
-                        <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
-                        tppabs=" {{asset('/home/img/transparent.gif')}}"
-                        />
-                    </a>
-                    &nbsp;
-                </div>
-                <a href="dispbbs.asp-id=11953659&boardid=13.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=11953659&boardid=13"
-                target="_blank">
-                    <img class="author-icon" title="原创作者" src="{{asset('/home/img/transparent.gif')}}"
-                    tppabs="{{asset('/home/img/transparent.gif')}}"
-                    />
-                </a>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:50:49 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    跟帖回复：
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72003086', '10');return false;"
-                    id="floor10">
-                        10
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    天朝哪一部影视剧不是告诉我们，在天朝，办事要送钱？
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72003086">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003086&rootid=12447302&lay=10  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003086&rootid=12447302&lay=10'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003086&rootid=12447302&lay=10">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_10', 'detailinfo_10', '1877573', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box nobg" id="72003143" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72003143">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_11">
-                    <div class="usertips clearfix box1" id="detailinfo_11">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15893451  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15893451'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=15893451" target="_blank">
-                            骑行的时光
-                        </a>
-                    </span>
-                    <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15893451  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15893451'"
-                    tppabs="http://user.kdnet.net/index.asp?userid=15893451" target="_blank">
-                        <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
-                        tppabs="{{asset('/home/img/transparent.gif')}}"
-                        />
-                    </a>
-                    &nbsp;
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:54:22 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    android
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72003143', '11');return false;"
-                    id="floor11">
-                        11
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    中国人的行贿受贿行为估计是天性。
-                    <img src="{{asset('/home/img/face_cat_yellow_25_40x40.gif')}}"
-                    tppabs="{{asset('/home/img/face_cat_yellow_25_40x40.gif')}}"
-                    width="40" height="40" />
-                    <br>
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72003143">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003143&rootid=12447302&lay=11  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003143&rootid=12447302&lay=11'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003143&rootid=12447302&lay=11">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_11', 'detailinfo_11', '15893451', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box" id="72003195" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72003195">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_12">
-                    <div class="usertips clearfix box1" id="detailinfo_12">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12949202  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12949202'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=12949202" target="_blank">
-                            叽里咕噜嘀咕
-                        </a>
-                    </span>
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:57:34 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    跟帖回复：
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72003195', '12');return false;"
-                    id="floor12">
-                        12
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    其实不只歪果仁，在本锅行贿也已明确入罪，行贿是触犯刑法的犯罪行为，按照在日本给考官500拿驾照即为行贿的标准，那么看似形态无辜人模人样端庄体面的满大街的本锅人群中又有几个是清白？举目望去那岂不是是黑压压一片，谁没送过人谁没办过事？是不？可否看成是一锅犯罪分子？成何体统？前些年破过一个诈骗案例，归还了受骗者7000余万元办事金额，好像是骗子冒充中央机关工作人员，是不是行贿呢？还归还受害者？
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72003195">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003195&rootid=12447302&lay=12  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003195&rootid=12447302&lay=12'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003195&rootid=12447302&lay=12">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_12', 'detailinfo_12', '12949202', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box nobg" id="72003251" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72003251">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_13">
-                    <div class="usertips clearfix box1" id="detailinfo_13">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15739654  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15739654'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=15739654" target="_blank">
-                            大漠尘轻
-                        </a>
-                    </span>
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 11:59:38 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    android
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72003251', '13');return false;"
-                    id="floor13">
-                        13
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    <!-- 屏蔽信息 -->
-                    <p>
-                        <img src="{{asset('/home/img/14925075115843294.png')}}"
-                        tppabs="{{asset('/home/img/14925075115843294.png')}}">
-                    </p>
-                    <!-- 屏蔽信息 end -->
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72003251">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_13', 'detailinfo_13', '15739654', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box" id="72003335" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72003335">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_14">
-                    <div class="usertips clearfix box1" id="detailinfo_14">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=7684544  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=7684544'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=7684544" target="_blank">
-                            任子由
-                        </a>
-                    </span>
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 12:04:35 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    android
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72003335', '14');return false;"
-                    id="floor14">
-                        14
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    黄虫行贿在欧美日韩国家行不通？在老朋友国家是完全可行的，比如在恶裸屎、朝鲜、委内瑞拉、津巴布韦，行贿才能万事如意。
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72003335">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003335&rootid=12447302&lay=14  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003335&rootid=12447302&lay=14'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003335&rootid=12447302&lay=14">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_14', 'detailinfo_14', '7684544', 'arrow');
-    </script>
-    <!--回复-->
-    <div class="reply-box nobg" id="72003372" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72003372">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_15">
-                    <div class="usertips clearfix box1" id="detailinfo_15">
-                    </div>
-                    <span class="name c-main">
-                        <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=54031  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=54031'"
-                        tppabs="http://user.kdnet.net/index.asp?userid=54031" target="_blank">
-                            无处伸冤
-                        </a>
-                    </span>
-                    <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=54031  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=54031'"
-                    tppabs="http://user.kdnet.net/index.asp?userid=54031" target="_blank">
-                        <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
-                        tppabs="{{asset('/home/img/transparent.gif')}}"
-                        />
-                    </a>
-                    &nbsp;
-                </div>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        只看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                <span>
-                    <a onclick="openSesPopup_new()" href="javascript:;">
-                        不看此人
-                    </a>
-                </span>
-                <span class="c-sub">
-                    |
-                </span>
-                2017/10/10 12:07:26 &nbsp;&nbsp;
-                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    android
-                </a>
-            </div>
-            <div class="posted-floor">
-                第
-                <span class="c-alarm">
-                    <a href="#" onclick="javascript:showExposeMask('72003372', '15');return false;"
-                    id="floor15">
-                        15
-                    </a>
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    听说FBI是可以钓鱼行贿的，而且做的很逼真。所以接受贿赂有中钩的风险。所以哥想想为了几百块钱犯不着……
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72003372">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <a href="#Preply" onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="javascript:if(confirm('http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003372&rootid=12447302&lay=15  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003372&rootid=12447302&lay=15'"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72003372&rootid=12447302&lay=15">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
-    <script>
-        x.personalInfo('userinfo_15', 'detailinfo_15', '54031', 'arrow');
-    </script>
+@endforeach
+
+ 
     <!-- sunny 20130925 begin -->
     <!-- 弹窗 -->
     <div id="uplBoxF" class="upl-box-f">
@@ -3208,16 +1882,18 @@
                 <span class="c-sub">
                     共
                     <span class="c-alarm">
-                        12138
+                        {{$postinfo[0]->clickcount}}
                     </span>
                     次点击，
                     <span class="c-alarm">
-                        61
+                    {{$postinfo[0]->replaycount}}
+                        
                     </span>
                     个回复
                 </span>
                 &nbsp;
-                <span class="current">
+                {!! $replay->render()!!}
+                <!-- span class="current">
                     1
                 </span>
                 <a href="dispbbs.asp-id=12447302&boardid=1&page=2&uid=&usernames=&userids=&action=.htm"
@@ -3235,7 +1911,7 @@
                 <a href="dispbbs.asp-id=12447302&boardid=1&page=5&uid=&usernames=&userids=&action=.htm"
                 tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302&boardid=1&page=5&uid=&usernames=&userids=&action=">
                     5
-                </a>
+                </a> -->
             </div>
         </div>
     </div>
@@ -3244,211 +1920,14 @@
     <div class="statistics-club clearfix">
         <div class="clublist-selected">
             跳转论坛至：
+
             <select onchange="if(this.options[this.selectedIndex].value!=''){location = 'list.asp?boardid='+this.options[this.selectedIndex].value;}">
-                <option value="68">
-                    ╋猫论天下
-                </option>
-                <option value="1" selected="selected">
-                    &nbsp;&nbsp;├猫眼看人
-                </option>
-                <option value="88">
-                    &nbsp;&nbsp;├商业创富
-                </option>
-                <option value="89">
-                    &nbsp;&nbsp;├时局深度
-                </option>
-                <option value="3">
-                    &nbsp;&nbsp;├经济风云
-                </option>
-                <option value="2">
-                    &nbsp;&nbsp;├文化散论
-                </option>
-                <option value="52">
-                    &nbsp;&nbsp;├原创评论
-                </option>
-                <option value="24">
-                    &nbsp;&nbsp;├中间地带
-                </option>
-                <option value="25">
-                    &nbsp;&nbsp;├以案说法
-                </option>
-                <option value="15">
-                    &nbsp;&nbsp;├股市泛舟
-                </option>
-                <option value="44">
-                    &nbsp;&nbsp;├会员阅读
-                </option>
-                <option value="101">
-                    &nbsp;&nbsp;├舆情观察
-                </option>
-                <option value="127">
-                    &nbsp;&nbsp;├史海钩沉
-                </option>
-                <option value="67">
-                    ╋生活资讯
-                </option>
-                <option value="92">
-                    &nbsp;&nbsp;├杂货讨论
-                </option>
-                <option value="9">
-                    &nbsp;&nbsp;├健康社会
-                </option>
-                <option value="29">
-                    &nbsp;&nbsp;├家长里短
-                </option>
-                <option value="35">
-                    &nbsp;&nbsp;├吃喝玩乐
-                </option>
-                <option value="45">
-                    &nbsp;&nbsp;├职场生涯
-                </option>
-                <option value="60">
-                    &nbsp;&nbsp;├咱们女人
-                </option>
-                <option value="62">
-                    &nbsp;&nbsp;├家有宝宝
-                </option>
-                <option value="63">
-                    &nbsp;&nbsp;├消费观察
-                </option>
-                <option value="61">
-                    &nbsp;&nbsp;├房产家居
-                </option>
-                <option value="30">
-                    &nbsp;&nbsp;├车友评车
-                </option>
-                <option value="58">
-                    &nbsp;&nbsp;├猫眼鉴宝
-                </option>
-                <option value="69">
-                    ╋影音娱乐
-                </option>
-                <option value="33">
-                    &nbsp;&nbsp;├图画人生
-                </option>
-                <option value="86">
-                    &nbsp;&nbsp;├猫影无忌
-                </option>
-                <option value="26">
-                    &nbsp;&nbsp;├影视评论
-                </option>
-                <option value="40">
-                    &nbsp;&nbsp;├网络剧场
-                </option>
-                <option value="27">
-                    &nbsp;&nbsp;├音乐之声
-                </option>
-                <option value="16">
-                    &nbsp;&nbsp;├网友风采
-                </option>
-                <option value="7">
-                    &nbsp;&nbsp;├娱乐八卦
-                </option>
-                <option value="10">
-                    &nbsp;&nbsp;├笑话人生
-                </option>
-                <option value="56">
-                    &nbsp;&nbsp;├游戏天地
-                </option>
-                <option value="70">
-                    ╋文化广场
-                </option>
-                <option value="55">
-                    &nbsp;&nbsp;├菁菁校园
-                </option>
-                <option value="4">
-                    &nbsp;&nbsp;├甜蜜旅程
-                </option>
-                <option value="6">
-                    &nbsp;&nbsp;├心灵驿站
-                </option>
-                <option value="5">
-                    &nbsp;&nbsp;├原创文学
-                </option>
-                <option value="31">
-                    &nbsp;&nbsp;├汉诗随笔
-                </option>
-                <option value="32">
-                    &nbsp;&nbsp;├闲话国粹
-                </option>
-                <option value="8">
-                    &nbsp;&nbsp;├体育观察
-                </option>
-                <option value="41">
-                    &nbsp;&nbsp;├开心科普
-                </option>
-                <option value="18">
-                    &nbsp;&nbsp;├IT 数码
-                </option>
-                <option value="74">
-                    ╋地方频道
-                </option>
-                <option value="85">
-                    &nbsp;&nbsp;├会馆工作讨论区
-                </option>
-                <option value="73">
-                    &nbsp;&nbsp;├凯迪华南
-                </option>
-                <option value="75">
-                    &nbsp;&nbsp;├凯迪西南
-                </option>
-                <option value="77">
-                    &nbsp;&nbsp;├海口会馆
-                </option>
-                <option value="80">
-                    &nbsp;&nbsp;├珠三角
-                </option>
-                <option value="97">
-                    &nbsp;&nbsp;├凯迪深圳
-                </option>
-                <option value="98">
-                    &nbsp;&nbsp;├北京会馆
-                </option>
-                <option value="99">
-                    &nbsp;&nbsp;├上海会馆
-                </option>
-                <option value="104">
-                    &nbsp;&nbsp;├河南会馆
-                </option>
-                <option value="105">
-                    &nbsp;&nbsp;├长三角
-                </option>
-                <option value="106">
-                    &nbsp;&nbsp;├贵州会馆
-                </option>
-                <option value="107">
-                    &nbsp;&nbsp;├杭州会馆
-                </option>
-                <option value="123">
-                    &nbsp;&nbsp;├香港会馆
-                </option>
-                <option value="124">
-                    &nbsp;&nbsp;├台湾会馆
-                </option>
-                <option value="125">
-                    &nbsp;&nbsp;├美洲会馆
-                </option>
-                <option value="109">
-                    ╋凯迪重庆
-                </option>
-                <option value="37">
-                    ╋站务
-                </option>
-                <option value="13">
-                    &nbsp;&nbsp;├站务专区
-                </option>
-                <option value="72">
-                    &nbsp;&nbsp;├企业家园
-                </option>
-                <option value="46">
-                    &nbsp;&nbsp;├十大美帖
-                </option>
-                <option value="57">
-                    &nbsp;&nbsp;├视频创作
-                </option>
-                <option value="91">
-                    &nbsp;&nbsp;├商品发布
-                </option>
+                @foreach($plates as $k=>$v)
+                <option value="68" {{$postinfo[0]->pid == $v->id ? "selected":''}}>
+                    {{$v->pname}}
+                </option>
+                @endforeach
+                
             </select>
         </div>
     </div>
@@ -3519,34 +1998,18 @@
             <ul id="autoTipsUserList">
             </ul>
         </div>
-        <iframe src="../upfile1.kdnet.net/textareaeditor/GetPostFast_ubb.asp-boardid=1&followup=72000715&rootid=12447302&star=1&TotalUseTable=DV_BBS8&UserName=&topicname=猫眼看人&pages=5&lay=63"
+        <iframe src="{{asset('./ueditor/demo.html')}}"
         tppabs="http://upfile1.kdnet.net/textareaeditor/GetPostFast_ubb.asp?boardid=1&followup=72000715&rootid=12447302&star=1&TotalUseTable=DV_BBS8&UserName=&topicname=猫眼看人&pages=5&lay=63"
-        width="100%" height="780" name="baidu" id="baidu" scrolling="no" allowtransparency="true"
+        width="100%" height="500px" name="baidu" id="baidu" scrolling="no" allowtransparency="true"
         frameborder="0">
         </iframe>
     </div>
     <!-- //发表回复 -->
-    <div class="clubcont-line ">
-    </div>
-    <div class="clearfix" style="border-left:1px solid #fff; border-right:1px solid #fff;">
-        <div style="margin:0 auto; overflow:hidden;">
-            <div id="dispbbs91">
-                <div style="width:820px; overflow:hidden;">
-                    <!-- modify sunny 20131231 ad -->
-                    <!--object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0"
-                    width="800" height="100" id="myFlash">
-                    <param name="movie" value="http://user.kdnet.net/800-100.swf" />
-                    <param name="quality" value="high" />
-                    <param name="allowFullScreen" value="true" />
-                    <param name="wmode" value="Transparent" />
-                    <embed src="http://user.kdnet.net/800-100.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="800" height="100" wmode="Transparent" name="myFlash" swLiveConnect="true"></embed>
-                    </object-->
-                    <!--<script type="text/javascript">BAIDU_CLB_SLOT_ID = "840523";</script>
-                    <script type="text/javascript" src="http://cbjs.baidu.com/js/o.js"></script>-->
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+
+
+
     <!--声明-->
     <div class="site-statement">
         <span class="c-alarm">

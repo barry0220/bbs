@@ -266,7 +266,7 @@
                                </label> 
                                 <label>
                                     公告帖<input type="radio" 
-                                     @if($res[0]->status == 2)
+                                     @if($res[0]->postcode == 2)
                                         checked="checked"
                                     @endif
                                     name="status" id="optionsRadios2"

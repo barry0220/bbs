@@ -1,6 +1,6 @@
  
 
-@extends('Layouts.admin') @section('title','帖子详情') 
+@extends('Layouts.admin') @section('title','活动帖详情') 
 @section('content')
 
     <body>
@@ -83,16 +83,45 @@
                     </div>
                     <div class="hr-line-dashed">
                     </div>
-                    <div class="form-group">
+                   <div class="form-group">
                         <label class="col-sm-2 control-label">
                              内　　容:
                         </label>
-                        <div class="col-sm-4">
-                           <textarea disabled="disabled" name="content" id="" cols="30" rows="10">{{$res[0]->content}}</textarea>    
+                        <div class="col-sm-8">
+                             <!-- 加载编辑器的容器 -->
+                            <script id="container" name="content" type="text/plain">
+                           {!!$res[0]->content!!}
+                            </script>
+                            <!-- 配置文件 -->
+                            <script type="text/javascript" src="{{asset('./ueditor/ueditor.config.js')}} "></script>
+                            <!-- 编辑器源码文件 -->
+                            <script type="text/javascript" src="{{asset('./ueditor/ueditor.all.js')}}"></script>
+                      
                         </div>
                     </div>
+
+                            <!-- 实例化编辑器 -->
+                    <script>    
+                            var ue = UE.getEditor('container');
+                            // //对编辑器的操作最好在编辑器ready之后再做
+                            // ue.ready(function() {
+                            //     //设置编辑器的内容
+                            //     ue.setContent('{{$res[0]->content}}');
+                            //     //获取html内容，返回: <p>hello</p>
+                            //     // var html = ue.getContent();
+                            //     //获取纯文本内容，返回: hello
+                            //     var txt = ue.getContentTxt();
+
+                            //         $.post('/admin/active/create',{'_token':'{{csrf_token()}}','content':'txt'},function(data){
+                                           
+                            //         });
+
+                            // });
+
+                    </script>
                     <div class="hr-line-dashed">
                     </div>
+                   
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                              回复数　:
@@ -214,7 +243,7 @@
                     </div>
                     <div class="hr-line-dashed">
                     </div>
-                          <div class="form-group">
+                               <div class="form-group">
                         <div class="col-sm-3 control-label" style="margin-left: 30px" >
                        <b>状　　态:</b>
 
@@ -243,10 +272,10 @@
                     </div>
  
                          <div class="form-group">
-                        <div class="col-sm-4 control-label" style="margin-left: 20px" >
+                        <div class="col-sm-4 control-label">
                        <b>帖子类型:</b>
 
-                                <label  style="margin-left: 10px">
+                                <label  style="margin-left: 8px">
                                     普通帖
                                      <input type="radio" name="postcode" 
                                     @if($res[0]->postcode == 0)
@@ -266,7 +295,7 @@
                                </label> 
                                 <label>
                                     公告帖<input type="radio" 
-                                     @if($res[0]->status == 2)
+                                     @if($res[0]->postcode == 2)
                                         checked="checked"
                                     @endif
                                     name="status" id="optionsRadios2"

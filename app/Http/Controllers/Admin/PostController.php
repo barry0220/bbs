@@ -29,9 +29,7 @@ class PostController extends Controller
           $pid = $request->input('pid')?$request->input('pid'):'';
 
           $cid = $request->input('cid')?$request->input('cid'):'';
-        // $_GET
-          // $pid = $pid!=0?$pid:'';
-          
+ 
           $num = $request->input('pagea')?$request->input('pagea'): 10;
 
         if ($pid == '0' || $pid == '' ||$cid == '0'|| $cid == '') {
@@ -50,17 +48,14 @@ class PostController extends Controller
         //转换状态
         $statu = ['普通帖','活动贴','公告贴'];
 
-       // print_r($_GET);
 
         $plates = new Plates();
 
 
-        // $pla = $plates->treeName();
+
         $pls = $plates->get();
         $childPlates = new ChildPlates();
         $cls = $childPlates ->get();
-        // echo "<pre>";
-        // var_dump($res);
         $id = 0;
 
 
@@ -108,9 +103,6 @@ class PostController extends Controller
         $postcode = ['普通帖','活动贴','公告贴'];
         $status=['正常','已删除'];
 
-        // echo "<pre>";
-        // print_r($res);
-
         return view('Admin.post.show',compact('res','status','postcode'));
 
     }
@@ -150,12 +142,11 @@ class PostController extends Controller
     public function destroy($id)
     {
 
-        $re = DB::table('post')->where('id',$id)->delete();
-     //查询要删除的记录的模型
-        // $post = Post::find($id);
+        // $re = DB::table('post')->where('id',$id)->delete();
+     //查询要删除的记录的模型执行删除操作
+        $re = Post::where('id',$id)->delete();
 
-        //执行删除操作
-        // $re = $post->delete();
+        
         //根据返回的结果处理成功和失败
         if($re){
           $data=[

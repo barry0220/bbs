@@ -99,14 +99,14 @@
             tppabs="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=qlI7j1a4ZP00wT"
             style="display:none" height="1" width="1" alt="" />
         </noscript>
-        <link rel="stylesheet" type="text/css" href="{{asset('/home/css/common.43b90947.css')}}"
-        tppabs="{{asset('/home/css/common.43b90947.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{asset('/home/css/jquery.webui-popover.ace6c896.css')}}"
-        tppabs="{{asset('/home/css/jquery.webui-popover.ace6c896.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{asset('/home/css/bbs.8d80e54e.css')}}"
+        <link rel="stylesheet" type="text/css" href="{{asset('/home/css/common.css')}}"
+        tppabs="{{asset('/home/css/common.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{asset('/home/css/jquery.webui-popover.css')}}"
+        tppabs="{{asset('/home/css/jquery.webui-popover.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{asset('/home/css/bbs.css')}}"
         tppabs="{{asset('/home/css/bbs.8d80e54e.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{asset('/home/css/bbsWidget.dd4ea4b8.css')}}"
-        tppabs="{{asset('/home/css/bbsWidget.dd4ea4b8.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{asset('/home/css/bbsWidget.css')}}"
+        tppabs="{{asset('/home/css/bbsWidget.css')}}" />
     </head>
     
     <body>
@@ -114,37 +114,13 @@
             <div class="bbsCont">
                 <ul class="topnav">
                     <li>
-                        <a href="../www.kdnet.net/index.htm" tppabs="http://www.kdnet.net/">
+                        <a href="{{url('/home')}}" tppabs="http://www.kdnet.net/">
                             首页
                         </a>
                     </li>
                     <li>
-                        <a href="index.htm" tppabs="http://club.kdnet.net/">
+                        <a href="{{url('/home/post')}}" tppabs="http://club.kdnet.net/">
                             社区
-                        </a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="javascript:if(confirm('http://group.kdnet.net/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://group.kdnet.net/'"
-                        tppabs="http://group.kdnet.net/">
-                            群组
-                        </a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="javascript:if(confirm('http://www.100jiapu.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.100jiapu.com/'"
-                        tppabs="http://www.100jiapu.com/">
-                            百姓家谱
-                        </a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="javascript:if(confirm('http://school.kdnet.net/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://school.kdnet.net/'"
-                        tppabs="http://school.kdnet.net/">
-                            凯迪小学
-                        </a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="javascript:if(confirm('http://game.kdnet.net/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://game.kdnet.net/'"
-                        tppabs="http://game.kdnet.net/">
-                            凯迪游戏
                         </a>
                     </li>
                 </ul>
@@ -180,33 +156,13 @@
                     <ul>
                     @foreach($tags as $k => $v)
                         <li>
-                            <a target="_blank" href="{{url('/home/hottoday')}}"
+                            <a target="_blank" href="{{url('/home/list/'.$v->id)}}"
                             tppabs="http://hot.kdnet.net/hottopiclist.asp">
                                 {{$v->tagname}}
                             </a>
                         </li>
                     @endforeach
-                       <!--  <li>
-                            <a href="{{url('/home/index')}}" tppabs="{{url('/home/index')}}">
-                                原创帖文
-                            </a>
-                        </li>
-                        <li>
-                            <a href="list.asp-boardid=1&topicmode=1.htm" tppabs="http://club.kdnet.net/list.asp?boardid=1&topicmode=1">
-                                精华帖文
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{url('/home/cateye')}}" tppabs="{{url('/home/cateye')}}">
-                                猫眼观察
-                            </a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15842616  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15842616#post'"
-                            tppabs="http://user.kdnet.net/index.asp?userid=15842616#post">
-                                猫论天下
-                            </a>
-                        </li> -->
+                       
                     </ul>
                     <div class="bbsdata">
                         <i>
@@ -244,7 +200,7 @@
 
                         @foreach($plates as $k => $v)   
                             <li>
-                                <a href="list.asp-boardid=1.htm" tppabs="http://club.kdnet.net/list.asp?boardid=1">
+                                <a href="/home/plateslist/{{$v->id}}" tppabs="http://club.kdnet.net/list.asp?boardid=1">
                                     <img src="{{$v->imgfile}}" tppabs="{{asset('/home/img/1.43e9e240.png')}}">
                                     <span>
                                         {{$v->pname}}
@@ -455,13 +411,15 @@
                     </div>
                     <div class="bbslist">
                         <div class="title">
-                            <a href="{{url('/home/index')}}" tppabs="{{url('/home/index')}}" class="active">
+                            <a id="a" href="{{url('/home/post')}}" tppabs="{{url('/home/post')}}" class="active " >
                                 原创帖文
                             </a>
-                            <a href="{{url('/home/cateye')}}" tppabs="{{url('/home/cateye')}}">
+                            <a id="b" href="{{url('/home/cateye')}}" tppabs="{{url('/home/cateye')}}">
                                 猫眼观察
                             </a>
                         </div>
+
+
                         <ul>
                     @foreach($post as $k=> $v)
                             <li>
@@ -469,18 +427,18 @@
                                     <img src="{{asset('/home//img/59dc45910faf4.jpg')}}" tppabs="{{asset('/home//img/59dc45910faf4.jpg')}}">
                                 </a>
                                 <div class="list-title">
-                                    <a target="_blank" href="/home/index/{{$v->id}}" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
+                                    <a target="_blank" href="/home/post/{{$v->id}}" tppabs="/home/post/{{$v->id}}">
                                         {{$v->title}}
                                     </a>
                                 </div>
                                 <div class="list-desc">
-                                    <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
+                                    <a target="_blank" href="/home/post/{{$v->id}}" tppabs="/home/post/{{$v->id}}">
                                        {{$v->keywords}}
                                     </a>
                                 </div>
                                 <div class="list-author">
                                     <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
-                                        {{$v->uid}}
+                                        {{$postusers["$v->uid"]}}
                                     </a>
                                     <span>
                                       {{$v->posttime}}
@@ -497,17 +455,17 @@
                                             {{$v->replaycount}}
                                         </a>
                                     </span>
-                                    <a href="list.asp-boardid=1.htm" tppabs="http://club.kdnet.net/list.asp?boardid=1"
+                                    <a href="{{url('/home/plateslist/'.$v->pid)}}" tppabs="http://club.kdnet.net/list.asp?boardid=1"
                                     class="plate">
-                                        来自：{{$v->pid}}
+                                        来自：{{$postplates[$v->pid]}}
                                     </a>
                                 </div>
                             </li>
                     @endforeach
 
                         </ul>
-                        <div class="postlist-page">
-                            <form class="c_pager">
+                        <div style="margin-left:500px" class="postlist-page">
+                            <!-- <form class="c_pager">
                                 <span class="numInfo">
                                     共1140个记录，页次1/38页
                                 </span>
@@ -526,7 +484,8 @@
                                         GO
                                     </button>
                                 </div>
-                            </form>
+                            </form> -->
+                            {!!$post->render()!!}
                         </div>
                     </div>
                     <div class="c_spread">
@@ -537,25 +496,11 @@
                             ac_group_id = 1;
                             ac_server_base_url = "afpeng.alimama.com/";
                         </script>
-                        <script type="text/javascript" src="{{asset('/home/js/k.jsg')}}" tppabs="{{asset('/home/js/k.jsg')}}">
+                        <script type="text/javascript" src="{{asset('/home/js/k.js')}}" tppabs="{{asset('/home/js/k.js')}}">
                         </script>
                     </div>
                 </div>
                 <div class="bbsRight">
-                    <div class="link-group">
-                        <a target="_blank" href="dispbbs.asp-boardid=13&id=11953659.htm" tppabs="http://club.kdnet.net/dispbbs.asp?boardid=13&id=11953659"
-                        class="btn btn-green">
-                            <i class="fa kd-angle-right">
-                            </i>
-                            如何成为原创作者
-                        </a>
-                        <a target="_blank" href="javascript:if(confirm('http://group.kdnet.net/cluster/create/apply  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://group.kdnet.net/cluster/create/apply'"
-                        tppabs="http://group.kdnet.net/cluster/create/apply" class="btn btn-primary">
-                            <i class="fa kd-angle-right">
-                            </i>
-                            申请创建群组
-                        </a>
-                    </div>
                     <div id="myCarousel" class="excellent carousel slide">
                         <div class="title">
                             优秀作者
@@ -583,8 +528,9 @@
                         <div class="carousel-inner">
                             <div class="active item" data-slide="1">
                                 <ul>
+                                    @foreach($posts1 as $k=>$v)
                                     <li>
-                                        <div class="avatar a-w40">
+                                        <div class=" a-w40">
                                             <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12417931  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12417931'"
                                             tppabs="http://user.kdnet.net/index.asp?userid=12417931">
                                                 <img src="{{asset('/home/img/12417931.jpg-imageMogr2-crop-200x200.jpg')}}"
@@ -594,348 +540,19 @@
                                         </div>
                                         <div class="area">
                                             <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12447465&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447465">
-                                                    你是鹿晗的饭，可鹿晗不是你的饭
+                                                <a target="_blank" href="#" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447465">
+                                                   {{$v->title}}
                                                 </a>
                                             </h5>
                                             <h6>
                                                 <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12417931  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12417931'"
                                                 tppabs="http://user.kdnet.net/index.asp?userid=12417931">
-                                                    纸上建筑
+                                                    {{$postusers[$v->uid]}}
                                                 </a>
                                             </h6>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=14960365  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=14960365'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=14960365">
-                                                <img src="{{asset('/home/img/Club_default_face.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/Club_default_face.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12447346&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447346">
-                                                    我们凭嘛要养活300万医药代表?
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=14960365  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=14960365'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=14960365">
-                                                    周蓬安
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15557856  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15557856'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=15557856">
-                                                <img src="{{asset('/home/img/15557856.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/15557856.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12447107&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447107">
-                                                    总有人幸福白头 总有人哭着分手
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15557856  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15557856'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=15557856">
-                                                    孙继胜
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15933598  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15933598'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=15933598">
-                                                <img src="{{asset('/home/img/59b771ef81e763582.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/59b771ef81e763582.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12446935&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12446935">
-                                                    历史欠刘阿斗一个诺贝尔和平奖
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15933598  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15933598'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=15933598">
-                                                    壹权谋
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=5857026  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=5857026'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=5857026">
-                                                <img src="{{asset('/home/img/59cb720b1ee399210.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/59cb720b1ee399210.jpg-imageMogr2-crop-200x200.jpg')}}0"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12446885&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12446885">
-                                                    从猿到人，从狼到狗，从进化到驯化
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=5857026  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=5857026'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=5857026">
-                                                    江湖西子
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class=" item" data-slide="2">
-                                <ul>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=7703199  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=7703199'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=7703199">
-                                                <img src="{{asset('/home/img/7703199.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/7703199.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12446745&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12446745">
-                                                    手机销毁大会，杀鸡骇猴
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=7703199  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=7703199'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=7703199">
-                                                    维扬卧龙
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15687957  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15687957'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=15687957">
-                                                <img src="{{asset('/home/img/15687957.jpg-imageMogr2-crop-200x200.png')}}"
-                                                tppabs="{{asset('/home/img/15687957.jpg-imageMogr2-crop-200x200.png')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12446692&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12446692">
-                                                    恢复五一黄金周是最不坏的选择
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15687957  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15687957'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=15687957">
-                                                    书生香评
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=41056  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=41056'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=41056">
-                                                <img src="{{asset('/home/img/59c22637d63418908.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/59c22637d63418908.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12446346&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12446346">
-                                                    用最损的招对付父母口中的那个别人家的孩子
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=41056  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=41056'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=41056">
-                                                    曾颖
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15808872  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15808872'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=15808872">
-                                                <img src="{{asset('/home/img/59956a0b31d7c8847.jpg-imageMogr2-crop-200x200.png')}}"
-                                                tppabs="{{asset('/home/img/59956a0b31d7c8847.jpg-imageMogr2-crop-200x200.png')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="http://bad_redirect">
-                                                    [襄阳胡秋林]一看就是没见过世面的
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=15808872  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=15808872'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=15808872">
-                                                    襄阳快线
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=100791  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=100791'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=100791">
-                                                <img src="{{asset('/home/img/Club_default_face.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/Club_default_face.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="http://bad_redirect">
-                                                    许亿：当鹿晗关晓彤恋爱，你敢说世界一切都没变
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=100791  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=100791'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=100791">
-                                                    酸酸
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class=" item" data-slide="3">
-                                <ul>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12417931  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12417931'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=12417931">
-                                                <img src="{{asset('/home/img/12417931.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/12417931.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12445550&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12445550">
-                                                    追逐藏羚羊罚款买单？
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12417931  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12417931'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=12417931">
-                                                    纸上建筑
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=44153  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=44153'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=44153">
-                                                <img src="{{asset('/home/img/58fbcb041f3ca5836.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/58fbcb041f3ca5836.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="http://bad_redirect">
-                                                    裤子的学问
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=44153  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=44153'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=44153">
-                                                    月淡风清
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12065044  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12065044'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=12065044">
-                                                <img src="{{asset('/home/img/12065044.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/12065044.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="http://bad_redirect">
-                                                    藏羚羊藏着什么具体情况不可透露的秘密？
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12065044  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12065044'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=12065044">
-                                                    比雷更雷的人
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=7900875  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=7900875'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=7900875">
-                                                <img src="{{asset('/home/img/7900875.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/7900875.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="dispbbs.asp-id=12444828&boardid=26.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12444828">
-                                                    何云伟再怼郭德纲，扔掉云字，压轴央视相声大联欢
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=7900875  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=7900875'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=7900875">
-                                                    马庆云
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="avatar a-w40">
-                                            <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12417931  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12417931'"
-                                            tppabs="http://user.kdnet.net/index.asp?userid=12417931">
-                                                <img src="{{asset('/home/img/12417931.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                tppabs="{{asset('/home/img/12417931.jpg-imageMogr2-crop-200x200.jpg')}}"
-                                                onerror="this.src='http://qc-cache.kdnet.net/Images/userface/image41.gif?imageMogr2/crop/200x200'">
-                                            </a>
-                                        </div>
-                                        <div class="area">
-                                            <h5>
-                                                <a target="_blank" href="http://bad_redirect">
-                                                    “打小三”因何成法外之地？
-                                                </a>
-                                            </h5>
-                                            <h6>
-                                                <a target="_blank" href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=12417931  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=12417931'"
-                                                tppabs="http://user.kdnet.net/index.asp?userid=12417931">
-                                                    纸上建筑
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </li>
+                                @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -951,14 +568,7 @@
                         <script type="text/javascript" src="{{asset('/home/js/k.js')}}" tppabs="{{asset('/home/js/k.js')}}">
                         </script>
                     </div>
-                    <div class="sellgroup">
-                        <div class="title">
-                            推荐群组
-                        </div>
-                        <input type="hidden" id="groupcid" value="100012,100026,100230,100150">
-                        <ul>
-                        </ul>
-                    </div>
+                    
                     <div class="bbsad">
                         <a href="javascript:if(confirm('http://m.kdnet.net/intro/mobile.html  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://m.kdnet.net/intro/mobile.html'"
                         tppabs="http://m.kdnet.net/intro/mobile.html">
@@ -1161,17 +771,18 @@
         <script src="{{asset('/home/js/k.js')}}" tppabs="{{asset('/home/js/k.js')}}">
         </script>
     </body>
-    <script type="text/javascript" src="{{asset('/home/js/common.7392a1ba.js')}}"
-    tppabs="{{asset('/home/js/common.7392a1ba.js')}}">
+    <script type="text/javascript" src="{{asset('/home/js/common.js')}}"
+    tppabs="{{asset('/home/js/common.js')}}">
     </script>
     <script type="text/javascript" src="{{asset('/home/js/log.js')}}" tppabs="{{asset('/home/js/log.js')}}">
     </script>
-    <script type="text/javascript" src="{{asset('/home/js/bbs.1fadd174.js')}}"
-    tppabs="{{asset('/home/js/bbs.1fadd174.js')}}">
+    <script type="text/javascript" src="{{asset('/home/js/bbs.js')}}"
+    tppabs="{{asset('/home/js/bbs.js')}}">
     </script>
-    <script type="text/javascript" src="{{asset('/home/js/bbsindex.dd163fe6.js')}}"
-    tppabs="{{asset('/home/js/bbsindex.dd163fe6.js')}}">
+    <script type="text/javascript" src="{{asset('/home/js/bbsindex.js')}}"
+    tppabs="{{asset('/home/js/bbsindex.js')}}">
     </script>
+
     <script type="text/javascript">
         !
         function() {
