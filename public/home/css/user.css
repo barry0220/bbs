@@ -379,6 +379,8 @@ body{background:#a3b3bf; color:#223b4d;}
 .btn-controlpanel a{ display: block; height:31px; line-height:28px; width:80px; font-size:14px; font-weight:bold; text-align:center; color:#223b4d; background:url("../img/btn_item_yes.gif" ) no-repeat 0 0; margin:0 auto; }
 .btn-controlpanel a:hover{ text-decoration:none; background-position:0 -31px; color:#223b4d;}
 .btn-controlpanel a:active{ text-decoration:none; background-position:0 -62px; color:#223b4d;}
+.btn-userinfo {background: url('../img/btn_item_yes.gif') no-repeat 0 0;border: none;margin:0 auto;height:31px; line-height:28px; width:80px; font-size:14px; font-weight:bold;text-align:center; color:#223b4d;}
+
 
 .btn-controlpanel-s2 a { cursor:default;}	/*sunny add 20130725 µã»÷°´Å¥±ä»Ò*/
 

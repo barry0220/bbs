@@ -17,10 +17,12 @@ class UploadController extends Controller
      */
     public function upload($type)
     {
+        // dd(11111);
         //return Input::all();
         //获取上传的文件对象
         $file = Input::file('file_upload');
         //判断文件是否有效
+        // dd($file);
         if ($file->isValid()) {
             $entension = $file->getClientOriginalExtension();//上传文件的后缀名
             $newName = date('YmdHis') . mt_rand(1000, 9999) . '.' . $entension;

@@ -82,9 +82,7 @@
             $('.datepicker').datepicker();
         });
 
-        $("#file_upload").change(function(){
-            uploadImage();
-        });
+
         $("#tagdetail").hide();
 
         $('input[name=postid]').focus(function(){
@@ -94,7 +92,9 @@
         $('input[name=postid]').blur(function(){
              $("#tagdetail").hide();
         });
-
+        $("#file_upload").change(function(){
+            uploadImage();
+        });
         function uploadImage() {
             //  判断是否有选择上传文件
             var imgPath = $("#file_upload").val();

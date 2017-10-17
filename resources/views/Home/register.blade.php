@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>凯迪论坛 | 登录页面</title>
+    <title>凯迪论坛 | 注册页面</title>
     <link rel="icon" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon"/>
     <link rel="shortcut icon" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon"/>
     <script type="text/javascript" src="{{asset('/home/js/common.js')}}"></script>
@@ -88,13 +88,13 @@
         <div class="row">
             <div class="col-sm-5 col-sm-push-7 kdnet-login">
                 <ul class="j-logintabs login-tab">
-                    <li class="active formLogin">
+                    <li class="formLogin">
                         <a href="{{asset('/home/login')}}"  id="showlogin">登录</a>
                     </li>
                     <li>
                         ·
                     </li>
-                    <li class="formRegister">
+                    <li class="active  formRegister">
                         <a href="{{asset('/home/register')}}"  id="showregister">注册</a>
                     </li>
                 </ul>
@@ -112,50 +112,64 @@
                     </div>
                 @endif
                 <div class="tab-content">
-                    <form class="tab-pane fade in active" id="formLogin" action="{{url('/home/dologin')}}" method="post">
+                    <form class="tab-pane fade in active" id="formRegister" action="{{url('/home/doregister')}}" method="post">
                         <div class="form-group">
-                            <label class="sr-only" for="EmailPhoneNcke">手机/邮箱/凯迪昵称</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <span class="fa fa-user"></span>
-                                </div>
-                                <input type="text" class="form-control" id="EmailPhoneNcke" name="EmailPhoneNcke" placeholder="手机/邮箱/凯迪昵称" aria-invalid="true">
-                                <i></i>
-                            </div>
+                            <input type="text" class="form-control" id="inputEmailPhone" name="phone" placeholder="手机(仅支持大陆手机)">
+                            <i></i>
                         </div>
-                        <div class="form-group login-pwd">
-                            <label class="sr-only" for="Password">登录密码</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <span class="fa fa-unlock-alt"></span>
-                                </div>
-                                <input type="password" class="form-control" id="Password" name="password" placeholder="登录密码" required>
-                                <i></i>
+                        <div class="form-group code-group">
+                            <input type="text" class="form-control" id="inputAuthcode" maxlength="6" name="phonecode" placeholder="4位数验证码">
+                            <i></i>
+                            <div class="verify-btn">
+                                <button type="button" data-backdrop="static" data-keyboard="false" id="regphone" onclick="sendCode()" href="javascript:void(0);"
+                                        class="btn btn-default btn-sm j-verify-btn" >
+                                    请先验证手机
+                                </button>
                             </div>
+                            {{--<div id="regphone">4324324234</div>--}}
                         </div>
                         <div class="form-group">
+                            <input type="password" class="form-control" id="inputPassword" name="password"
+                                   maxlength="20" placeholder="设置登录密码">
+                            <i></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="inputRePassword" name="repassword"
+                                   maxlength="20" placeholder="重复密码">
+                            <i></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="inputNickname" name="username"
+                                   maxlength="16" placeholder="用户名">
+                            <i></i>
+                            <div class="explain">
+                                <s class="fa fa-exclamation-circle"></s>
+                                <p>昵称是您的唯一名称，注册后无法修改，请谨慎填写！3~16个字符，字母/中文/数字/下划线。</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="input-group">
-                                <div class="input-group-addon">
-                                    <span class="fa fa-unlock-alt"></span>
-                                </div>
                                 <input type="text" class="form-control" placeholder="验证码" name="code" required="" value="{{old('code')}}"><br>
                             </div>&nbsp;&nbsp;&nbsp;
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <img src="{{ URL('/homecode/captcha/1') }}" id="codeimg" onclick="javascript:re_captcha();">&nbsp;
+                                <img src="{{ URL('/homeregcode/captcha/1') }}" id="codeimg" onclick="javascript:re_captcha();">&nbsp;
                                 <a href="#" onclick="javascript:re_captcha();">看不清？点击图片换一张</a>
                             </div>
                         </div>
                         <div class="form-group">
-                            {{csrf_field()}}
-                            <button class="btn btn-primary btn-block btn-lg" type="submit" name="submit"
-                                    data-loading-text="<i class='fa fa-refresh fa-spin'></i> 正在登录…">登录
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" name="submit"
+                                    data-loading-text="<i class='fa fa-refresh fa-spin'></i> 正在提交…">
+                                同意以下协议并注册
                             </button>
                         </div>
-                        <p class="text-right small mt10">
-                            <a href="{{url('/home/forget')}}">忘记登录密码?</a>
-                        </p>
+                        <div class="agreement">
+                            <a href="{{url('/home/agreement')}}}" target="_blank">
+                                《凯迪网络服务协议和声明》
+                            </a>
+                        </div>
+                        {{csrf_field()}}
                     </form>
                 </div>
             </div>
@@ -215,10 +229,59 @@
     </noscript>
     <script type="text/javascript">
         function re_captcha() {
-            $url = "{{ URL('/homecode/captcha') }}";
+            $url = "{{ URL('/homeregcode/captcha') }}";
             $url = $url + "/" + Math.random();
             document.getElementById('codeimg').src = $url;
         }
+
+        function sendCode() {
+
+            //获取要发送验证码的手机号
+            var phone = $('input[name=phone]').val();
+//            alert(phone);
+            //验证手机号格式
+            var reg = /^1[34578]\d{9}$/;
+            if (!reg.test(phone)) {
+                alert('手机号码格式不正确,请重新输入');
+            } else {
+
+                $.post("{{url('sendcode')}}",{'phone':phone,'_token':"{{csrf_token()}}"},function(data){
+                    var data = JSON.parse(data);
+                    if(data.status == 0){
+                        layer.msg(data.message, {icon: 6});
+                        $('#regphone').attr('disabled','true');
+                        var time = 59;
+                        var wait = setInterval(function(){
+                            if (time > 0) {
+                                time = time -1;
+//                        alert($('#regphone').text());
+                                $('#regphone').text("发送成功请稍候.."+time+'S');
+                            } else {
+                                $('#regphone').text("请重新验证手机");
+                                $('#regphone').attr('disabled',false);
+                                clearInterval(wait);
+                                wait=null;
+                            }
+
+                        },1000)
+                    }else{
+                        layer.msg(data.message[0], {icon: 5});
+                    }
+
+                });
+            }
+        }
+
+        $('.explain').hide();
+
+        $('input[name=username]').focus(function(){
+            $('.explain').show();
+        });
+
+        $('input[name=username]').blur(function(){
+            $('.explain').hide();
+        });
+
     </script>
 </div>
 </body>

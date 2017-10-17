@@ -29,6 +29,12 @@ Route::get('admin/login','Admin\LoginController@login');
 Route::post('admin/dologin','Admin\LoginController@dologin');
 
 Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
+//前台登录验证码
+Route::get('/homecode/captcha/{tmp}', 'Home\LoginController@captcha');
+//前台注册验证码
+Route::get('/homeregcode/captcha/{tmp}', 'Home\RegisterController@captcha');
+//前台手机验证码
+Route::post('/sendcode','Home\RegisterController@sendCode');
 
 //Route::get('admin/user/repass','Admin\UserController@repass');
 Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],function(){
@@ -107,14 +113,29 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
-    // 登录路由
-    Route::resource('/login','LoginController');
-    //用户路由
-    Route::resource('/user','UserController');
+    // 登录页面路由
+    Route::get('/login','LoginController@showlogin');
+    // 登录执行路由
+    Route::post('/dologin','LoginController@dologin');
+    // 注册页面路由
+    Route::get('/register','RegisterController@showregister');
+    // 注册执行路由
+    Route::post('/doregister','RegisterController@doregister');
+
     // 忘记密码路由
     Route::get('/forget','CommonController@forget');
     // 网络服务协议和声明
     Route::get('/agreement','CommonController@agreement');
+    //用户个人信息管理
+    Route::get('/userinfo','UserInfoController@index');
+    //用户个人详细信息修改
+    Route::post('/updateuserinfo','UserInfoController@updateuserinfo');
+    //用户个人密码修改
+    Route::post('/repass','UserInfoController@repassword');
+    //用户头像修改
+    Route::post('/updateface','UserInfoController@updateface');
+    //用户退出登录
+    Route::post('/loginout','LoginController@loginOut');
 
 
 });
