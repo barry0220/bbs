@@ -71,7 +71,9 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="{{url('admin/user/1')}}">个人信息</a></li>
+                            <li><a href="#">个人信息</a></li>
+                            {{--{{url('admin/user/'.(isset(session('user')) ? session('user')->id : '1') )}}--}}
+
 
                             <li><a href="{{url('admin/repass')}}">修改密码</a></li>
                             <li class="divider"></li>
