@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Models\Scorelog;
 use App\Models\UserDetail;
 use App\Models\UserHome;
 use Illuminate\Http\Request;
 use App\SMS\M3Result;
 use App\SMS\SendTemplateSMS;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 require_once app_path().'/Http/Org/code/Code.class.php';
 use App\Http\Org\code\Code;
@@ -17,8 +17,6 @@ use App\Http\Org\code\Code;
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -148,22 +146,48 @@ class RegisterController extends Controller
         $homeuser->status = 2;       //新注册用户未验证邮箱没有发帖回帖等权限
         //创建一个新用户
         $res = $homeuser->save();
+        $uid = $homeuser->id;
         //如果注册成功
         if($res){
             //增加用户详情表信息 注册时间  赠送积分等
             $detail = new UserDetail();
-            $detail -> uid = $homeuser->id;
+            $detail -> uid = $uid;
             $detail -> regtime = time();
             $detail -> logintime = time();
             $detail -> score = 50;
             $detail -> detail = "请输入个人简介";
-            $re = $detail -> save();
-            if (!$re) {
-                dd($detail);
+            try{
+                $detail -> save();
+            }catch (\Exception $e){
+                // $e.message('服务器内部错误,请重新注册');
+                UserHome::destroy($uid);
+                return back()->with('errors','注册失败，请重新注册');
             }
-            return redirect('home/login');
+            //记录增加积分的日志
+            $scoreinfo=[
+                'uid'=>$uid,
+                'time'=>time(),
+                'handle'=>'新注册用户赠送50积分',
+                'scorelog'=>'+50'
+            ];
+
+            try{
+                Scorelog::create($scoreinfo);
+            }catch (\Exception $e){
+                // $e.message('服务器内部错误,请重新注册');
+                UserDetail::where('uid',$uid)->delete();
+                UserHome::where('id',$uid)->delete();
+                return back()->with('errors','注册失败，请重新注册');
+            }
+
+            // if (!$re) {
+            //     dd($detail);
+            // }
+            session(['homeuser'=>$homeuser]);
+            session(['type'=>'email']);
+            return redirect('home/userinfo');
         }else{
-            return back()->with('msg','注册失败，请重新注册');
+            return back()->with('errors','注册失败，请重新注册');
         }
 
 

@@ -135,9 +135,7 @@ class LinksController extends Controller
         $validator = Validator::make($input,$rule,$msg);
         //如果验证失败
         if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            return redirect('admin/links')->withErrors($validator)->withInput();
         }
 
         $links = Links::find($id);
@@ -147,6 +145,8 @@ class LinksController extends Controller
         $res = $links -> save();
 
         if ($res) {
+            //调用putfile方法写如配置文档
+            $this->putFile();
             return redirect('admin/links');
         } else {
             return back()->with('errors','修改友情链接失败');
@@ -179,5 +179,18 @@ class LinksController extends Controller
         }
 
         return  $data;
+    }
+
+    public function putFile()
+    {
+        //将配置文件中的内容写入config目录下的webconfig.php文件   方便后期读取网站配置
+        $links = Links::lists('linkname','link')->all();
+        dd($links);
+        //die;
+        $str = '<?php return '.var_export($links,true).';';
+        //要写入的路径
+        $path = base_path().'\config\linksconfig.php';
+        //参数1 写入的文件的路径  参数2  向文件中写入的内容
+        file_put_contents($path,$str);
     }
 }

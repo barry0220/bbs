@@ -241,8 +241,8 @@
 
 
                     <li>
-                        <a href="login.html">
-                            <i class="fa fa-sign-out"></i> <a href="javascript:;" onclick="loginOut()">退出登录</a>
+                        <a href="javascript:;" onclick="loginOut()">
+                            <i class="fa fa-sign-out"></i> 退出登录
                         </a>
                     </li>
                 </ul>
@@ -270,7 +270,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{--</div>--}}
 </div>
 <script>
     function loginOut(){

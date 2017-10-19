@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <title>个人信息设置</title>
-    <meta name="author" content="凯迪网络">
-    <meta name="keywords" content="个人用户中心,凯迪网络">
-    <meta name="description" content="凯迪网络个人用户中心">
-    <meta name="copyright" content="凯迪网络版权所有">
     <link rel="icon" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon">
     <link rel="bookmark" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon">
@@ -14,209 +11,152 @@
     <link href="{{asset('/home/css/face.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('/home/css/user.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('/home/css/user2-0923.css')}}" rel="stylesheet" type="text/css">
-    <!-- sunny modify 20130902 积分 -->
-    <script type="text/javascript" async="" src="{{asset('home/js/jquery-1.4.2.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('home/js/jquery.tools.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('home/js/jquery-2.1.1.js')}}"></script>
     <script type="text/javascript" src="{{asset('home/js/jquery.jm.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('home/js/jquery.tools.min.js')}}"></script>--}}
     <script type="text/javascript" src="{{asset('/home/js/valid.js')}}"></script>
-    <!--script type="text/javascript" src="http://panda.kdnet.net/scripts/log.js"></script-->
-    <script type="text/javascript">
-        var cf;
-        var cfw;
-        var user = {
-                id: 15945881,
-                name: "barry0220",
-                status: true
-            },
-            KDNET_USER_URL = "fat.com";
-        var userid = 15945881;
-        var username = '我';
-        var duf = 'http://imgcdn.cat898.com/upload/userface/NoPic.jpg';
-        var duf_190_190 = 'http://imgcdn.cat898.com/upload/userface/NoPic_190_190.jpg';
-        var duf_60_60 = 'http://imgcdn.cat898.com/upload/userface/NoPic_60_60.jpg';
-        var duf_40_40 = 'http://imgcdn.cat898.com/upload/userface/NoPic_40_40.jpg';
+    <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('/home/js/kd.user.js')}}"></script>--}}
+    <script>
+        {{--function isEmail() {--}}
+            {{--var email=$('#email').val();--}}
+            {{--if (email.search(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})/) != -1){--}}
+                {{----}}
+                {{--return true;--}}
+            {{--}--}}
+            {{--else{--}}
+                {{--alert("邮箱格式错误");--}}
+                {{--return false;--}}
+            {{--}--}}
+        {{--}--}}
+        $(function(){
+            @if($type == 'details')
+                userdetails();
+            @elseif($type== 'email')
+                usercheckemail();
+            @endif
 
-        //关注、推荐tabs切换
-        function Tabs_active(obj) {
-            var o = document.getElementById('followactnav');
-            var c = o.childNodes;
-            var n = 0;
-            for (var i = 0,
-                     j = 1; i < c.length; i++, j++) {
-                var str = "myfollowact_" + j;
-                if (c[i] == obj) {
-                    c[i].id = "fon";
-                    document.getElementById(str).style.display = "block";
-                } else {
-                    document.getElementById(str).style.display = "none";
-                    c[i].id = "";
-                }
+        })
+        //标签切换
+        function userdetails(){
+            $('#details').show();
+            $('#repass').hide();
+            $('#email').hide();
+            $('#face').hide();
+
+            $('#userdetails').attr('class','current');
+            $('#userrepass').attr('class','false');
+            $('#usercheckemail').attr('class','false');
+            $('#userface').attr('class','false');
+        }
+
+        function userrepass(){
+            $('#details').hide();
+            $('#repass').show();
+            $('#email').hide();
+            $('#face').hide();
+
+            $('#userdetails').attr('class','false');
+            $('#userrepass').attr('class','current');
+            $('#usercheckemail').attr('class','false');
+            $('#userface').attr('class','false');
+        }
+
+        function usercheckemail(){
+            $('#details').hide();
+            $('#repass').hide();
+            $('#email').show();
+            $('#face').hide();
+
+            $('#userdetails').attr('class','false');
+            $('#userrepass').attr('class','false');
+            $('#usercheckemail').attr('class','current');
+            $('#userface').attr('class','false');
+        }
+
+        function userface(){
+            $('#details').hide();
+            $('#repass').hide();
+            $('#email').hide();
+            $('#face').show();
+
+            $('#userdetails').attr('class','false');
+            $('#userrepass').attr('class','false');
+            $('#usercheckemail').attr('class','false');
+            $('#userface').attr('class','current');
+        }
+
+        //用户头像上传
+//        $("#file_upload").change(function(){
+////            uploadImage();
+//            alert(11111);
+//        });
+        function uploadImage() {
+            //  判断是否有选择上传文件
+            var imgPath = $("#file_upload").val();
+            if (imgPath == "") {
+                alert("请选择上传图片！");
+                return;
             }
-        }
-
-        //文集、跟贴、微评tabs切换
-        function Tabs_active2(obj) {
-            var o = document.getElementById('tnav');
-            var c = o.childNodes;
-            var n = 0;
-            for (var i = 0,
-                     j = 1; i < c.length; i++, j++) {
-                var str = "Active_cont_" + j;
-                if (c[i] == obj) {
-                    c[i].id = "ton";
-                    document.getElementById(str).style.display = "block";
-                } else {
-                    document.getElementById(str).style.display = "none";
-                    c[i].id = "";
-                }
+            //判断上传文件的后缀名
+            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+            if (strExtension != 'jpg' && strExtension != 'gif'
+                && strExtension != 'png' && strExtension != 'bmp') {
+                alert("请选择图片文件");
+                return;
             }
-        }
-
-        function openLoginPopup() {
-            $.openPopupLayer({
-                name: "LoginPopup",
-                width: 880,
-                target: "hidden_frame",
-                success: function() //{$('#popupLayer_LoginPopup').children('#_frame').attr('src','http://user.kdnet.net/login.asp?suserid=&token=&ts=&sina_name=&sina_location=&sina_url=&sina_gender=&r='+(new Date()).getTime());}
-                {
-                    $('#popupLayer_LoginPopup').children('#_frame').attr('src', 'http://user.kdnet.net/login_new2.asp?suserid=&token=&ts=&sina_name=&sina_location=&sina_url=&sina_gender=&r=' + (new Date()).getTime());
-                }
-
-            });
-        }
-        function openRegisterPopup() {
-            $.openPopupLayer({
-                name: "RegisterPopup",
-                width: 628,
-                target: "hidden_frame",
-                //success: function() {$('#popupLayer_RegisterPopup').children('#_frame').attr('src','http://user.kdnet.net/register.asp?invite=');}
-                success: function() {
-                    $('#popupLayer_RegisterPopup').children('#_frame').attr('src', 'http://user.kdnet.net/register_new2.asp?invite=');
+            var formData = new FormData($('#userfaceform')[0]);
+            //formData.append('_token','{{csrf_token()}}');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-        }
-        function openItemPopup() {
-            $.openPopupLayer({
-                name: "ItemPopup",
-                width: 700,
-                target: "hidden_frame",
-                success: function() {
-                    $('#popupLayer_ItemPopup').children('#_frame').attr('src', 'http://user.kdnet.net/item.asp');
-                }
-            });
-        }
-        function openForgetPopup() {
-            $.openPopupLayer({
-                name: "ForgetPopup",
-                width: 628,
-                target: "hidden_frame",
-                success: function() {
-                    $('#popupLayer_ForgetPopup').children('#_frame').attr('src', 'http://user.kdnet.net/forget.asp');
-                }
-            });
-        }
-
-        var __uid = 0;
-        var __from = 0;
-        var triggers;
-
-        function delFollowModal(el, userid) {
-            __from = el.className;
-            $("#sure_modal .info-cont-text").html("您确定要取消对此人的关注？");
-            $("#sure_modal .btn-info").show();
-            __uid = userid;
-            triggers = $(el).overlay({
-                mask: {
-                    color: '#000',
-                    loadSpeed: 200,
-                    opacity: 0.5
-                },
-                top: 'center',
-                load: true,
-                closeOnClick: false
-            });
-        }
-
-        $('document').ready(function() {
-            var buttons = $("#sure_modal .ok").click(function(e) {
-                delFollow();
-            });
-            $('.more-show').hide();
-            $('.detailed-more-cont').fadeIn();
-        });
-
-        function delFollow() {
+            console.log(formData);
             $.ajax({
-                url: "http://user.kdnet.net/follow.asp",
-                type: "GET",
-                data: 'a=del&uid=' + 15945881 + '&puid=' + __uid,
-                cache: false,
-                beforeSend: function() {
-                    $("#sure_modal .info-cont-text").html(" 正在取消关注...请稍候！");
-                    $("#sure_modal .btn-info").hide();
-                },
-                error: function() {
-                    $("#sure_modal .info-cont-text").html(" 取消关注失败...点确定重试...");
-                    $("#sure_modal .btn-info").show();
-                },
-                success: function(html) {
-                    if (html.search("success") == -1) {
-                        $("#sure_modal .info-cont-text").html(" 取消关注失败...点确定重试...");
-                        $("#sure_modal .btn-info").show();
-                    } else {
-                        $("#sure_modal .info-cont-text").html(" 已经取消了此关注！");
-                        window.setTimeout(function() {
-                                triggers.overlay().close();
-                            },
-                            500);
-                        window.setTimeout(function() {
-                                c_frame.$('#follow_status_' + __uid).html('<a rel="#add_follow_modal" href="javascript:;" onclick="parent.addFollowModal(this,' + __uid + ');" class="addAttention 2" title="立即关注">立即关注</a>');
-                            },
-                            1200);
-                        $('#follow_status_' + __uid).attr('className', 'btn-addfollow');
-                        $('#follow_status_' + __uid).html('<a rel="#add_follow_modal" class="0" href="javascript:;" onclick="addFollowModal(this,' + __uid + ');" title="关注此用户">加关注</a>');
+                type: "POST",
+                url: "/admin/upload/userface",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+//                    本地服务器
+//                    $('#img1').attr('src','/'+data);
+//                    阿里云OSS
+                    $('#img1').attr('src', 'http://bbs189.oss-cn-beijing.aliyuncs.com/' + data);
 
-                    }
+                    $('#art_thumb').text('/' + data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("上传失败，请检查网络后重试");
                 }
             });
         }
 
-        // 更多版块top控制
-        var positions = 55;
+        function loginOut(){
+            //询问框
+            layer.confirm('确认退出登录吗？', {
+                btn: ['确认','取消']
+            }, function(){
+                //                通过ajax 向服务器发送一个删除请求
+                $.post("{{url('/home/loginout')}}",{"_token":"{{csrf_token()}}"},function(data){
 
-        $(document).ready(function() {
-            $(".loading").remove();
-            $("#login_area").fadeIn();
+                    if(data.status == 0){
+                        layer.msg(data.msg, {icon: 6});
+                        setTimeout(function(){
+                            location.href = "{{url('/home/login')}}";
+                        },3000)
+                    }else{
 
-            $('title').overlay({
-                top: positions,
-                fixed: false,
-                target: '#overlay',
-                load: false,
-                onBeforeLoad: function() {
-                    var wrap = this.getOverlay().find(".contentWrap");
-                    wrap.load('clubforum.asp');
-                },
-                onLoad: function() {
-                    $("#MoreForum").attr('className', 'moreforum-down');
-                },
-                onClose: function() {
-                    $("#MoreForum").attr('className', 'moreforum-up');
-                }
+                        layer.msg(data.msg, {icon: 5});
+                    }
+
+                })
+
             });
-            $('#more_btn').click(function() {
-                if ($("title").overlay().isOpened()) {
-                    $("title").overlay().close();
-                } else {
-                    $("title").overlay().load();
-                }
-            });
-        });
-
-        //-->
+        }
 
     </script>
-    <script type="text/javascript" src="{{asset('/home/js/kd.user.js')}}"></script>
 </head>
 
 <body class="setting">
@@ -228,62 +168,7 @@
 <script type="text/javascript" src="{{asset('/home/js/wz_tooltip.js')}}">
 </script>
 <!--Tips-->
-<div style="width:310px; margin:10px auto; display:none;" id="sure_modal">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="popuplayerinfo">
-        <tbody>
-        <tr>
-            <td class="tl">
-            </td>
-            <td height="10" class="tc">
-            </td>
-            <td class="tr">
-            </td>
-        </tr>
-        <tr>
-            <td class="lc">
-            </td>
-            <td class="cc" valign="top" bgcolor="#f0f3f5">
-                <div class="title-info clearfix">
-                    <div class=" f14px fB">
-                        提示信息
-                    </div>
-                    <div class="close-info">
-                        <a href="javascript:;" class="close" title="关闭">
-                            关闭
-                        </a>
-                    </div>
-                </div>
-                <div class="info-cont clearfix">
-                    <div class="info-cont-icon">
-                    </div>
-                    <div class="info-cont-text">
-                    </div>
-                </div>
-                <div class="btn-info">
-                    <div class="clearfix">
-                        <a href="javascript:;" class="ok">确定</a>
-                        <a href="javascript:;" class="close" title="取消">取消</a>
-                    </div>
-                </div>
-            </td>
-            <td class="rc">
-            </td>
-        </tr>
-        <tr>
-            <td class="bl">
-            </td>
-            <td height="10" class="bc">
-            </td>
-            <td class="br">
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div id="hidden_frame" style="display:none;">
-
-    asdasdasdasdasd
-</div>
+<div id="hidden_frame" style="display:none;"></div>
 <!--定位消息-->
 <div class="fixed-outer">
     <div class="fixed-inner" id="ajax_header_msg">
@@ -302,19 +187,17 @@
 <div class="header" id="Small">
     <div class="gn-box">
         <div class="gn-body clearfix">
-            <div class="logo" title="凯迪网络 主流声音">
-                <a href="http://www.kdnet.net/">
-                    凯迪网络 主流声音
+            <div class="logo" title="谜之论坛 谜一般的气质">
+                <a href="{{url('/')}}">
+                    谜之论坛 谜一般的气质
                 </a>
             </div>
             <div class="rf">
                 <div class="globalnav c-sub">
                     社区版块：
-                    <a target="_blank" href="http://club.kdnet.net/list.asp?boardid=1">猫眼看人</a>|
-                    <a target="_blank" href="http://club.kdnet.net/list.asp?boardid=3">经济风云</a>|
-                    <span id="MoreForum" class="moreforum-up">
-                        <a href="javascript:;" id="more_btn">更多版块&nbsp;&nbsp;&nbsp;</a>
-                    </span>
+                    @foreach($plates as $k => $v)
+                        <a target="_blank" href="{{url('/home/list/'.$v->id)}}">{{$v->pname}}</a>|
+                    @endforeach
                 </div>
                 <div id="user_index_s_1" class="banner">
                 </div>
@@ -326,32 +209,21 @@
 <!--注册人数、日期、注册/登录链接-->
 <div id="SmallLoginBox">
     <div class="login-box clearfix">
-        <div class="num-info c-white">
-            <span class="leader fB">14305441</span>位注册用户，目前在线
-            <span class="fB" style="color:#223B4D;">122989</span>人，
-        </div>
+
         <div class="login-info">
             欢迎你&nbsp;
             <span class="c-main">
-                <a href="http://user.kdnet.net/index.asp">barry0220</a>
+                <a href="{{url('/home/userinfo')}}">{{session('homeuser')->username}}</a>
             </span>
-            &nbsp;
-            <span class="c-main">
-                <a href="http://user.kdnet.net/index.asp">个人中心</a>
-            </span>
-            &nbsp;
-            <!--<span class="c-main">
-            <a href="javascript:;" onclick="KD.user.goto('sms',this);return false;">收件箱(0)</a>
-            </span>&nbsp;-->
             <span class="fB c-main">
-                <a href="http://user.kdnet.net/user.asp?a=logout" title="退出">退出</a>
+                <a href="javascript:;" onclick="loginOut()" title="退出">退出</a>
             </span>
         </div>
-        <div class="globalsearch">
-            <div class="search-text">搜索：</div>
-            <input name="q" type="text" id="s"  value="">
-            <input type="submit" name="sa" id="searchsubmit" value="搜索" >
-        </div>
+        {{--<div class="globalsearch">--}}
+            {{--<div class="search-text">搜索：</div>--}}
+            {{--<input name="q" type="text" id="s"  value="">--}}
+            {{--<input type="submit" name="sa" id="searchsubmit" value="搜索" >--}}
+        {{--</div>--}}
     </div>
 </div>
 <!--注册人数、日期、注册/登录链接 End-->
@@ -367,38 +239,24 @@
             <div class="userinfo clearfix">
                 <div class="userpic">
                     <div class="modify-userpic">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('face',this);return false;">修改头像</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=face">
-                            修改头像
-                        </a>
+                        <a href="javascript:;" onclick="userface()">修改头像</a>
                     </div>
-                    <a href="http://user.kdnet.net/index.asp?userid=15945881">
-                        <!--?userid=15945881-->
                         <span></span>
-                        <img id="userface_img_index" onerror="this.src = duf_190_190;" src="{{asset('/home/img/saved_resource')}}"
+                        <img id="userface_img_index" onerror="this.src = duf_190_190;" src="{{$details->profile}}"
                              width="70" height="70">
                     </a>
                 </div>
                 <div class="useridinfo">
                     <div class="userid clearfix">
-                        <a href="http://user.kdnet.net/index.asp">
-                            barry0220
-                        </a>
+                        <a href="javascript:;">{{session('homeuser')->username}}</a>
                         <!--身份认证-->
                         <!--手机认证-->
-                        <a href="javascript:;" target="_blank">
+                        <a href="javascript:;">
                             <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}">
-                        </a>
-                        <a href="javascript:;" onmouseover="" onmouseout="UnTip()">
-                            <img class="lv1-icon" title="影响力" src="{{asset('/home/img/transparent.gif')}}">
                         </a>
                     </div>
                     <div class="c-main">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('setting',this);return
-                        false;">修改资料</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=setting">
-                            修改资料
-                        </a>
+                        <a href="javascript:;">------------------</a>
                     </div>
                     <!-- 开通会员 -->
                     <div class="c-alarm fB mem-open-go">
@@ -412,43 +270,41 @@
             <!--用户头像 End-->
             <ul class="useratten clearfix">
                 <li>
-                    <a href="http://user.kdnet.net/index.asp?Redirect=topic">
+                    <a href="{{url('/home/mypost')}}">
                         <strong>1</strong>
                         <span>主帖</span>
                     </a>
                 </li>
-                <li>
-                    <a href="http://user.kdnet.net/index.asp?Redirect=fans">
-                        <strong>0</strong>
-                        <span>粉丝</span>
-                    </a>
-                </li>
-                <li class="no-line">
-                    <a href="http://user.kdnet.net/index.asp?Redirect=follow">
-                        <strong>0</strong>
-                        <span>关注</span>
-                    </a>
-                </li>
+                {{--<li>--}}
+                    {{--<a href="http://user.kdnet.net/index.asp?Redirect=fans">--}}
+                        {{--<strong>0</strong>--}}
+                        {{--<span>粉丝</span>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="no-line">--}}
+                    {{--<a href="http://user.kdnet.net/index.asp?Redirect=follow">--}}
+                        {{--<strong>0</strong>--}}
+                        {{--<span>关注</span>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
             </ul>
             <!--关注按钮-->
             <!--//关注按钮-->
-            <div class="ad-xz-l clearfix">
-                <a href="http://user.kdnet.net/index.asp?Redirect=honors">
-                    <img src="{{asset('/home/img/ad_p1.png')}}" width="18" height="18">
-                </a>
-                <a href="javascript:;" >
-                    <img src="{{asset('/home/img/ad_p2.png')}}" width="18" height="18">
-                </a>
-            </div>
+            {{--<div class="ad-xz-l clearfix">--}}
+                {{--<a href="http://user.kdnet.net/index.asp?Redirect=honors">--}}
+                    {{--<img src="{{asset('/home/img/ad_p1.png')}}" width="18" height="18">--}}
+                {{--</a>--}}
+                {{--<a href="javascript:;" >--}}
+                    {{--<img src="{{asset('/home/img/ad_p2.png')}}" width="18" height="18">--}}
+                {{--</a>--}}
+            {{--</div>--}}
             <div class="detailed clearfix">
                 <!--<div class="detailed-info underline">积分：<a href="javascript:;" onclick="KD.user.goto('integrallog',this);return false;">0</a></div> sunny 20131213 integral-->
                 <div class="detailed-info">
                     积分：
-                    <a href="javascript:;">积分数量</a>
+                    <a href="javascript:;">{{$details -> score}}</a>
                 </div>
-                <!-- sunny 20131213 integral -->
             </div>
-            <!-- sunny 20131106 lottery B -->
             <!-- sunny 打赏 B -->
             <div class="detailed clearfix">
                 <div class="detailed-info" style="color:red">我的钱包</div>
@@ -457,16 +313,12 @@
                 </div>
             </div>
             <!-- sunny 打赏 E -->
-            <!-- modify sunny group purchase B -->
             <div class="detailed clearfix">
                 <div class="detailed-info">我的订单</div>
                 <div class="operating c-main">
-                    <!--<a href="http://mall.kdnet.net/orders.php" target="_blank">查询</a>-->
                     <a href="javascript:;">查询</a>
                 </div>
             </div>
-            <!-- modify sunny group purchase E -->
-            <!-- sunny 20131106 lottery E -->
             <!-- 更多信息 -->
             <div class="more-show c-main" style="display: none;">
                 <a href="javascript:;">更多信息</a>
@@ -474,44 +326,30 @@
             <div class="detailed-more-cont" style="display: block;">
                 <div class="detailed clearfix">
                     <div class="detailed-info">
-                        Email：<a title=""></a>
+                        <a href="javascript:;" onclick="usercheckemail()">Email：{{session('homeuser')->email}}</a>
                     </div>
-                    <div class="operating c-main">
-                        <a href="javascript:;" >验证</a>
-                    </div>
+                    {{--<div class="operating c-main">--}}
+                        {{--<a href="javascript:;" onclick="usercheckemail()" >验证邮箱</a>--}}
+                    {{--</div>--}}
                 </div>
                 <div class="detailed clearfix">
-                    <div class="detailed-info">手机：15269189983</div>
-                    <div class="operating c-main">
-                        <a href="javascript:;" >换号</a>
-                    </div>
+                    <div class="detailed-info">手机：{{session('homeuser')->phone}}</div>
                 </div>
                 <div class="detailed clearfix">
-                    <div class="detailed-info">帐号绑定： 还没有绑定.</div>
-                    <div class="operating c-main">
-                        <a href="javascript:;" >绑定</a>
-                        <!--未绑定</div>
-                        <div class="operating c-main"><a href="javascript:;" onclick="KD.user.goto('bindAccount',this);return false;">绑定</a>-->
-                    </div>
+                    <div class="detailed-info">注册时间：{{date('Y/m/d H:i',$details ->regtime)}}</div>
                 </div>
                 <div class="detailed clearfix">
-                    <div class="detailed-info">注册时间：2017/9/20 15:59</div>
-                </div>
-                <div class="detailed clearfix">
-                    <div class="detailed-info">上次登录：2017/10/10 18:47</div>
-                </div>
-                <div class="detailed clearfix">
-                    <div class="detailed-info">登录次数：4</div>
+                    <div class="detailed-info">上次登录：{{date('Y/m/d H:i',$details ->logintime)}}</div>
                 </div>
                 <div class="more-hide c-main">
                     <a href="javascript:;">隐藏更多</a>
                 </div>
                 <script type="text/javascript">
-                        //更多个人信息显示、隐藏
-                        $('.more-show').click(function() {
-                            $(this).hide();
-                            $('.detailed-more-cont').fadeIn();
-                        });
+                    //更多个人信息显示、隐藏
+                    $('.more-show').click(function() {
+                        $(this).hide();
+                        $('.detailed-more-cont').fadeIn();
+                    });
                     $('.more-hide').click(function() {
                         $('.more-show').fadeIn();
                         $('.detailed-more-cont').hide();
@@ -520,376 +358,383 @@
                 </script>
             </div>
             <!-- 更多信息 End -->
-            <!--添加关注modal-->
-            <div class="info-boder" id="add_follow_modal" style="display:none;width:330px;">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="popuplayerinfo">
-                    <tbody>
-                    <tr>
-                        <td class="tl"></td>
-                        <td height="10" class="tc"></td>
-                        <td class="tr"></td>
-                    </tr>
-                    <tr>
-                        <td class="lc">
-                        </td>
-                        <td class="cc" valign="top" bgcolor="#f0f3f5">
-                            <div class="title-info clearfix">
-                                <div class="f14px fB"><!--请输入下面的验证码-->确认是否关注?</div>
-                                <div class="close-info">
-                                    <a href="javascript:;" class="close" title="关闭">关闭</a>
-                                </div>
-                            </div>
-                            <div class="btn-info">
-                                <div class="clearfix">
-                                    <a href="javascript:;" class="ok">确定</a>
-                                    <a href="javascript:;" class="close" title="取消">取消</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="rc"></td>
-                    </tr>
-                    <tr>
-                        <td class="bl"></td>
-                        <td height="10" class="bc"></td>
-                        <td class="br"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--添加关注modal End-->
-            <script type="text/javascript">
-                    function updateCodeImage(img) {
-                        document.getElementById(img).src = "http://user.kdnet.net/DV_getcode.asp?time=" + new Date().getTime();
-                    }
-
-                var triggers;
-                function addFollowModal(el, userid) {
-                    __from = el.className;
-                    //updateCodeImage('follow_valid_image');
-                    $("#add_follow_modal .popuplayertips").html("");
-                    $("#add_follow_modal .btn-info").show();
-                    __uid = userid;
-                    triggers = $(el).overlay({
-                        mask: {
-                            color: '#000',
-                            loadSpeed: 200,
-                            opacity: 0.5
-                        },
-                        top: 'center',
-                        load: true,
-                        closeOnClick: false
-                    });
-                }
-
-                $('document').ready(function() {
-                    $("#add_follow_modal .ok").click(function(e) {
-                        addFollow();
-                    });
-                });
-
-                function addFollow() {
-                    $.ajax({
-                        url: "http://user.kdnet.net/follow.asp",
-                        type: "GET",
-                        data: 'a=add&uid=' + 15945881 + '&puid=' + __uid + '&CodeStr=' + $("input[name='codestr']").val(),
-                        cache: false,
-                        beforeSend: function() {
-                            $("#add_follow_modal .popuplayertips").removeClass('c-alarm').html("正在添加关注...请稍候！");
-                            $("#add_follow_modal .btn-info").hide();
-                        },
-                        error: function() {
-                            updateCodeImage('follow_valid_image');
-                            $("#add_follow_modal .popuplayertips").removeClass('c-alarm').html("添加关注失败...点确定重试...");
-                            $("#add_follow_modal .btn-info").show();
-                        },
-                        success: function(html) {
-                            if (html.search("success") == -1) {
-                                //updateCodeImage('follow_valid_image');
-                                $("#add_follow_modal .popuplayertips").addClass('c-alarm').html(html);
-                                $("#add_follow_modal .btn-info").show();
-                            } else {
-                                $("#add_follow_modal .popuplayertips").removeClass('c-alarm').html("添加关注成功！");
-                                triggers.overlay().close();
-                                var cls = 'btn-alreadyfollow';
-                                if (__from == "addAttention 1") {
-                                    $('#follow_status_' + __uid).attr('title', '已经关注此用户');
-                                    $('#follow_status_' + __uid).html('<a class="disabled" title="已关注">已关注</a>');
-                                } else if (__from == "addAttention") {
-                                    cls = "alreadyfollow";
-                                    //c_frame.$('#follow_status_' + __uid).attr('className',cls);
-                                    c_frame.$('#follow_status_' + __uid).attr('title', '已经关注此用户');
-                                    c_frame.$('#follow_status_' + __uid).after('<a class="disabled" title="已关注">已关注</a>');
-                                    c_frame.$('#follow_status_' + __uid).remove();
-                                } else if (__from == '0') {
-                                    /*
-                                     $('#follow_status_' + __uid).attr('className',cls);
-                                     $('#follow_status_' + __uid).attr('title','已经关注此用户');
-                                     $('#follow_status_' + __uid).html('已关注');
-                                     */
-                                    if (html.search("successful") == -1) {
-                                        $('#follow_status_' + __uid).attr('className', 'btn-alreadyfollow');
-                                        $('#follow_status_' + __uid).html('<a rel="#sure_modal" href="javascript:;" onclick="parent.delFollowModal(this,' + __uid + ');" title="取消关注">取消关注</a>');
-                                    } else {
-                                        $('#follow_status_' + __uid).attr('className', 'btn-eachotherfollow');
-                                        $('#follow_status_' + __uid).html('<a rel="#sure_modal" href="javascript:;" onclick="parent.delFollowModal(this,' + __uid + ');" title="互相关注">取消关注</a>');
-                                    }
-                                } else if (__from == "addAttention 2") {
-                                    c_frame.$('#follow_status_' + __uid).html('<a rel="#sure_modal" href="javascript:;" onclick="parent.delFollowModal(this,' + __uid + ');" class="deleteAttention" title="取消关注">取消关注</a></div>');
-                                }
-                            }
-                        }
-                    });
-                }
-
-            </script>
             <!--个人信息 End-->
             <!-- 导航 -->
             <ul class="user-nav clearfix">
-                <li class="n1">
-                    <div class="index title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('index',this);return
-                        false;">我的主页</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=index">我的主页</a>
-                    </div>
-                </li>
-                <li class="n12">
-                    <div class="record title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('recycle',this);return
-                        false;">我的回收站</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=record">浏览记录</a>
-                    </div>
-                    <!--<div class="total">(0)</div>-->
-                </li>
-                <li class="n2">
-                    <div class="fposts title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('fposts',this);return
-                        false;">提到我的</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=fposts">提到我的</a>
-                    </div>
-                </li>
                 <li class="n3">
                     <div class="reme title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('reme',this);return false;">回复我的</a -->
                         <a href="http://user.kdnet.net/index.asp?Redirect=reme">回复我的</a>
                     </div>
                 </li>
                 <li class="n4">
                     <div class="reply title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('reply',this);return
-                        false;">我的回复</a -->
                         <a href="http://user.kdnet.net/index.asp?Redirect=reply">我的回复</a>
                     </div>
-                    <!--<div class="total">(-1)</div>-->
                 </li>
                 <li class="n5">
                     <div class="collection title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('collection',this);return
-                        false;">我的收藏</a -->
                         <a href="http://user.kdnet.net/index.asp?Redirect=collection">我的收藏</a>
                     </div>
-                    <!--<div class="total">(0)</div>-->
                 </li>
-                <li class="n6">
-                    <div class="sms title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('sms',this);return false;">我的私信</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=sms">我的私信</a>
-                    </div>
-                    <div class="operating c-main">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('sendSMS',this);return
-                        false;">发信息</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=sendSMS">发信息</a>
-                    </div>
-                </li>
+                {{--<li class="n6">--}}
+                    {{--<div class="sms title">--}}
+                        {{--<!-- a href="javascript:;" onclick="KD.user.goto('sms',this);return false;">我的私信</a -->--}}
+                        {{--<a href="http://user.kdnet.net/index.asp?Redirect=sms">我的私信</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="operating c-main">--}}
+                        {{--<!-- a href="javascript:;" onclick="KD.user.goto('sendSMS',this);return--}}
+                        {{--false;">发信息</a -->--}}
+                        {{--<a href="http://user.kdnet.net/index.asp?Redirect=sendSMS">发信息</a>--}}
+                    {{--</div>--}}
+                {{--</li>--}}
                 <li class="n7">
                     <div class="topic title">
                         <!-- a href="javascript:;" onclick="KD.user.goto('topic',this);return
                         false;">我的主帖</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=topic">我的主帖</a>
+                        <a href="{{url('/home/mypost')}}">我的主帖</a>
                     </div>
                     <!--<div class="total">(1)</div>-->
                     <div class="operating c-main">
-                        <a href="http://upfile1.kdnet.net/post.asp?action=new&amp;boardid=1" title="发布新帖"
+                        <a href="{{url('/home/post/create')}}" title="发布新帖"
                            target="_blank">发新帖</a>
                     </div>
                 </li>
-                <li class="n8">
-                    <div class="blog title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('blog',this);return false;">我的博文</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=blog">我的博文</a>
-                    </div>
-                    <!--<div class="total">(0)</div>-->
-                    <div class="operating c-main">
-                        <a href="http://blog.kdnet.net/BokeManage.asp?s=1&amp;t=1&amp;m=1" title="发博客文章"
-                           target="_blank">写博文</a>
-                    </div>
-                </li>
                 <!-- -->
-                <li class="n9">
-                    <div class="t title">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('t',this);return false;">我的微评</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=t">我的微评</a>
-                    </div>
-                    <!--<div class="total">(0)</div>-->
-                    <div class="operating c-main">
-                        <a href="http://t.kdnet.net/" title="发博微评" target="_blank">写微评</a>
-                    </div>
-                </li>
                 <li class="n10">
                     <div class="recycle title">
                         <a href="http://user.kdnet.net/index.asp?Redirect=recycle">我的回收站</a>
                     </div>
                 </li>
-                <script language="JavaScript">
-                    $(function() {
-                        $('#myurlnav').click(function() {
-                            $('body').attr({
-                                'class': 'urlnav'
-                            });
-                            scrollTo(0, 0);
-                        });
-                    });
-
-
-                </script>
                 <li class="n11 last">
                     <div class="title">
-                        <a href="http://user.kdnet.net/user.asp?a=logout">退出</a>
+                        <a href="javascript:;" onclick="loginOut()">退出</a>
                     </div>
                 </li>
             </ul>
             <!-- 导航 End -->
-            <!--关注我的人-->
-            <div class="sc fold">
-                <h3>
-                    <div style="float:left">
-                        <span>我的粉丝<span class="c-main">0</span>人</span>
-                    </div>
-                    <a class="btn" href="javascript:;"
-                       title="收起">
-                    </a>
-                </h3>
-                <div id="fans_panel">
-                    <div class="defaultcont">暂无粉丝</div>
-                </div>
-            </div>
-            <!--关注我的人 End-->
-            <!--我关注的人-->
-            <div class="sc">
-                <h3>
-                    我关注<span class="c-main">0</span>人
-                    <a class="btn" href="javascript:;"
-                       title="展开"></a>
-                </h3>
-                <div id="follow_panel" style="display:none;">
-                    <div class="defaultcont">无关注的人</div>
-                </div>
-            </div>
-            <!--取消关注modal-->
-            <div class="info-boder" id="sure_modal" style="display:none;width:300px;">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="popuplayerinfo">
-                    <tbody>
-                    <tr>
-                        <td class="tl"></td>
-                        <td height="10" class="tc"></td>
-                        <td class="tr"></td>
-                    </tr>
-                    <tr>
-                        <td class="lc">
-                        </td>
-                        <td class="cc" valign="top" bgcolor="#f0f3f5">
-                            <div class="title-info clearfix">
-                                <div class=" f14px fB">温馨提示</div>
-                                <div class="close-info">
-                                    <a class="close" href="javascript:;" title="关闭">关闭</a>
-                                </div>
-                            </div>
-                            <div class="info-cont clearfix">
-                                <div class="info-cont-icon"></div>
-                                <div class="info-cont-text">您确定要取消对此人的关注？</div>
-                            </div>
-                            <div class="btn-info">
-                                <div class="clearfix">
-                                    <a class="ok" href="javascript:;">确定</a>
-                                    <a class="close" href="javascript:;" title="取消">取消</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="rc"></td>
-                    </tr>
-                    <tr>
-                        <td class="bl"></td>
-                        <td height="10" class="bc"></td>
-                        <td class="br"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--取消关注modal End-->
-            <!--我关注的人 End-->
-            <!--谁访问过我-->
-            <div class="sc">
-                <h3>
-                    <div style="float:left">
-                        <span>谁访问过我</span>
-                    </div>
-                    <a class="btn" href="javascript:;"  title="展开"></a>
-                </h3>
-                <div id="by_visit" style="display:none;">
-                    <div class="defaultcont">暂无记录！</div>
-                </div>
-            </div>
-            <!--//谁访问过我-->
-            <!--我访问过谁-->
-            <div class="sc">
-                <h3>
-                    <div style="float:left">
-                        <span>我访问过谁</span>
-                    </div>
-                    <a class="btn" href="javascript:;"  title="展开"></a>
-                </h3>
-                <div id="visit" style="display:none;">
-                    <div class="defaultcont">暂无记录！</div>
-                </div>
-            </div>
-            <!--//我访问过谁-->
-            <!--黑名单-->
-            <div class="sc">
-                <h3>
-                    <div style="float:left">
-                        <span>黑名单</span>
-                    </div>
-                    <a class="btn" href="javascript:;" title="展开"></a>
-                </h3>
-                <div id="black_list" style="display:none;">
-                    <div class="defaultcont">暂无记录！</div>
-                    <div class="more c-main">
-                        <!-- a href="javascript:;" onclick="KD.user.goto('black',this);return
-                        false;">设置黑名单 &gt;&gt;</a -->
-                        <a href="http://user.kdnet.net/index.asp?Redirect=black">设置黑名单 &gt;&gt;</a>
-                    </div>
-                </div>
-            </div>
-            <!--//黑名单-->
         </div>
         <div class="rf">
-            {{--<iframe id="c_frame" name="c_frame" width="100%" frameborder="no" scrolling="no"--}}
-            {{--src="../control_base.html" height="952" allowtransparency="true">--}}
-            {{--</iframe>--}}
-            <script type="text/javascript">
-                cf = document.getElementById("c_frame");
-                cfw = document.getElementById("c_frame").contentWindow;
+            {{--个人信息修改显示区域--}}
+            @if (count($errors) > 0)
+                <div class="alert" style="color:red;">
+                    <ul>
+                        @if(is_object($errors))
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        @else
+                            <li>{{  $errors }}</li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
+            <!-- TABS -->
+            <ul class="tabs clearfix">
+                <li onclick="userdetails()"><a href="javascript:;" id="userdetails" title="个人资料"><span>个人资料</span></a></li>
+                <li onclick="userrepass()"><a href="javascript:;" id="userrepass" title="密码设置"><span>密码设置</span></a></li>
+                <li onclick="usercheckemail()"><a href="javascript:;" id="usercheckemail" title="邮件验证"><span>邮件验证</span></a></li>
+                <li onclick="userface()"><a href="javascript:;" id="userface" title="设置头像"><span>头像设置</span></a></li>
+            </ul>
+            <!-- TABS End -->
+            <!--控制面板-->
+            <!--个人资料-->
+            <div style="height:100%" id="details">
+                <form action="{{url('/home/updateuserinfo')}}" method="post" id="detailsform">
+                    <div style="height:600px">
+                        <div class="control-cont clearfix">
+                            <div class="cpassword-box">
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">用户名： </div>
+                                    <div class="cformfieldtext">
+                                        <span>{{session('homeuser')->username}}</span>
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">姓名： </div>
+                                    <div class="cformfieldtext">
+                                        <input name="name" type="text" class="input-boder" style="width:100px" value="{{$details['name']}}">
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">性别： </div>
+                                    <div class="cformfieldtext" >
+                                        男:&nbsp;&nbsp;<input name="sex" type="radio"  value="1" {{ $details['sex']==1 ? 'checked' : '' }} style="vertical-align: middle;">&nbsp;&nbsp;
+                                        女:&nbsp;&nbsp;<input name="sex" type="radio"  value="0" {{ $details['sex']==0 ? 'checked' : '' }}  style="vertical-align: middle;">
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">年龄： </div>
+                                    <div class="cformfieldtext">
+                                        <input name="age" type="text" class="input-boder" style="width:40px" value="{{$details['age']}}">&nbsp;&nbsp;岁
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">身份证号： </div>
+                                    <div class="cformfieldtext">
+                                        <input name="idnum" type="text" class="input-boder" style="width:100px" value="{{$details['idnum']}}">
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">地址： </div>
+                                    <div class="cformfieldtext">
+                                        <input name="address" type="text" class="input-boder" style="width:100px" value="{{$details['address']}}">
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">邮编： </div>
+                                    <div class="cformfieldtext">
+                                        <input name="postcode" type="text" class="input-boder" style="width:100px" value="{{$details['postcode']}}">
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">血型： </div>
+                                    <div class="cformfieldtext">
+                                        A:&nbsp;&nbsp;<input name="blood" type="radio"  value="A" {{ $details['blood']=="A" ? 'checked' : '' }}  style="vertical-align: middle;">
+                                        B:&nbsp;&nbsp;<input name="blood" type="radio"  value="B" {{ $details['blood']=="B" ? 'checked' : '' }}  style="vertical-align: middle;">
+                                        O:&nbsp;&nbsp;<input name="blood" type="radio"  value="O" {{ $details['blood']=="O" ? 'checked' : '' }}  style="vertical-align: middle;">
+                                        保密:&nbsp;&nbsp;<input name="blood" type="radio"  value="X" {{ $details['blood']=="X" ? 'checked' : '' }}  style="vertical-align: middle;">
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">QQ： </div>
+                                    <div class="cformfieldtext">
+                                        <input name="qq" type="text" class="input-boder" style="width:100px" value="{{$details['qq']}}">
+                                    </div>
+                                </div><div class="cforminput clearfix">
+                                    <div class="cformlabel">MSN： </div>
+                                    <div class="cformfieldtext">
+                                        <input name="msn" type="text" class="input-boder" style="width:100px" value="{{$details['msn']}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div align="center">
+                                <div class="btn-controlpanel">
+                                    <a href="javascript:;" style="pandding-top:12px;" onclick="updateuserinfo()">保存</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--密码设置-->
+            <div style="height:100%" id="repass">
+                <form action="/home/repass" id="repassform" method="POST">
+                    <input type="hidden" name="a" value="u">
+                    <div class="gb-lb" id="cPassword">
+                        <div class="control-cont clearfix">
+                            <div style="color:red;"></div>
+                            <div class="cpassword-box">
 
-                var curLocation = document.location.hash.replace('#', '');
-                if (curLocation != '' && KD.user.navData[curLocation] != 'undefined') {
-                    KD.user.goto(curLocation);
-                } else {
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">旧密码确认：</div>
+                                    <div class="cformfieldtext">
+                                        <input name="password_o" type="password" class="input-boder" style="width:100px">
+                                    </div>
+                                </div>
 
-                    KD.user.goto('index');
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">新密码：</div>
+                                    <div class="cformfieldtext">
+                                        <input name="password_n" type="password" class="input-boder" style="width:100px">
+                                    </div>
+                                </div>
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">新密码确认：</div>
+                                    <div class="cformfieldtext">
+                                        <input name="repassword_n" type="password" class="input-boder" style="width:100px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-controlpanel">
+                                <a href="javascript:;" style="pandding-top:12px;" onclick="repass()">重置密码</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- 邮箱验证 -->
+            <div style="height:100%" id="email">
+                <form action="" method="post" id="emailform" name="form">
+                    <div style="height:600px">
+                        <div class="control-cont clearfix">
+                            <div class="cpassword-box">
+                                <div class="cforminput clearfix">
+                                    <div class="cformlabel">邮箱： </div>
+                                    <div class="cformfieldtext">
+                                        <input name="checkemail" type="text" class="input-boder" style="width:200px" id="checkemail" value="{{session('homeuser')->email}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-controlpanel">
+                                <a href="javascript:;" style="pandding-top:12px;" onclick="sendmail()" >验证邮箱</a>
+                            </div>
+                        </div>
+                        <div class="fillinfo">
+                            <h1 class="c-alarm">验证后立即拥有社区发帖、回复权限！<span class="fB">收不到邮件？</span></h1>
+                            <ul>
+                                <li>1.尝试到广告邮件、垃圾邮件目录里找找看；</li>
+                                <li>2.再次发送验证邮件</li>
+                                <li>3.换个邮箱试试；</li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--设置头像-->
+             <div style="height:100%" id="face">
+                 <form action="" method="post" id="userfaceform">
+                     <div style="height:600px">
+                         <div class="control-cont clearfix">
+                             <div class="cpassword-box">
+                                 <div class="cforminput clearfix">
+                                     <div class="cformlabel">用户头像： </div>
+                                     <div class="cformfieldtext">
+                                         {{--<input type="text" class="input-boder" id="art_thumb" name="profile" value="{{$details->profile}}">--}}
+                                         <span id="art_thumb" style="display:none;">{{$details->profile}}</span>
+                                         <p><img id="img1" src="{{$details->profile}}" alt="上传后显示图片"  style="max-width:350px;max-height:100px;" /></p>
+                                     </div>
+                                     <div style="clear:both;"></div><br /><br />
+                                     <div class="cformfieldtext">
+                                         {{--{{csrf_field()}}--}}
+                                         <input id="file_upload" type="file" name="file_upload" onchange="uploadImage()" multiple="true">
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="btn-controlpanel">
+                                     <a href="javascript:;" style="pandding-top:12px;" onclick="updateface()">上传头像</a>
+                             </div>
+                         </div>
+                     </div>
+                 </form>
+             </div>
+            <script>
+                //修改用户详细信息
+                function updateuserinfo(){
+                    //询问框
+                    layer.confirm('您确认修改个人信息吗？', {
+                        btn: ['确认','取消']
+                    }, function(){
+                        //获取原始密码值
+                        var name = $('input[name=name]').val();
+                        var sex = $('input[name=sex]:checked').val();
+                        var age = $('input[name=age]').val();
+                        var idnum = $('input[name=idnum]').val();
+                        var address = $('input[name=address]').val();
+                        var postcode = $('input[name=postcode]').val();
+                        var blood = $('input[name=blood]:checked').val();
+                        var qq = $('input[name=qq]').val();
+                        var msn = $('input[name=msn]').val();
+                        var arr = {'name':name,'sex':sex,
+                            'age':age,'idnum':idnum,'address':address,
+                            'postcode':postcode,'blood':blood,'qq':qq,'msn':msn};
+
+//                通过ajax 向服务器发送一个删除请求
+                        $.post("{{url('/home/updateuserinfo/')}}",{'arr':arr,'_token':"{{csrf_token()}}"},function(data){
+
+                            if(data.status == 0){
+                                layer.msg(data.msg, {icon: 6});
+                                setTimeout(function(){
+                                    location.href = location.href;
+                                },3000)
+                            }else{
+
+                                layer.msg(data.msg, {icon: 5});
+                            }
+
+                        })
+
+                    });
+                }
+                //修改用户密码
+                function repass(){
+                    //询问框
+                    layer.confirm('您确认修改密码吗？', {
+                        btn: ['确认','取消']
+                    }, function(){
+                        //获取原始密码值
+                        var password_o = $('input[name=password_o]').val();
+                        var password_n = $('input[name=password_n]').val();
+                        var repassword_n = $('input[name=repassword_n]').val();
+
+//                通过ajax 向服务器发送一个删除请求
+                        $.post("{{url('/home/repass/')}}",{'password_o':password_o,'password_n':password_n,'repassword_n':repassword_n,'_token':"{{csrf_token()}}"},function(data){
+
+                            if(data.status == 0){
+                                layer.msg(data.msg, {icon: 6});
+                                setTimeout(function(){
+                                    location.href = location.href;
+                                },3000)
+                            }else{
+
+                                layer.msg(data.msg, {icon: 5});
+                            }
+
+                        })
+
+                    });
+                }
+                //验证用户邮箱
+                function sendmail(){
+                    //获取邮件值
+                    var email = $('#checkemail').val();
+                    var regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+
+                    if (!regex.test(email)) {
+                        layer.msg("邮件格式不正确,请重新输入", {icon: 5});
+                    } else {
+                        // 通过ajax 向服务器发送一个删除请求
+                        $.post("{{url('/home/sendmail/')}}",{'email':email,'_token':"{{csrf_token()}}"},function(data){
+
+                            if(data.status == 0){
+                                layer.msg(data.msg, {icon: 6});
+                            }else{
+
+                                layer.msg(data.msg, {icon: 5});
+                            }
+                        })
+                    }
+
 
                 }
-            </script>
-            <script>
-                KD.user.goto('setting');
+                //修改用户头像
+                function updateface(){
+                    //  判断是否有选择上传文件
+                    var imgPath = $("#file_upload").val();
+                    if (imgPath == "") {
+                        alert("请选择上传图片！");
+                        return;
+                    }
+                    //判断上传文件的后缀名
+                    var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+                    if (strExtension != 'jpg' && strExtension != 'gif'
+                        && strExtension != 'png' && strExtension != 'bmp') {
+                        alert("请选择图片文件");
+                        return;
+                    }
+                    //询问框
+                    layer.confirm('您确认修改头像吗？', {
+                        btn: ['确认','取消']
+                    }, function(){
+                        //获取原始密码值
+                        var profile = $('#art_thumb').text();
+
+//                通过ajax 向服务器发送一个删除请求
+                        $.post("{{url('/home/updateface/')}}",{'profile':profile,'_token':"{{csrf_token()}}"},function(data){
+
+                            if(data.status == 0){
+                                layer.msg(data.msg, {icon: 6});
+                                setTimeout(function(){
+                                    location.href = location.href;
+                                },3000)
+                            }else{
+
+                                layer.msg(data.msg, {icon: 5});
+                            }
+
+                        })
+
+                    });
+                }
             </script>
         </div>
     </div>
@@ -902,60 +747,6 @@
     <div class="close"></div>
     <img src="http://user.kdnet.net/index.asp?Redirect=setting" onload="imageOverlay.overlay().load();">
 </div>
-<script type="text/javascript">
-    //导航鼠标滑过控制
-    $('.user-nav li').mouseover(function() {
-        $(this).addClass("mouseover");
-    });
-    $('.user-nav li').mouseout(function() {
-        $(this).removeClass("mouseover");
-    });
-
-    //更多个人信息显示、隐藏
-    function toggleCont(id, el) {
-        $(el).parent().parent().toggleClass('fold');
-        if (el.title == "收起") {
-            $('#' + id).css('display', 'none');
-            el.title = "展开";
-        } else {
-            $('#' + id).css('display', '');
-            el.title = "收起";
-        }
-    }
-    $('.more-show').click(function() {
-        $(this).hide();
-        $('.detailed-more-cont').fadeIn();
-    });
-    $('.more-hide').click(function() {
-        $('.more-show').fadeIn();
-        $('.detailed-more-cont').hide();
-    });
-
-    function reinitIframe() {
-        try {
-            var bHeight = cf.contentWindow.document.body.scrollHeight;
-            var dHeight = cf.contentWindow.document.documentElement.scrollHeight + 20;
-            var height = Math.min(bHeight, dHeight);
-            if (height == 0) {
-                height = Math.max(bHeight, dHeight);
-            }
-            cf.height = height + 100;
-        } catch(ex) {}
-    }
-    window.setInterval("reinitIframe()", 400);
-
-    var imageOverlay = $('#img_overlay_trigger').overlay({
-        expose: {
-            color: '#000',
-            opacity: 0.2,
-            closeSpeed: 1000
-        },
-        top: 'center'
-    });
-</script>
-<!--div id="panda_user_index_s_1" style="display:none"><script type="text/javascript" src="http://panda.kdnet.net/data/user_index_s_1.js"></script></div>
-<div id="panda_user_index_l_1" style="display:none"><script type="text/javascript" src="http://panda.kdnet.net/data/user_index_l_1.js"></script></div>
-<div id="panda_user_index_r_1" style="display:none"><script type="text/javascript" src="http://panda.kdnet.net/data/user_index_r_1.js"></script></div-->
 <!--尾部-->
 <div id="globalfooter" class="">
     <div class="footer-box clearfix">
@@ -982,88 +773,7 @@
 <!--script type="text/javascript" src="http://imgcdn.kdnet.net/webset/www/g_javascript/globalpanda.js"></script-->
 <script src="{{asset('/home/js/log.js')}}">
 </script>
-<script>
-    document.onmousemove = function() {
-        document.getElementById('update_flag').innerHTML = 1;
-    };
-    document.onscroll = function() {
-        document.getElementById('update_flag').innerHTML = 1;
-    };
-    var tracking_starttime = "1507661855";
-    tracking_log();
 
-    function openurl(url, div, count) {
-        window.open(url);
-        $("#" + div).hide();
-        if (count == 1) $("#ajax_header").html('');
-    }
-
-    function upheader() {
-        $.ajax({
-            url: 'ajax_update_header.asp',
-            type: "GET",
-            cache: false,
-            success: function(html) {
-                $("#ajax_header").html('');
-            }
-        });
-    }
-
-    function UpdateHeader(flag) {
-        if (document.getElementById('update_flag').innerHTML == "1" || flag == 0) {
-            $.ajax({
-                url: 'ajax_header.asp',
-                type: "GET",
-                cache: false,
-                success: function(html) {
-                    $("#ajax_header").html(html);
-                    if (html != "") $("#ajax_header").css('display', 'block');
-                    else $("#ajax_header").css('display', 'none');
-                }
-            });
-            document.getElementById('update_flag').innerHTML = "0";
-        }
-    }
-
-    $(document).ready(function() {
-        UpdateHeader(0);
-        setInterval("UpdateHeader(1)", 30000);
-    });
-
-    //勋章查看
-    $(".slidetabs").tabs(".images > div", {
-        //启用“渐隐”效果
-        effect: 'fade',
-        fadeOutSpeed: "slow",
-        //结束后从开始重复滚动
-        rotate: false
-        //使用幻灯片插件。它接受自己的配置，禁用点击层翻页
-    }).slideshow({
-        clickable: false
-    });
-
-    $(".ad-xz li>img[title]").tooltip({
-        offset: [ - 2, 0]
-    });
-    $(".ad-xz-l a>img[title]").tooltip({
-        position: "top right",
-        offset: [ - 2, -18]
-    });
-</script>
-<script type="text/javascript">
-    _atrk_opts = {
-        atrk_acct: "qlI7j1a4ZP00wT",
-        domain: "kdnet.net",
-        dynamic: true
-    }; (function() {
-        var as = document.createElement('script');
-        as.type = 'text/javascript';
-        as.async = true;
-        as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js";
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(as, s);
-    })();
-</script>
 </body>
 
 </html>

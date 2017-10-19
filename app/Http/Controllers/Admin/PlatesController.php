@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\ChildPlates;
 use App\Models\Plates;
+use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -311,11 +312,22 @@ class PlatesController extends Controller
         $plates = Plates::find($id);
         $cpls = ChildPlates::where('pid',$id)->first();
 
+        //查询该板块下是否存在帖子
+        $posts = Post::where('pid',$id)->first();
+
         //判断有没有下级板块,如果有不允许删除
         if ($cpls) {
             $data=[
                 'status'=>1,
                 'msg'=>'该板块存在子板块,不允许删除'
+            ];
+            return  $data;
+        }
+        //判断该板块下有没有帖子,如果有不允许删除
+        if ($posts) {
+            $data=[
+                'status'=>1,
+                'msg'=>'该板块存在已发布的帖子,不允许删除'
             ];
             return  $data;
         }
@@ -345,6 +357,19 @@ class PlatesController extends Controller
     {
         //查询要删除的记录的模型
         $cplates = ChildPlates::find($id);
+        //查询该板块下是否存在帖子
+        $posts = Post::where('cid',$id)->first();
+
+        //判断该板块下有没有帖子,如果有不允许删除
+        if ($posts) {
+            $data=[
+                'status'=>1,
+                'msg'=>'该板块存在已发布的帖子,不允许删除'
+            ];
+            return  $data;
+        }
+
+
         //执行删除操作
         $res = $cplates->delete();
         //根据返回的结果处理成功和失败

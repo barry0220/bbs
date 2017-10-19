@@ -33,15 +33,17 @@ Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
 Route::get('/homecode/captcha/{tmp}', 'Home\LoginController@captcha');
 //前台注册验证码
 Route::get('/homeregcode/captcha/{tmp}', 'Home\RegisterController@captcha');
-//前台手机验证码
+//前台注册手机验证码
 Route::post('/sendcode','Home\RegisterController@sendCode');
+//前台忘记密码手机验证码
+Route::post('/resetsendcode','Home\CommonController@sendCode');
+
 
 //Route::get('admin/user/repass','Admin\UserController@repass');
 Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],function(){
 
     //验证码路由
 //    Route::get('admin/yzm','LoginController@yzm');
-
 
     //后台用户模块
     Route::resource('/user','UserController');
@@ -112,6 +114,13 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 //前台页面路由规则
 
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
+    /**
+    *登录注册相关路由
+    */
+    //用户前台手机号验证是否存在
+    Route::post('/issetphone','CommonController@checkphone');
+    //用户前台手机号验证是否存在
+    Route::post('/issetusername','CommonController@checkusername');
 
     // 登录页面路由
     Route::get('/login','LoginController@showlogin');
@@ -124,18 +133,50 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
     // 忘记密码路由
     Route::get('/forget','CommonController@forget');
+    //执行检测手机验证码
+    Route::post('/resetcheck','CommonController@resetcheck');
+    //执行忘记密码重置路由
+    Route::post('/forgetrepass','CommonController@forgetrepass');
+
+    //必须验证是否登录才能执行的路由规则
+    Route::group(['middleware'=>'homelogin'],function(){
+        //用户个人信息管理
+        Route::get('/userinfo','UserInfoController@index');
+        //用户个人详细信息修改
+        Route::post('/updateuserinfo','UserInfoController@updateuserinfo');
+        //用户个人密码修改
+        Route::post('/repass','UserInfoController@repassword');
+        //用户头像修改
+        Route::post('/updateface','UserInfoController@updateface');
+        //用户发送验证邮件
+        Route::post('/sendmail','UserInfoController@sendmail');
+        //用户激活或修改邮件地址
+        Route::get('/active','UserInfoController@activeuser');
+        //用户退出登录
+        Route::post('/loginout','LoginController@loginOut');
+        //我的回复
+        Route::get('/myreplay','UserInfoController@myreplay');
+        //回复我的
+        Route::get('/replayme','UserInfoController@replayme');
+        //我的主贴
+        Route::get('/mypost','UserInfoController@mypost');
+        //删除我的主贴至回收站
+        Route::post('/delpost','UserInfoController@delpost');
+        //我的回收站
+        Route::get('/myrecycle','UserInfoController@myrecycle');
+        //从回收站清除帖子
+        Route::post('/delrecycle','UserInfoController@delrecycle');
+        //我的收藏
+        Route::get('/mycollect','UserInfoController@mycollect');
+        //取消收藏
+        Route::post('/discollect','UserInfoController@discollect');
+        //我的积分记录
+        Route::get('/myscorelog','UserInfoController@myscorelog');
+    });
+
     // 网络服务协议和声明
-    Route::get('/agreement','CommonController@agreement');
-    //用户个人信息管理
-    Route::get('/userinfo','UserInfoController@index');
-    //用户个人详细信息修改
-    Route::post('/updateuserinfo','UserInfoController@updateuserinfo');
-    //用户个人密码修改
-    Route::post('/repass','UserInfoController@repassword');
-    //用户头像修改
-    Route::post('/updateface','UserInfoController@updateface');
-    //用户退出登录
-    Route::post('/loginout','LoginController@loginOut');
+    // Route::get('/agreement','CommonController@agreement');
+
 
 
 });
@@ -143,3 +184,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
 //前台首页
 Route::resource('/','Home\IndexController@index');
+
+//记录执行的sql语句
+Event::listen('illuminate.query', function($sql,$param) {
+    file_put_contents(public_path().'/sql.log',$sql.'['.print_r($param, 1).']'."\r\n",8);
+});

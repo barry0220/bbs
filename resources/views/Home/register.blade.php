@@ -122,7 +122,7 @@
                             <i></i>
                             <div class="verify-btn">
                                 <button type="button" data-backdrop="static" data-keyboard="false" id="regphone" onclick="sendCode()" href="javascript:void(0);"
-                                        class="btn btn-default btn-sm j-verify-btn" >
+                                        class="btn btn-default btn-sm j-verify-btn" disabled="disabled">
                                     请先验证手机
                                 </button>
                             </div>
@@ -132,19 +132,29 @@
                             <input type="password" class="form-control" id="inputPassword" name="password"
                                    maxlength="20" placeholder="设置登录密码">
                             <i></i>
+                            <div id="passinfo" class="explain">
+                                <s class="fa fa-exclamation-circle"></s>
+                                <p>3~16个字符，字母/数字/下划线</p>
+                            </div>
                         </div>
+
                         <div class="form-group">
                             <input type="password" class="form-control" id="inputRePassword" name="repassword"
                                    maxlength="20" placeholder="重复密码">
                             <i></i>
+                            <div id="repassinfo" class="explain">
+                                <s class="fa fa-exclamation-circle"></s>
+                                <p>3~16个字符，字母/数字/下划线</p>
+                            </div>
                         </div>
+
                         <div class="form-group">
                             <input type="text" class="form-control" id="inputNickname" name="username"
                                    maxlength="16" placeholder="用户名">
                             <i></i>
-                            <div class="explain">
+                            <div class="explain" id="nameinfo">
                                 <s class="fa fa-exclamation-circle"></s>
-                                <p>昵称是您的唯一名称，注册后无法修改，请谨慎填写！3~16个字符，字母/中文/数字/下划线。</p>
+                                <p>昵称是您的唯一名称，注册后无法修改，请谨慎填写！3~16个字符，字母/数字/下划线。</p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -161,14 +171,14 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block btn-lg" name="submit"
                                     data-loading-text="<i class='fa fa-refresh fa-spin'></i> 正在提交…">
-                                同意以下协议并注册
+                                注册
                             </button>
                         </div>
-                        <div class="agreement">
-                            <a href="{{url('/home/agreement')}}}" target="_blank">
-                                《凯迪网络服务协议和声明》
-                            </a>
-                        </div>
+                        {{--<div class="agreement">--}}
+                            {{--<a href="{{url('/home/agreement')}}}" target="_blank">--}}
+                                {{--《凯迪网络服务协议和声明》--}}
+                            {{--</a>--}}
+                        {{--</div>--}}
                         {{csrf_field()}}
                     </form>
                 </div>
@@ -272,14 +282,69 @@
             }
         }
 
-        $('.explain').hide();
+        $('#nameinfo').hide();
+        $('#passinfo').hide();
+        $('#repassinfo').hide();
 
         $('input[name=username]').focus(function(){
-            $('.explain').show();
+            $('#nameinfo').show();
+        });
+        $('#inputPassword').focus(function(){
+            $('#passinfo').show();
+        });
+        $('#inputRePassword').focus(function(){
+            $('#repassinfo').show();
         });
 
         $('input[name=username]').blur(function(){
-            $('.explain').hide();
+            $('#nameinfo').hide();
+            var reg = /^\w{3,16}$/;
+            var name = $(this).val();
+
+            if (!reg.test(name)) {
+                layer.msg('用户名格式不正确',{icon:5});
+            }else {
+                $.post("{{url('/home/issetusername')}}",{'username':name,'_token':"{{csrf_token()}}"},function(data){
+                    if (data.status == 1) {
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+            }
+
+        });
+        $('#inputPassword').blur(function(){
+            $('#passinfo').hide();
+            var reg = /^\w{3,16}$/;
+            var pass = $(this).val();
+            if (!reg.test(pass)) {
+                layer.msg('密码格式不正确',{icon:5});
+            }
+        });
+        $('#inputRePassword').blur(function(){
+            $('#repassinfo').hide();
+            var pass = $('#inputPassword').val();
+            var repass = $(this).val();
+            if (pass != repass) {
+                layer.msg('两次输入的密码不一致',{icon:5});
+            }
+        });
+        $('#inputEmailPhone').blur(function(){
+            var phone = $(this).val();
+            var reg = /^1[34578]\d{9}$/;
+
+            if (!reg.test(phone)) {
+                layer.msg('手机号格式不正确',{icon:5});
+                $('#inputEmailPhone').attr('disabled','disabled');
+            }else {
+                $.post("{{url('/home/issetphone')}}",{'phone':phone,'_token':"{{csrf_token()}}"},function(data){
+                    if (data.status == '1') {
+                        layer.msg(data.msg, {icon: 5});
+                        $('#inputEmailPhone').attr('disabled','disabled');
+                    }else {
+                        $('#inputEmailPhone').attr('disabled',false);
+                    }
+                });
+            }
         });
 
     </script>

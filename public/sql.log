@@ -1,0 +1,624 @@
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_user` where `username` = ? or `email` = ? or `phone` = ? limit 1[Array
+(
+    [0] => 15269189983
+    [1] => 15269189983
+    [2] => 15269189983
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+update `bbs_user_detail` set `score` = ?, `logintime` = ? where `id` = ?[Array
+(
+    [0] => 80
+    [1] => 1508400305
+    [2] => 2
+)
+]
+select * from `bbs_user` where `username` = ? or `email` = ? or `phone` = ? limit 1[Array
+(
+    [0] => 15269189983
+    [1] => 15269189983
+    [2] => 15269189983
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+update `bbs_user_detail` set `score` = ?, `logintime` = ? where `id` = ?[Array
+(
+    [0] => 90
+    [1] => 1508401237
+    [2] => 2
+)
+]
+insert into `bbs_scorelog` (`uid`, `time`, `handle`, `scorelog`) values (?, ?, ?, ?)[Array
+(
+    [0] => 9
+    [1] => 1508401238
+    [2] => 用户每天第一次登录10积分
+    [3] => 10
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 0[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 0[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_mycollect` left join `bbs_post` on `bbs_mycollect`.`postid` = `bbs_post`.`id` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_mycollect`.`uid` = ? and `status` = ?[Array
+(
+    [0] => 9
+    [1] => 0
+)
+]
+select `bbs_mycollect`.*, `bbs_post`.`title`, `bbs_tags`.`tagname`, `bbs_plates`.`pname`, `bbs_plates`.`id` as `platesid` from `bbs_mycollect` left join `bbs_post` on `bbs_mycollect`.`postid` = `bbs_post`.`id` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_mycollect`.`uid` = ? and `status` = ? limit 3 offset 0[Array
+(
+    [0] => 9
+    [1] => 0
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_mycollect` left join `bbs_post` on `bbs_mycollect`.`postid` = `bbs_post`.`id` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_mycollect`.`uid` = ? and `status` = ?[Array
+(
+    [0] => 9
+    [1] => 0
+)
+]
+select `bbs_mycollect`.*, `bbs_post`.`title`, `bbs_tags`.`tagname`, `bbs_plates`.`pname`, `bbs_plates`.`id` as `platesid` from `bbs_mycollect` left join `bbs_post` on `bbs_mycollect`.`postid` = `bbs_post`.`id` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_mycollect`.`uid` = ? and `status` = ? limit 3 offset 0[Array
+(
+    [0] => 9
+    [1] => 0
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 0[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 3[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 6[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 9[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 12[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 12[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 3[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 6[Array
+(
+    [0] => 9
+)
+]
+select count(*) as aggregate from `bbs_user` where `username` like ?[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_user` where `username` like ? limit 1 offset 0[Array
+(
+    [0] => %%
+)
+]
+select count(*) as aggregate from `bbs_links` where `linkname` like ?[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `linkname` like ? limit 6 offset 0[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 2
+)
+]
+delete from `bbs_links` where `id` = ?[Array
+(
+    [0] => 2
+)
+]
+select count(*) as aggregate from `bbs_links` where `linkname` like ?[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `linkname` like ? limit 6 offset 0[Array
+(
+    [0] => %%
+)
+]
+select count(*) as aggregate from `bbs_links` where `linkname` like ?[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `linkname` like ? limit 6 offset 0[Array
+(
+    [0] => %%
+)
+]
+insert into `bbs_links` (`linkname`, `link`) values (?, ?)[Array
+(
+    [0] => 淘宝
+    [1] => http://www.taobao.com
+)
+]
+select count(*) as aggregate from `bbs_links` where `linkname` like ?[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `linkname` like ? limit 6 offset 0[Array
+(
+    [0] => %%
+)
+]
+insert into `bbs_links` (`linkname`, `link`) values (?, ?)[Array
+(
+    [0] => 谷歌
+    [1] => http://www.google.com
+)
+]
+select count(*) as aggregate from `bbs_links` where `linkname` like ?[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `linkname` like ? limit 6 offset 0[Array
+(
+    [0] => %%
+)
+]
+insert into `bbs_links` (`linkname`, `link`) values (?, ?)[Array
+(
+    [0] => 测试
+    [1] => http://www.123.com
+)
+]
+select count(*) as aggregate from `bbs_links` where `linkname` like ?[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `linkname` like ? limit 6 offset 0[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+update `bbs_links` set `link` = ? where `id` = ?[Array
+(
+    [0] => http://www.1234.com
+    [1] => 5
+)
+]
+select `linkname`, `link` from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+select `linkname`, `link` from `bbs_links`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_links` where `linkname` like ?[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_links` where `linkname` like ? limit 6 offset 0[Array
+(
+    [0] => %%
+)
+]
+select * from `bbs_webconfigs`[Array
+(
+)
+]
+select * from `bbs_webconfigs` where `bbs_webconfigs`.`id` = ? limit 1[Array
+(
+    [0] => 1
+)
+]
+update `bbs_webconfigs` set `law` = ? where `id` = ?[Array
+(
+    [0] => 法律声明sdfasdfadsfafsd阿萨德发大水爱的色放sd 的萨芬的事啊
+    [1] => 1
+)
+]
+select * from `bbs_webconfigs` limit 1[Array
+(
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+update `bbs_links` set `link` = ? where `id` = ?[Array
+(
+    [0] => http://www.12234.com
+    [1] => 5
+)
+]
+select `linkname`, `link` from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+update `bbs_links` set `link` = ? where `id` = ?[Array
+(
+    [0] => http://www.1224.com
+    [1] => 5
+)
+]
+select * from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+select `linkname`, `link` from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_links` where `bbs_links`.`id` = ? limit 1[Array
+(
+    [0] => 5
+)
+]
+select `linkname`, `link` from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_scorelog` where `uid` = ?[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_scorelog` where `uid` = ? limit 3 offset 6[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_mycollect` left join `bbs_post` on `bbs_mycollect`.`postid` = `bbs_post`.`id` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_mycollect`.`uid` = ? and `status` = ?[Array
+(
+    [0] => 9
+    [1] => 0
+)
+]
+select `bbs_mycollect`.*, `bbs_post`.`title`, `bbs_tags`.`tagname`, `bbs_plates`.`pname`, `bbs_plates`.`id` as `platesid` from `bbs_mycollect` left join `bbs_post` on `bbs_mycollect`.`postid` = `bbs_post`.`id` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_mycollect`.`uid` = ? and `status` = ? limit 3 offset 0[Array
+(
+    [0] => 9
+    [1] => 0
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_post` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_post`.`uid` = ? and `status` = ?[Array
+(
+    [0] => 9
+    [1] => 0
+)
+]
+select `bbs_post`.*, `bbs_tags`.`tagname`, `bbs_tags`.`imgfile` as `tagfile`, `bbs_plates`.`pname`, `bbs_plates`.`imgfile` as `platesfile` from `bbs_post` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_post`.`uid` = ? and `status` = ? limit 15 offset 0[Array
+(
+    [0] => 9
+    [1] => 0
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select count(*) as aggregate from `bbs_post` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_post`.`uid` = ? and `status` = ?[Array
+(
+    [0] => 9
+    [1] => 1
+)
+]
+select `bbs_post`.*, `bbs_tags`.`tagname`, `bbs_tags`.`imgfile` as `tagfile`, `bbs_plates`.`pname`, `bbs_plates`.`imgfile` as `platesfile` from `bbs_post` left join `bbs_tags` on `bbs_tags`.`id` = `bbs_post`.`tagid` left join `bbs_plates` on `bbs_plates`.`id` = `bbs_post`.`pid` where `bbs_post`.`uid` = ? and `status` = ? limit 3 offset 0[Array
+(
+    [0] => 9
+    [1] => 1
+)
+]
+select * from `bbs_user_detail` where `uid` = ? limit 1[Array
+(
+    [0] => 9
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]

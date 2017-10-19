@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Models\Scorelog;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 
@@ -85,12 +86,12 @@ class LoginController extends Controller
                 ->withInput();
 
         }
-        //3.0 验证码是否正确
+        //验证码是否正确
         // dd(session('homecode'));
         if($input['code'] != session('homecode')){
-            return redirect('home/login')->with('errors','验证码错误')->withInput();
+            return redirect('home/login')->with('errors','验证码错误,请重新输入')->withInput();
         }
-        //3.进行逻辑验证
+        //进行逻辑验证
         $user = DB::table('user')
             ->where('username',$input['EmailPhoneNcke'])
             ->orwhere('email',$input['EmailPhoneNcke'])
@@ -98,14 +99,19 @@ class LoginController extends Controller
             ->first();
 
         if (!$user){
-            return redirect('home/login')->with('errors','用户不存在')->withInput();
+            return redirect('home/login')->with('errors','用户不存在,请重新输入')->withInput();
         }
-        //3.2 密码是否正确
+        //密码是否正确
         if( !Hash::check($input['password'],$user->password)){
-            return redirect('home/login')->with('errors','密码不正确')->withInput();
+            return redirect('home/login')->with('errors','密码不正确,请重新输入')->withInput();
         }
 
-        //4.将登录用户的状态值保存到session中
+        //用户是否已经禁用
+        if ($user->status == '1') {
+            return redirect('home/login')->with('errors','帐户因违规已禁用,请联系管理员')->withInput();
+        }
+
+        //将登录用户的状态值保存到session中
 
         session(['homeuser'=>$user]);
 
@@ -121,7 +127,19 @@ class LoginController extends Controller
             $details -> save();
         }
 
-        //5.进入前台首页
+        //记录增加积分的日志
+        $scoreinfo=[
+            'uid'=>$user->id,
+            'time'=>time(),
+            'handle'=>'用户每天第一次登录10积分',
+            'scorelog'=>'+10'
+        ];
+
+        Scorelog::create($scoreinfo);
+
+        // session(['test'=>$r]);
+
+        //进入前台首页
         return redirect('/home/userinfo');
     }
     //退出登录方法
