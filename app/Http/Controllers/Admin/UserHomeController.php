@@ -21,14 +21,27 @@ class UserHomeController extends Controller
 
 //        $user =DB::table('user')->paginate(2);
 
-        $num = $request->input('pagea')?$request->input('pagea'): 1;
+        $num = $request->input('pagea')?$request->input('pagea'): 3;
         //
         $input = $request->input('username')?$request->input('username'):'';
 
-        $user = UserHome::where('username','like','%'.$input.'%')->paginate($num);
+        $isvip = $request->input('isvip');
 
+//        dd($isvip);
+//        $user = UserHome::where('username','like','%'.$input.'%')->paginate($num);
 
-        return view('admin.userhome.index',compact('user','input','num'));
+        $user = \DB::table('user')
+            ->leftjoin('user_detail','user_detail.uid','=','user.id')
+            ->where('username','like','%'.$input.'%')
+            ->where('isvip','like','%'.$isvip.'%')
+            ->select('user.*','user_detail.isvip')
+            ->paginate($num);
+
+        $vip = ['否','是'];
+//        dd($user[0]->isvip);
+
+//        dd($vip[$user[0]->isvip]);
+        return view('admin.userhome.index',compact('user','input','num','vip','isvip'));
 
     }
 

@@ -51,7 +51,7 @@ class UserController extends Controller
 
 
 
-        $num = $request->input('pagea')?$request->input('pagea'): 1;
+        $num = $request->input('pagea')?$request->input('pagea'): 3;
         //
         $input = $request->input('user')?$request->input('user'):'';
 
@@ -259,7 +259,7 @@ class UserController extends Controller
     public function repass()
     {
 
-        //获取要修改的那条记录
+        //获取要修改密码的页面
         return view('admin/user/password');
     }
 

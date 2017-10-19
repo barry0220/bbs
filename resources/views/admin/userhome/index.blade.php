@@ -37,9 +37,19 @@
                             </label>
                         </div>
                     </div>
-                    {{--<div class="col-sm-4">--}}
-                        {{--<a href="{{url('admin/user/create')}}" class="btn btn-info btn-sm" style="font-size:16px;">+</a>--}}
-                    {{--</div>--}}
+                     <div class="col-sm-4">
+                         <div id="editable_filter" class="dataTables_filter">
+                             <label>
+                                 是否为VIP用户：<select name="isvip" id="">
+                                     <option selected="selected" value="">全部</option>
+                                     <option value="1">是</option>
+                                     <option value="0">否</option>
+
+                                 </select>
+                             </label>
+
+                         </div>
+                     </div>
                     <div class="col-sm-4">
                         <div id="editable_filter" class="dataTables_filter">
                             <label>
@@ -60,31 +70,7 @@
 
 
                 </form>
-                {{--<div class="row">--}}
-                    {{--<div class="col-sm-2">--}}
-                        {{--<div class="dataTables_length" id="editable_length">--}}
-                            {{--<label>--}}
-                                {{--<select name="editable_length" aria-controls="editable" class="form-control input-sm">--}}
-                                    {{--<option value="10">10</option>--}}
-                                    {{--<option value="25">25</option>--}}
-                                    {{--<option value="50">50</option>--}}
-                                    {{--<option value="100">100</option>--}}
-                                {{--</select>--}}
-                                {{--每页记录--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-sm-4">--}}
-                        {{--<a href="{{url('admin/user/create')}}" class="btn btn-info btn-sm" style="font-size:16px;">+</a>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-sm-4">--}}
-                        {{--<div id="editable_filter" class="dataTables_filter">--}}
-                            {{--<label>--}}
-                                {{--关键词：<input type="search" name="keywords" class="form-control input-sm" placeholder="输入查询条件">--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+
 
 
 
@@ -97,7 +83,9 @@
                         <th class="sorting_asc"  style="width: 205px;">用户名</th>
                         <th class="sorting_asc" style="width: 210px;">邮箱</th>
                         <th class="sorting_asc" style="width: 102px;">手机号</th>
+                        <th class="sorting_asc"  style="width: 175px;">是否为VIP用户</th>
                         <th class="sorting_asc"  style="width: 175px;">操作</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -108,6 +96,7 @@
                             <td>{{$v->username}}</td>
                             <td>{{$v->email}}</td>
                             <td class="center">{{$v->phone}}</td>
+                            <td>{{$vip[$v->isvip]}}</td>
                             <td class="center">
                                 <a href="/admin/userhome/{{$v->id}}" class="btn btn-primary btn-sm">详情</a>
 
@@ -139,7 +128,7 @@
                 {{--</div>--}}
                 {{--</div>--}}
                 <div>
-                    {!! $user->appends(['username'=>$input,'pagea'=>$num])->render()!!}
+                    {!! $user->appends(['username'=>$input,'pagea'=>$num,'isvip'=>$isvip])->render()!!}
                 </div>
             </div>
         </div>
