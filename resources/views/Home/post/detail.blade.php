@@ -320,6 +320,7 @@
                                 <div class="usertips clearfix box1" id="detailinfo_1">
                                 </div>
                                 <input id="input" type="hidden" value="{{$postinfo[0]->id}}" />
+                                <input id="author" type="hidden" value="{{$postinfo[0]->uid}}" />
                                 <span class="name c-main">
                                     <a href="javascript:;"
                                     tppabs="http://user.kdnet.net/index.asp?userid=11849785" target="_blank">
@@ -603,7 +604,7 @@
                                 18px; border: none;} .donate-textarea textarea { padding: 12px 15px; border:
                                 none; width: 100%; color: #C1C4CB; height: 70px;} .donate-btn-warp { text-align:
                                 center;} .donate-Main .donate-btn { height: 50px; line-height: 50px; text-align:
-                                center; color: #fff; font-size: 22px; width: 150px; display: block; background:
+                                center; color: #fff; font-size: 22px; width: 50px; display: block; background:
                                 #d95f4c; margin: 0 auto 20px; border-radius: 30px;} .donate-btn-warp p
                                 { font-size: 14px; margin-bottom: 16px;} .donate-btn-warp span b { color:
                                 #E53C0F;} .donate-more { width: 490px; margin: 20px auto;} .donate-more
@@ -646,29 +647,16 @@
                             <div class="donate-Main clearfix">
                                 <div class="donate-btn-warp">
                                 
-                                    <a onclick="donateBtn();" class="reward-btn-big  donate-btn " href="javascript:void(0);">
+                                    <a onclick="donateBtn();" style="float: left;margin-left: 200px" class="reward-btn-big  donate-btn " href="javascript:void(0);">
                                         赞
                                     </a>
-                                    <!--span>?? <b class="donate">23</b> ???</span-->
-                                </div>
-                                <div class="donate-more">
-                                </div>
-                            </div>
-                            <div class="donate-Main clearfix">
-                                <div class="donate-btn-warp">
-                                
-                                    <a onclick="downBtn();" class="reward-btn-big  donate-btn " href="javascript:void(0);">
+                                    <a onclick="downBtn();" style="float: right; margin-right: 200px"  class="reward-btn-big  donate-btn " href="javascript:void(0);">
                                         踩
                                     </a>
-                                    <!--span>?? <b class="donate">23</b> ???</span-->
-                                </div>
-                                <div class="donate-more">
-                                </div>
+                                  </div>
+ 
                             </div>
-                          <!--   <div class="reward-fixed-box reward-fixed" style="display:none;">
-                               
-                            </div> -->
-                            <!-- 赞赏html -->
+
                         </div>
     </body>
     <script src="{{asset('/home/js/jquery-1.12.0.min.js')}}" tppabs="{{asset('/home/js/jquery-1.12.0.min.js')}}">
@@ -676,16 +664,31 @@
     <script src="{{asset('/home/js/jquery.qrcode.min.js')}}" tppabs="{{asset('/home/js/jquery.qrcode.min.js')}}">
     </script>
     <script>
-       postid = $('#input').val();
+
+     var  postid = $('#input').val();
         function donateBtn() {
+
                  // alert(postid);
-            $.get("{{url('home/collection')}}",{},function(){
+            
+                 $.post("{{url('home/admire')}}",{'_token':'{{csrf_token()}}','postid':postid},function(data){
+                                if(data.status == 0){
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 6});
+                                }else if(data.status == 2){
+                                     location.href = location.href;
+                                    layer.msg(data.msg, {icon: 1});
+                                }else{
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 5});
+                                }
 
-            })
-                 
+                                console.log(data);
+                         });
+
+     
 
 
-        }
+            }
         function downBtn() {
             
 
@@ -758,104 +761,102 @@
         x.personalInfo('userinfo_1', 'detailinfo_1', '11849785', 'arrow');
     </script>
     @foreach($replay as $k => $v)
-    <!--回复-->
-    <div class="reply-box" id="72000998" style="display:block">
-        <div class="posted-box clearfix">
-            <a name="72000998">
-            </a>
-            <div class="posted-info c-sub">
-                回帖人：
-                <div class="name" id="userinfo_2">
-                    <div class="usertips clearfix box1" id="detailinfo_2">
-                    </div>
-                    <span class="name c-main">
-                        <a href="#" tppabs="http://user.kdnet.net/index.asp?userid=8439893" target="_blank">
-                            {{$users[$replay[0]->uid]}}
+
+                <!--回复-->
+                <div class="reply-box" id="72000998" style="display:block">
+                    <div class="posted-box clearfix">
+                        <a name="72000998">
                         </a>
-                    </span>
-                    <a href="#" tppabs="http://user.kdnet.net/index.asp?userid=8439893" target="_blank">
-                        <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
-                        tppabs="{{asset('/home/img/transparent.gif')}}" />
-                    </a>
-                    &nbsp;
-                </div>
-                         {{date('Y-m-d H:i:s',$replay[0]->time)}}
-                <!-- 2017/10/10 10:24:31 &nbsp;&nbsp; -->
-                <a href=""
-                tppabs="http://3g.kdnet.net/app.php" target="_blank">
-                    跟帖回复：
-                </a>
-            </div>
-            <div class="posted-floor">
-                <span class="c-sub">
-                    <span id="dispbbs34" style="width:0;height:0;visibility:hidden;overflow:hidden;">
-                    </span>
-                </span>
-                &nbsp;&nbsp;&nbsp;
-                第
-                <span id="floor">
-                 <!--    <a href="#" onclick="javascript:showExposeMask('72000998', '1');return false;"
-                    id="floor1">
-                        第{{$k+1}}楼
-                    </a> -->
-                {{$k+1}}
-                </span>
-                楼
-            </div>
-        </div>
-        <div class="replycont-box clearfix">
-            <div class="replycont-box-l">
-                <span class="c-main">
-                </span>
-            </div>
+                        <div class="posted-info c-sub">
+                            回帖人：
+                            <div class="name" id="userinfo_2">
+                                <div class="usertips clearfix box1" id="detailinfo_2">
+                                </div>
+                                <span class="name c-main">
+                                    <a href="#" tppabs="http://user.kdnet.net/index.asp?userid=8439893" target="_blank">
+                                        {{$users[$replay[0]->uid]}}
+                                    </a>
+                                </span>
+                                <a href="#" tppabs="http://user.kdnet.net/index.asp?userid=8439893" target="_blank">
+                                    <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
+                                    tppabs="{{asset('/home/img/transparent.gif')}}" />
+                                </a>
+                                &nbsp;
+                            </div>
+                                     {{date('Y-m-d H:i:s',$replay[0]->time)}}
+                            <!-- 2017/10/10 10:24:31 &nbsp;&nbsp; -->
+                            <a href=""
+                            tppabs="http://3g.kdnet.net/app.php" target="_blank">
+                                跟帖回复：
+                            </a>
+                        </div>
+                        <div class="posted-floor">
+                            <span class="c-sub">
+                                <span id="dispbbs34" style="width:0;height:0;visibility:hidden;overflow:hidden;">
+                                </span>
+                            </span>
+                            &nbsp;&nbsp;&nbsp;
+                            第
+                            <span id="floor">
+                             <!--    <a href="#" onclick="javascript:showExposeMask('72000998', '1');return false;"
+                                id="floor1">
+                                    第{{$k+1}}楼
+                                </a> -->
+                            {{$k+1}}
+                            </span>
+                            楼
+                        </div>
+                    </div>
+                    <div class="replycont-box clearfix">
+                        <div class="replycont-box-l">
+                            <span class="c-main">
+                            </span>
+                        </div>
 
-            <div class="replycont-box-r">
-                <div class="replycont-text" style="word-spacing: 2px;">
-                    {!!$v->content!!}
-                </div>
-                <!--sunny 打赏 B -->
-                <!--sunny 打赏 E -->
-            </div>
+                        <div class="replycont-box-r">
+                            <div class="replycont-text" style="word-spacing: 2px;">
+                                {!!$v->content!!}
+                            </div>
+                            <!--sunny 打赏 B -->
+                            <!--sunny 打赏 E -->
+                        </div>
 
-        </div>
-        <div class="c-main posts-control c-sub">
-            <!-- IP,曾用名 -->
-            <div style="float:left;">
-            </div>
-            <!-- // IP,曾用名 -->
-            <!-- sunny 打赏 E -->
-            <span id="ding_72000998">
-            </span>
-            <!--<b class="c-sub">|</b>-->
-            <!-- <a href="{{url('home/post/relative/'.$postinfo[0]->uid)}}" onclick="openLoginPopup();"> -->
-            <a href="javascript:;"   onclick="openLoginPopup();">
-                回复
-            </a>
-            |
-            <a href="#"
-            tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72000998&rootid=12447302&lay=2">
-                引用
-            </a>
-            <b class="c-sub">
-                |
-            </b>
-            <span class="c-alarm fB" title="举报">
-                <a href="javascript:;" onclick="openLoginPopup();" title="举报">
-                    举报
-                </a>
-            </span>
-        </div>
-    </div>
-    <!--回复 End-->
+                    </div>
+
+                    <div class="c-main posts-control c-sub">
+                        <!-- IP,曾用名 -->
+                        <div style="float:left;">
+                        </div>
+                        <!-- // IP,曾用名 -->
+                        <!-- sunny 打赏 E -->
+                        <span id="ding_72000998">
+                        </span>
+                        <!--<b class="c-sub">|</b>-->
+                        <!-- <a href="{{url('home/post/relative/'.$postinfo[0]->uid)}}" onclick="openLoginPopup();"> -->
+                        <a href="#Preply"  id="re" onclick="replay()">
+                            回复
+                        </a>
+                        |
+                        <a href="#"
+                        tppabs="http://upfile1.kdnet.net/textareaeditor/quote.asp?boardid=1&followup=72000998&rootid=12447302&lay=2">
+                            引用
+                        </a>
+                        <b class="c-sub">
+                            |
+                        </b>
+                        <span class="c-alarm fB" title="举报">
+                            <a href="javascript:;" onclick="openLoginPopup();" title="举报">
+                                举报
+                            </a>
+                        </span>
+                    </div>
+
+                </div>
+                <!--回复 End-->
     @endforeach
     <!-- sunny 20130925 begin -->
     <!-- 回复 -->
-    <script>
-    
 
-
-
-    </script>
     <!-- 弹窗 -->
     <div id="uplBoxF" class="upl-box-f">
         <div id="uplBoxFC" class="upl-box">
@@ -888,7 +889,7 @@
     <!-- 弹窗 end -->
     <!--发帖/分页-->
 
-                    {!! $replay->render()!!}
+                       {!! $replay->render()!!}
 
     <div class="operating clearfix">
         <div class="btn-publish" title="发布新帖">
@@ -921,27 +922,29 @@
     <!--modify sunny 20131231 ad E-->
     <a name="Preply" id="Preply">
     </a>
+
     <div style="height:10px;border:1px solid #fff;border-width:0 1px 0 1px;">
     </div>
     <div class="clubcont-line ">
     </div>
 
-    <!--发表回复-->
-    <div class="quick-reply">
+        <script type="text/javascript" src="{{asset('./ueditor/ueditor.config.js')}}"></script>
+        <!-- 编辑器源码文件 -->
+        <script type="text/javascript" src="{{asset('./ueditor/ueditor.all.js')}}"></script>
+        <script type="text/javascript" src="{{asset('./ueditor/jquery-1.js')}}"></script>
+        <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
+                  <!-- 加载编辑器的容器 -->
+        
 
-        <div>
-                 <!-- 加载编辑器的容器 -->
-                <script id="container" name="content" type="text/plain">
+    <!--发表评论-->
+    <div id="btn1" class="quick-reply" >
+               <!-- 配置文件 -->
+                      <script id="container" name="content" type="text/plain">
                 请写入内容
                 </script>
-                <!-- 配置文件 -->
-                <script type="text/javascript" src="{{asset('./ueditor/ueditor.config.js')}}"></script>
-                <!-- 编辑器源码文件 -->
-                <script type="text/javascript" src="{{asset('./ueditor/ueditor.all.js')}}"></script>
-                <script type="text/javascript" src="{{asset('./ueditor/jquery-1.js')}}"></script>
-                  <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
 
-                   <a id="btn" href="javascript:;">发布</a>
+                   <!-- <div id="btn" href="javascript:;">发布</div>s -->
+                   <button id="btn">评论</button>
 
                 <!-- 实例化编辑器 -->
                 <script type="text/javascript">
@@ -960,8 +963,6 @@
                             //更多其他参数，请参考ueditor.config.js中的配置项    
                         });  
                          
-                
-
                         //对编辑器的操作最好在编辑器ready之后再做
                         ue.ready(function() {
                                 var id = $('#input').val();
@@ -972,6 +973,7 @@
                                     $.post("{{url('home/replay')}}",{'_token':"{{csrf_token()}}",'content':content,'id':id},function(data){
                                         if(data.status == 0){
                                             location.href = location.href;
+
                                             layer.msg(data.msg, {icon: 6});
                                         }else{
                                             location.href = location.href;
@@ -985,11 +987,90 @@
                    
                 
             </script>
+          
+    </div>
+    <!--发表回复-->
+  
+    <div id="btn2" class="quick-reply1" style="display: none;" >
+
+        <div>
+                 <!-- <a id="btn" href="javascript:;">发布</a> -->
+                             <script id="container1" name="content" type="text/plain">
+                            请写入内容
+                            </script>   
+                <button id="btn3">回复 </button>
+
+                <!-- 实例化编辑器 -->
+                <script type="text/javascript">
+                                     
+                        var uea = UE.getEditor('container1',{    
+                            //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个    
+                            toolbars:[['FullScreen', 'Source', 'Undo', 'Redo','bold','test','simpleupload','fontfamily','fontsize','bold','italic','justifyleft','justifycenter']],  
+                            //focus时自动清空初始化时的内容    
+                            autoClearinitialContent:true,    
+                            //关闭字数统计    
+                            // wordCount:false,    
+                            //关闭elementPath    
+                            elementPathEnabled:false,    
+                            //默认的编辑区域高度    
+                            initialFrameHeight:300    
+                            //更多其他参数，请参考ueditor.config.js中的配置项    
+                        });  
+                         
+                
+
+                        //对编辑器的操作最好在编辑器ready之后再做
+                        uea.ready(function() {
+                                var postid = $('#input').val();
+                                var author = $('#author').val();
+                                $('#btn3').click(function() {
+                                    // 获取html内容，返回: <p>hello</p>
+                                     var content = uea.getContent();
+
+                                    $.post("{{url('home/rep')}}",{'_token':"{{csrf_token()}}",'content':content,'postid':postid,'author':author},function(data){
+                                        if(data.status == 0){
+                                            location.href = location.href;
+                                            layer.msg(data.msg, {icon: 6});
+                                        }else{
+                                            location.href = location.href;
+                                            layer.msg(data.msg, {icon: 5});
+                                        }
+                                    // console.log(data);
+                                    });
+                                    // alert(12345678);   
+
+                                });   
+                        });
+                   
+                
+            </script>
 
         </div>
     </div>
+      
+    <script>
+        function replay() {
+            
+           // $('#btn1').style.display="none";
+           // $('#btn2').style.display="";
+
+        // alert($);
 
 
+                document.getElementById("btn1").style.display="none";
+
+        //         // document.getElementById("btn2").removeattr('style');
+                document.getElementById("btn2").style.display="";
+
+
+
+
+            // alert(1234);
+        }
+  
+
+
+    </script>
     <!-- //发表回复 -->
     <!--声明-->
     <div class="site-statement">
