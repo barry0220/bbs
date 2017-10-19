@@ -152,7 +152,7 @@
                                     {{$v->username}}
                                 </td>
                                 <td class="center">
-                                    {{$v->posttime}}
+                                    {{date('Y-m-d H:i:s',$v->posttime)}}
                                 </td>                   
                                 <td class="center">
                                     {{$v->pname}}

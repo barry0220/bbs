@@ -171,8 +171,18 @@
                             @else 
                                 <a href="javascript:void(0);" onclick="stat({{$v->id}})" class="btn btn-success btn-sm">开启</a>
                             @endif
-                                  <!--   <a href="{{url('admin/post/'.$v->id)}}/edit">禁用</a> -->
-                                    <a href="javascript:;" onclick="delPost({{$v->id}})" class="btn btn-danger btn-sm">删除</a>
+
+                            @if($v->good == 0)
+                                <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="good({{$v->id}})">加　精</a>
+                            @else 
+                                <a href="javascript:void(0);" onclick="nogood({{$v->id}})" class="btn btn-success btn-sm">不加精</a>
+                            @endif
+                            @if($v->stick == 0)
+                                <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="stick({{$v->id}})">置　顶</a>
+                            @else 
+                                <a href="javascript:void(0);" onclick="nostick({{$v->id}})" class="btn btn-success btn-sm">不置顶</a>
+                            @endif
+                                     <a href="javascript:;" onclick="delPost({{$v->id}})" class="btn btn-danger btn-sm">删除</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -194,6 +204,75 @@
     <div class="row"></div>
 
  <script>
+        // 加精帖子
+        function good(id){
+            layer.confirm('确认加精？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(){
+                            $.post("{{url('admin/post/good')}}"+'/'+id,{'_token':'{{csrf_token()}}'},function(data){
+                                if(data.status == 0){
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 6});
+                                }else{
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 5});
+                                }
+                            })
+                        });
+
+        }
+    // 不加精帖子
+        function nogood(id){
+            layer.confirm('确认不加精？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(){
+                            $.post("{{url('admin/post/nogood')}}"+'/'+id,{'_token':'{{csrf_token()}}'},function(data){
+                                if(data.status == 0){
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 6});
+                                }else{
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 5});
+                                }
+                            })
+                        });
+
+        }
+            // 置顶帖子
+        function stick(id){
+            layer.confirm('确认置顶？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(){
+                            $.post("{{url('admin/post/stick')}}"+'/'+id,{'_token':'{{csrf_token()}}'},function(data){
+                                if(data.status == 0){
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 6});
+                                }else{
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 5});
+                                }
+                            })
+                        });
+
+        }
+
+    // 不置顶帖子
+        function nostick(id){
+            layer.confirm('确认不置顶？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(){
+                            $.post("{{url('admin/post/nostick')}}"+'/'+id,{'_token':'{{csrf_token()}}'},function(data){
+                                if(data.status == 0){
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 6});
+                                }else{
+                                    location.href = location.href;
+                                    layer.msg(data.msg, {icon: 5});
+                                }
+                            })
+                        });
+
+        }
     // 禁用帖子
         function sta(id){
             layer.confirm('确认禁用？', {

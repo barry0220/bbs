@@ -150,7 +150,7 @@
                                 <label  style="margin-left: 10px">
                                     加　精
                                      <input type="radio" name="good" 
-                                    @if($res[0]->good == 0)
+                                    @if($res[0]->good == 1)
                                         checked="checked"
                                     @endif
                                       id="optionsRadios1" >
@@ -158,7 +158,7 @@
                                 </label>
                                 <label>
                                     不加精<input type="radio" 
-                                     @if($res[0]->good == 1)
+                                     @if($res[0]->good == 0)
                                         checked="checked"
                                     @endif
                                     name="good" id="optionsRadios2"
@@ -175,7 +175,7 @@
                              加精时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" name="goodtime" value="{{$res[0]->goodtime}}" class="form-control">
+                            <input type="text" readonly="readonly" name="goodtime" value="{{date('Y-m-d H:i:s',$res[0]->goodtime)}}" class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -187,7 +187,7 @@
                                 <label  style="margin-left: 10px">
                                     置顶
                                      <input type="radio" name="stick" 
-                                    @if($res[0]->stick == 0)
+                                    @if($res[0]->stick == 1)
                                         checked="checked"
                                     @endif
                                       id="optionsRadios1" >
@@ -195,7 +195,7 @@
                                 </label>
                                 <label>
                                     不置顶<input type="radio" 
-                                     @if($res[0]->stick == 1)
+                                     @if($res[0]->stick == 0)
                                         checked="checked"
                                     @endif
                                     name="stick" id="optionsRadios2"
@@ -211,7 +211,7 @@
                              置顶时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" name="sticktime" value="{{$res[0]->sticktime}}"  class="form-control">
+                            <input type="text" readonly="readonly" name="sticktime" value="{{date('Y-m-d H:i:s',$res[0]->sticktime)}}"  class="form-control">
                         </div>
                     </div>
 

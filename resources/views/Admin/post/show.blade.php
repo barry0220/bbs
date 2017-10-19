@@ -38,7 +38,7 @@
                              发帖时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{$res[0]->posttime}}" disabled="disabled" class="form-control">
+                            <input type="text" value="{{date('Y-m-d H:i:s',$res[0]->posttime)}}" disabled="disabled" class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -83,14 +83,43 @@
                     </div>
                     <div class="hr-line-dashed">
                     </div>
-                    <div class="form-group">
+                   <div class="form-group">
                         <label class="col-sm-2 control-label">
                              内　　容:
                         </label>
-                        <div class="col-sm-4">
-                           <textarea disabled="disabled" name="content" id="" cols="30" rows="10">{{$res[0]->content}}</textarea>    
+                        <div class="col-sm-8">
+                             <!-- 加载编辑器的容器 -->
+                            <script id="container" name="content" type="text/plain">
+                           {!!$res[0]->content!!}
+                            </script>
+                            <!-- 配置文件 -->
+                            <script type="text/javascript" src="{{asset('./ueditor/ueditor.config.js')}} "></script>
+                            <!-- 编辑器源码文件 -->
+                            <script type="text/javascript" src="{{asset('./ueditor/ueditor.all.js')}}"></script>
+                      
                         </div>
                     </div>
+                              <!-- 实例化编辑器 -->
+                   <script type="text/javascript">
+                        // var ue = UE.getEditor('container');
+                        
+                        var editor = UE.getEditor('container',{    
+                            //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个    
+                            toolbars:[['FullScreen', 'Source', 'Undo', 'Redo','bold','test','simpleupload','fontfamily','fontsize','bold','italic','justifyleft','justifycenter','horizontal']],    
+                            //focus时自动清空初始化时的内容    
+                            autoClearinitialContent:true,    
+                            //关闭字数统计    
+                            // wordCount:false,    
+                            //关闭elementPath    
+                            elementPathEnabled:false,    
+                            //默认的编辑区域高度    
+                            initialFrameHeight:300    
+                            //更多其他参数，请参考ueditor.config.js中的配置项    
+                        });  
+                         
+                        
+                        </script>
+
                     <div class="hr-line-dashed">
                     </div>
                     <div class="form-group">
@@ -147,7 +176,7 @@
                              加精时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text"  disabled="disabled" value="{{$res[0]->goodtime}}" class="form-control">
+                            <input type="text"  value="{{date('Y-m-d H:i:s',$res[0]->goodtime)}}" class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -189,7 +218,7 @@
                              置顶时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text"  value="{{$res[0]->sticktime}}"  disabled="disabled" class="form-control">
+                            <input type="text"  value="{{date('Y-m-d H:i:s',$res[0]->sticktime)}}"  disabled="disabled" class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">

@@ -8,6 +8,7 @@
 
     <title>@yield("title")</title>
 
+    <link href="{{asset('/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
     <link href="{{asset('/admin/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('/admin/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{asset('/admin/css/plugins/iCheck/custom.css')}}" rel="stylesheet">
@@ -15,14 +16,13 @@
     <link href="{{asset('/admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('/admin/css/datepicker.css')}}" rel="stylesheet">
 
-    <link href="{{asset('/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css')}}" rel="stylesheet">
 
 
     <!-- Mainly scripts -->
     <script src="{{asset('/admin/js/jquery-2.1.1.js')}}"></script>
 {{--    <script src="{{asset('/admin/js/jquery-ui-1.10.4.min.js')}}"></script>--}}
-    <script src="{{asset('/admin/js/bootstrap-datepicker.js')}}"></script>
     {{--<script src="{{asset('/admin/js/locales/bootstrap-datepicker.zh-CN.js')}}"></script>--}}
+    <script src="{{asset('/admin/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('/admin/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('/admin/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('/admin/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
@@ -233,12 +233,11 @@
 
 
                     <li>
-                        <a href="login.html">
-                            <i class="fa fa-sign-out"></i> <a href="javascript:;" onclick="loginOut()">退出登录</a>
+                        <a href="javascript:;" onclick="loginOut()">
+                            <i class="fa fa-sign-out"></i> 退出登录
                         </a>
                     </li>
                 </ul>
-
             </nav>
         </div>
 

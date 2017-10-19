@@ -47,7 +47,7 @@
                         <div class="col-sm-4">
                             <!-- <input type="text" value="" name="tname" class="form-control"> -->
 
-                            <select class="form-control m-b " name="pid" id="type">
+                            <select class="form-control m-b " name="tid" id="type">
                             
                                 @foreach($tag as $k => $v)
 
@@ -75,7 +75,7 @@
                         
                             <div class="col-sm-4 plates " id="editable_length">
                                  <select class="form-control m-b " name="pid" id="type">
-                                        <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
+                                        <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级板块---|</option>
                                             @foreach($pls as $k => $v)
 
                                         <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->pname}} </option>
@@ -103,15 +103,16 @@
 
                     <div class="hr-line-dashed">
                     </div>
-                    <div class="form-group">
+                      <div class="form-group">
                         <label class="col-sm-2 control-label">
                              内　　容:
                         </label>
+                        <!-- <div id="dvs"></div> -->
                         <div class="col-sm-8">
                              <!-- 加载编辑器的容器 -->
                             <script id="container" name="content" type="text/plain">
-                            
-                            </script>
+                            <!-- 这里写你的初始化内容 -->
+                             </script>
                             <!-- 配置文件 -->
                             <script type="text/javascript" src="{{asset('./ueditor/ueditor.config.js')}} "></script>
                             <!-- 编辑器源码文件 -->
@@ -120,30 +121,22 @@
                         </div>
                     </div>
 
-                            <!-- 实例化编辑器 -->
-                    <script>    
-                            var ue = UE.getEditor('container');
-                            //对编辑器的操作最好在编辑器ready之后再做
-                            /*ue.ready(function() {
-                                //设置编辑器的内容
-                                // ue.setContent('hello');
-                                //获取html内容，返回: <p>hello</p>
-                                // var html = ue.getContent();
-                                //获取纯文本内容，返回: hello
-                                var txt = ue.getContentTxt();
-
-                                    $.post('/admin/active/create',{'_token':'{{csrf_token()}}','content':'txt'},function(data){
-                                     
-
-
-
-
-
-                                    });
-
-                            });*/
-
-                    </script>
+                          <script>
+                                                   
+                        var ue = UE.getEditor('container',{    
+                            //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个    
+                            toolbars:[['FullScreen', 'Source', 'Undo', 'Redo','bold','test','simpleupload','fontfamily','fontsize','bold','italic','justifyleft','justifycenter','horizontal']],    
+                            //focus时自动清空初始化时的内容    
+                            // autoClearinitialContent:true,    
+                            //关闭字数统计    
+                            // wordCount:false,    
+                            //关闭elementPath    
+                            elementPathEnabled:false,    
+                            //默认的编辑区域高度    
+                            initialFrameHeight:300    
+                            //更多其他参数，请参考ueditor.config.js中的配置项    
+                        });  
+                          </script>
                     <div class="hr-line-dashed">
                     </div>
                     <div class="form-group">
@@ -151,7 +144,7 @@
                        <b>是否加精:</b>
                                 <label  style="margin-left: 10px">
                                     加　精
-                                     <input type="radio"  name="good"  value="1" 
+                                     <input type="radio" id="good"  name="good"  value="1" 
                                     >
                                 </label>
                                 <label>
@@ -161,16 +154,16 @@
                                </label>                      
                         </div>
                     </div>
-                    <div class="hr-line-dashed">
-                    </div>
-                    <div class="form-group">
+                <!--     <div class="hr-line-dashed">
+                    </div> -->
+<!--                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                              加精时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" name="goodtime" value="" class="form-control">
+                            <input type="text" id="goodtime" name="goodtime" value="" class="form-control"  readonly="readonly" >
                         </div>
-                    </div>
+                    </div> -->
                     <div class="hr-line-dashed">
                     </div>
                     <div class="form-group">
@@ -179,29 +172,195 @@
 
                                 <label  style="margin-left: 10px">
                                     置顶
-                                     <input type="radio" value="1" name="stick">
+                                     <input type="radio" id="stick" value="1" name="stick">
                                 </label>
                                 <label>
-                                    不置顶<input checked="checked" value="1" type="radio" name="stick">
+                                    不置顶<input checked="checked" value="0" type="radio" name="stick">
                                     
                                </label>                      
                         </div>
                     </div>
-                    <div class="hr-line-dashed">
-                    </div>
-                    <div class="form-group">
+                <!--     <div class="hr-line-dashed">
+                    </div> -->
+   <!--                  <div class="form-group">
                         <label class="col-sm-2 control-label">
                              置顶时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" name="sticktime" value=""  class="form-control">
+                            <input type="text" id="sticktime" name="sticktime" value=""  class="form-control" readonly="readonly">
                         </div>
-                    </div>
+                    </div> -->
 
 
 
                     <div class="hr-line-dashed">
                     </div>
+                      <script>
+                        $('#good').click(function(){
+                            // var date = new Date();
+
+                            // alert();
+
+                       var timeStr = '';
+                          var curDate = new Date();
+                          var curYear = curDate.getFullYear();
+                          var curMonth = curDate.getMonth()+1;  //获取当前月份(0-11,0代表1月)
+                          var curDay = curDate.getDate();       //获取当前日(1-31)
+                          var curWeekDay = curDate.getDay();    //获取当前星期X(0-6,0代表星期天)
+                          var curHour = curDate.getHours();      //获取当前小时数(0-23)
+                         var curMinute = curDate.getMinutes();   // 获取当前分钟数(0-59)
+                         var curSec =curDate.getSeconds();      //获取当前秒数(0-59)
+                         timeStr = curYear+'年'+curMonth+'月'+curDay+'日 周';
+                         switch(curWeekDay)
+                         {
+                           case 0:timeStr += '日';break;
+                           case 1:timeStr += '一';break;
+                           case 2:timeStr += '二';break;
+                           case 3:timeStr += '三';break;
+                           case 4:timeStr += '四';break;
+                           case 5:timeStr += '五';break;
+                           case 6:timeStr += '六';break;
+                         }
+                         if(curHour < 10)
+                         {
+                           if(curMinute < 10)
+                           {
+                             if(curSec < 10)
+                             {
+                               timeStr += ' 0'+curHour+':0'+curMinute+':0'+curSec;
+                             }
+                             else
+                             {
+                               timeStr += ' 0'+curHour+':0'+curMinute+':'+curSec;
+                             }
+                           }
+                           else
+                           {
+                             if(curSec < 10)
+                             {
+                               timeStr += ' 0'+curHour+':'+curMinute+':0'+curSec;
+                             }
+                             else
+                             {
+                               timeStr += ' 0'+curHour+':'+curMinute+':'+curSec;
+                             }
+                           }
+                         }
+                         else
+                         {
+                           if(curMinute < 10)
+                           {
+                             if(curSec < 10)
+                             {
+                               timeStr += ' '+curHour+':0'+curMinute+':0'+curSec;
+                             }
+                             else
+                             {
+                               timeStr += ' '+curHour+':0'+curMinute+':'+curSec;
+                             }
+                           }
+                           else
+                           {
+                             if(curSec < 10)
+                             {
+                               timeStr += ' '+curHour+':'+curMinute+':0'+curSec;
+                             }
+                             else
+                             {
+                               timeStr += ' '+curHour+':'+curMinute+':'+curSec;
+                             }
+                           }
+                         }
+                    $('#goodtime').val(timeStr);
+                    
+
+         })     
+                   $('#stick').click(function(){
+                            // var date = new Date();
+
+                            // alert();
+
+                       var timeStr = '';
+                          var curDate = new Date();
+                          var curYear = curDate.getFullYear();
+                          var curMonth = curDate.getMonth()+1;  //获取当前月份(0-11,0代表1月)
+                          var curDay = curDate.getDate();       //获取当前日(1-31)
+                          var curWeekDay = curDate.getDay();    //获取当前星期X(0-6,0代表星期天)
+                          var curHour = curDate.getHours();      //获取当前小时数(0-23)
+                         var curMinute = curDate.getMinutes();   // 获取当前分钟数(0-59)
+                         var curSec =curDate.getSeconds();      //获取当前秒数(0-59)
+                         timeStr = curYear+'年'+curMonth+'月'+curDay+'日 周';
+                         switch(curWeekDay)
+                         {
+                           case 0:timeStr += '日';break;
+                           case 1:timeStr += '一';break;
+                           case 2:timeStr += '二';break;
+                           case 3:timeStr += '三';break;
+                           case 4:timeStr += '四';break;
+                           case 5:timeStr += '五';break;
+                           case 6:timeStr += '六';break;
+                         }
+                         if(curHour < 10)
+                         {
+                           if(curMinute < 10)
+                           {
+                             if(curSec < 10)
+                             {
+                               timeStr += ' 0'+curHour+':0'+curMinute+':0'+curSec;
+                             }
+                             else
+                             {
+                               timeStr += ' 0'+curHour+':0'+curMinute+':'+curSec;
+                             }
+                           }
+                           else
+                           {
+                             if(curSec < 10)
+                             {
+                               timeStr += ' 0'+curHour+':'+curMinute+':0'+curSec;
+                             }
+                             else
+                             {
+                               timeStr += ' 0'+curHour+':'+curMinute+':'+curSec;
+                             }
+                           }
+                         }
+                         else
+                         {
+                           if(curMinute < 10)
+                           {
+                             if(curSec < 10)
+                             {
+                               timeStr += ' '+curHour+':0'+curMinute+':0'+curSec;
+                             }
+                             else
+                             {
+                               timeStr += ' '+curHour+':0'+curMinute+':'+curSec;
+                             }
+                           }
+                           else
+                           {
+                             if(curSec < 10)
+                             {
+                               timeStr += ' '+curHour+':'+curMinute+':0'+curSec;
+                             }
+                             else
+                             {
+                               timeStr += ' '+curHour+':'+curMinute+':'+curSec;
+                             }
+                           }
+                         }
+                    
+                    $('#sticktime').val(timeStr);
+
+         })
+
+
+
+
+
+                        
+                    </script>
                     <div class="form-group">
                         <div class="col-sm-3 control-label" style="margin-left: 30px" >
                            <b>状　　态:</b>
@@ -223,7 +382,10 @@
                         <div class="col-sm-5 control-label" style="margin-left:-150px">
                        <b>帖子类型:</b> 
                                 <label>
-                                    公告帖<input type="radio" checked="checked" value="2" name="postcode">
+                                    活动贴<input type="radio" checked="checked" value="1" name="postcode">
+                               </label>
+                                <label>
+                                    公告帖<input type="radio"  value="2" name="postcode">
                                </label>                      
                         </div>
                     </div>
