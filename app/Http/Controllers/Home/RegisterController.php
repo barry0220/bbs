@@ -183,6 +183,7 @@ class RegisterController extends Controller
             // if (!$re) {
             //     dd($detail);
             // }
+            $homeuser['userface'] = 'http://fat.com/home/img/NoPic_190_190.jpg';
             session(['homeuser'=>$homeuser]);
             session(['type'=>'email']);
             return redirect('home/userinfo');

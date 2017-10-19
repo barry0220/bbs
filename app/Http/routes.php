@@ -10,36 +10,21 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-
+//------------------------------------后台路由规则-----------------------------------------------------------
 //后台主页面
 Route::get('/admin/index', function () {
 //    return view('Admin.index');
     return redirect('/home/login');
 });
 
-Route::resource('/home/index','Home\PostController');
-Route::get('/home/hottoday','Home\PostController@hottoday');
-
-
 
 //后台登录页
 Route::get('admin/login','Admin\LoginController@login');
 //后台登录处理页
 Route::post('admin/dologin','Admin\LoginController@dologin');
-
+//后台验证码显示
 Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
-//前台登录验证码
-Route::get('/homecode/captcha/{tmp}', 'Home\LoginController@captcha');
-//前台注册验证码
-Route::get('/homeregcode/captcha/{tmp}', 'Home\RegisterController@captcha');
-//前台注册手机验证码
-Route::post('/sendcode','Home\RegisterController@sendCode');
-//前台忘记密码手机验证码
-Route::post('/resetsendcode','Home\CommonController@sendCode');
 
-
-//Route::get('admin/user/repass','Admin\UserController@repass');
 Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],function(){
 
     //验证码路由
@@ -83,6 +68,10 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
     Route::post('/post/disables/{id}','PostController@disables');
     Route::post('/post/open/{id}','PostController@open');
+    Route::post('/post/good/{id}','PostController@good');
+    Route::post('/post/nogood/{id}','PostController@nogood');
+    Route::post('/post/stick/{id}','PostController@stick');
+    Route::post('/post/nostick/{id}','PostController@nostick');
 
     // 敏感词管理
     Route::resource('/warwork','WarworkController');
@@ -93,6 +82,8 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
     Route::post('/tags/update/{id}','TagsController@update');
     //活动贴管理
     Route::resource('/active','ActiveController');
+    Route::post('/active/disables/{id}','ActiveController@disables');
+    Route::post('/active/open/{id}','ActiveController@open');
 
     //网站配置模块
     Route::get('/webconfigs','WebConfigsController@index');
@@ -111,9 +102,32 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
 });
 
-//前台页面路由规则
+//----------------------------------前台页面路由规则---------------------------------------------------------
 
+//前台首页
+Route::resource('/','Home\IndexController@index');
+//前台登录验证码
+Route::get('/homecode/captcha/{tmp}', 'Home\LoginController@captcha');
+//前台注册验证码
+Route::get('/homeregcode/captcha/{tmp}', 'Home\RegisterController@captcha');
+//前台注册手机验证码
+Route::post('/sendcode','Home\RegisterController@sendCode');
+//前台忘记密码手机验证码
+Route::post('/resetsendcode','Home\CommonController@sendCode');
+
+
+//分组去掉命名空间,前缀
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
+
+    //前台帖子
+    Route::resource('/post','PostController');
+//前台猫眼显示
+    Route::get('/cateye','PostController@cateye');
+//标签列表显示
+    Route::get('/list/{id}','PostController@lists');
+//板块列表显示
+    Route::get('/plateslist/{id}','PostController@plateslist');
+
     /**
     *登录注册相关路由
     */
@@ -137,6 +151,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
     Route::post('/resetcheck','CommonController@resetcheck');
     //执行忘记密码重置路由
     Route::post('/forgetrepass','CommonController@forgetrepass');
+    //执行检测帐号是否有发帖 回帖权限
+    Route::post('/checkpostauth','PostController@checkpostauth');
 
     //必须验证是否登录才能执行的路由规则
     Route::group(['middleware'=>'homelogin'],function(){
@@ -172,6 +188,21 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
         Route::post('/discollect','UserInfoController@discollect');
         //我的积分记录
         Route::get('/myscorelog','UserInfoController@myscorelog');
+
+        //--------------帖子相关路由  发帖 回帖单独写规则
+        //发帖 回帖 需要验证帐号是否已经激活邮箱
+        Route::group(['middleware'=>'isactive'],function(){
+            //评论帖子
+            Route::post('/replay','PostController@replay');
+            //回复评论
+            Route::post('/rep','PostController@rep');
+        });
+        // 收藏帖子
+        Route::post('//collection','PostController@collection');
+        //点赞
+        Route::post('/admire','PostController@admire');
+        //点踩
+        Route::post('/tread','PostController@tread');
     });
 
     // 网络服务协议和声明
@@ -182,10 +213,9 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 });
 
 
-//前台首页
-Route::resource('/','Home\IndexController@index');
+
 
 //记录执行的sql语句
-Event::listen('illuminate.query', function($sql,$param) {
-    file_put_contents(public_path().'/sql.log',$sql.'['.print_r($param, 1).']'."\r\n",8);
-});
+// Event::listen('illuminate.query', function($sql,$param) {
+//     file_put_contents(public_path().'/sql.log',$sql.'['.print_r($param, 1).']'."\r\n",8);
+// });

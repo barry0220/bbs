@@ -146,6 +146,10 @@ class UserInfoController extends Controller
             $newuser = UserHome::find(session('homeuser')->id);
             //清空旧的session
             Session::forget('homeuser');
+            //获取用户头像并存在session中
+            $userface = UserDetail::where('uid',$newuser->id)->select('profile')->first();
+
+            $newuser['userface'] = $userface;
             //存入新的session
             session(['homeuser'=>$newuser]);
         }else{

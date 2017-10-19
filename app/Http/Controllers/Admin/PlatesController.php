@@ -8,11 +8,8 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use App\Services\OSS;
+
 
 class PlatesController extends Controller
 {
@@ -54,7 +51,7 @@ class PlatesController extends Controller
         $pls = Plates::where('pname','like','%'.$searchname.'%')->get();
         $cpls = ChildPlates::get();
 
-        $ncpls = array();
+        // $ncpls = array();
         //重写二级模板格式
         foreach ($cpls as $k => $v){
             $cpls[$k]['cname'] = '　　|--'.$cpls[$k]['cname'];
@@ -105,6 +102,7 @@ class PlatesController extends Controller
             if (!$request -> hasFile('file_upload')) {
                 return back()->with('errors', '没有选择图片')->withInput();
             }
+            
 
             $rule=[
                 'pname'=>'required',

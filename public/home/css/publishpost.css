@@ -1,0 +1,78 @@
+
+/*发帖页面样式：左右分栏形式（LYJ）--------------------------------------------------*/
+/*::-webkit-scrollbar{width:13px;}
+::-webkit-scrollbar-track { background:#fff; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0); -webkit-border-radius:15px; border-radius:15px; }
+::-webkit-scrollbar-thumb { border:1px solid #fff; -webkit-border-radius:15px; border-radius:15px; background:rgba(28,113,122,1); }
+::-webkit-scrollbar-thumb:window-inactive{ background:rgba(141,184,188,0.4); }
+*/
+::-webkit-scrollbar{width:13px;}
+::-webkit-scrollbar-track { background:#fff; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0); -webkit-border-radius:15px; border-radius:15px; }
+::-webkit-scrollbar-thumb { -webkit-border-radius:15px; border-radius:15px; background:rgba(28,113,122,1); }
+::-webkit-scrollbar-thumb:window-inactive{ background:rgba(141,184,188,0.4); }
+
+body.post-page{ overflow-y:auto; }
+.fB {font-weight:bold;}
+.fC {font-family:Georgia,Constantia;}
+.post-page-h { width:100%; height:70px; border-bottom:1px solid #b7dadb; background:#429b9e; overflow-y:hidden; }	/*头部*/
+.post-page-c { width:100%; height:270px; position:relative; overflow:hidden; }	/*中部*/
+.post-page-f { width:100%; background:#c1dfe1; }				/*底部*/
+
+	/*头部*/
+	.post-page-h .p-logo { width:300px; height:50px; float:left; margin:9px 0 0 20px; background:url(../images/post_logo.png) 0 0 no-repeat; }
+	.post-page-h .p-logo .p-plank { margin:16px 0 0 122px; font-size:14px; font-weight:bold; color:#125e62;text-shadow:0 1px 1px #75bec0; }
+	.post-page-h .p-msg-r { width:212px; height:19px; float:right; margin:28px 20px 0 0; background:url(../images/post_txt.png) 0 0 no-repeat; }
+	/*中部*/
+	.post-page-c .post-input-l { width:50%; height:100%; padding:0;position:relative; overflow-x:hidden; overflow-y:hidden;  background:#c0dfe1; }
+	.post-page-c .post-input-r { width:640px; height:100%; position:absolute; _overflow-x:hidden; _overflow-y:auto; top:0; right:0; background:#dceced; z-index:999; }
+	.post-page-c .post-input-l .ui-combobox { width:80px; }
+	.post-page-c .post-input-l .ui-combobox-text {white-space:nowrap; width:60px; height:36px; overflow:hidden; cursor:pointer; float:left; margin-left:5px; line-height:36px; font-size:14px; text-align:center;}
+	.post-page-c .post-input-l .ui-combobox-arrow { float:right; width:5px; height:20; overflow:hidden; background:url('../images/icon_post.png') no-repeat -11px -360px; text-indent:-9999px; margin-top:2px; line-height:20px; cursor:pointer; }
+	.post-page-c .post-input-l .ui-combobox-layer { width:75px; margin-left:4px; margin-top:1px; z-index:9998; position:absolute; background:#fff; border-top:0; overflow:hidden; zoom:1; border:1px solid #C2C5C7; border-radius:0 0 4px 4px; -moz-border-radius:0 0 4px 4px; -webkit-border-radius:0 0 4px 4px; }
+	.post-page-c .post-input-l .ui-combobox-layer li { text-indent:5px; line-height:27px;}
+	.post-page-c .post-input-l .ui-combobox-layer .last {border-bottom:0;  }
+	.post-page-c .post-input-l .textarea-box-c { position:static; }
+	.post-page-c .post-input-l .upl-box-f {position:relative; z-index:99999; top:0; left:35%; }
+	.post-page-c .post-input-l .upl-box { position:absolute; z-index:99999; top:0; left:0; display:block; }
+	.post-page-c .post-input-l .textarea-f { position:relative; padding:10px 5px 10px 10px; overflow:hidden; }
+	.textarea-msg { position:absolute; left:10px; top:5px; color:#b8cad8; }
+	.post-page-c .post-input-l .textarea-f textarea { width:99%; height:300px; }
+	.post-page-c .post-input-r .post-pre-title{ font-weight:bold; padding:10px 10px 10px 10px; line-height:45px; background:#92c7c9; }
+	.post-page-c .post-input-r .post-pre-title .title-lt { position:absolute; top:0; color:#fff; line-height:45px;}
+	.post-page-c .post-input-r .post-pre-title .title-name{ display:block; padding-left:58px; line-height:25px; text-align:center; font-size:18px; }
+
+	.btn-preview { display:block; margin-right:-2px; margin-top:-23px; }
+	.preview-flex-box { position:absolute; top:10px; right:10px; width:100px; height:25px; font-size:16px; font-weight:bold; color:#1c717a; cursor:pointer; line-height:25px; }
+	.btn-preview-f { width:26px; height:25px; background:url(../images/icon_post.png) -3px -482px no-repeat; }
+
+	.post-page-c .post-input-r .post-preview { padding:10px 5px 10px 10px; }
+	.post-page-c .post-input-r .post-preview .post-preview-con { width:100%;padding-right:3px; overflow-x:hidden; overflow-y:auto; }
+
+	.post-page-c .post-input-l .push-out {width:60px; height:20px; line-height:20px; float:left;}
+	.post-page-c .post-input-l .menu-b-r { width:auto; position:relative; overflow:hidden; padding-top:18px; }
+	.post-page-c .post-input-l .push-tips {width:125px; padding-right:5px; right:0; top:0; margin-top:-5px; font-size:12px;}
+	.post-page-c .post-input-l .push-tips .f30px { position:relative; vertical-align:-7px; line-height:35px; right:0px; top:-5px;}
+	.post-page-c .post-input-l .userlogin-box { overflow:hidden; padding:10px; line-height:36px; height:auto; }	
+	.post-page-c .post-input-l .publishreply-title { overflow:hidden; padding:0 10px 5px 10px; line-height:36px; height:auto; }
+	.post-page-c .post-input-l .input-boder { *margin-top:-1px; line-height:34px; padding:2px 0 0 3px; height:34px; background:#fff; font-size:14px; font-family:"宋体"; border:1px solid #C2C5C7; box-shadow:1px 1px 1px #d3d6d9; border-bottom-color:#ABADAF; border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px;}
+	.post-page-c .post-input-l .face-tab-f {left:-300px;}
+
+	.post-page-c .post-input-l .userlogin-box div,
+	.p-t-l { display:block; padding:0 5px 0 0; float:left; overflow:hidden;}
+	.p-t-l .t-input, 
+	.t-input-a { position:relative; padding-right:0; z-index:9999; }
+	.p-t-l .t-input .ti, 
+	.t-input-a .ti{position:absolute; font-size:14px; left:8px; top:2px;}
+	.p-t-l .t-input .input-boder, 
+	.t-input-a .input-boder {width:315px; padding-left:45px; border:0; box-shadow:none;}
+	.t-input-a label{ display:block; width:168px; height:34px; line-height:33px; color:#999; background:#fff; }
+	.t-input-a input {line-height:34px;}
+
+	.title-larm { width:343px; position:absolute; background:#fff9b2; color:#666; z-index:9999; overflow:hidden; zoom:1; text-indent:10px; margin-left:6px; margin-top:1px; *margin-top:0px; box-shadow:1px 1px 1px #d3d6d9; -moz-border-radius:0 0 4px 4px; -webkit-border-radius:0 0 4px 4px; border-radius:0 0 4px 4px; }
+
+	/*底部*/
+
+/*2013-04-17 luo 新增：编辑器-编者按按钮*/
+.editor-say-btn, .editor-say-btn-h { display:block; width:36px; height:36px; margin-top:1px; background:red url('../images/bianzhean.png') 0 0 no-repeat; }
+.editor-say-btn:hover { background-position:-36px 0; }
+.editor-say-btn-h { background-position:0 -36px; }
+.editor-say-btn-h:hover { background-position:-36px -36px; }

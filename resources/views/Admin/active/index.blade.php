@@ -1,6 +1,6 @@
 <?php /** * Created by PhpStorm. * User: Administrator * Date: 2017/9/27
 * Time: 15:44 */ ?>
-@extends('Layouts.admin') @section('title','帖子管理') 
+@extends('Layouts.admin') @section('title','活动帖管理') 
 @section('content')
     <!-- <div class="ibox float-e-margins"> -->
         <!-- <div class="ibox-content"> -->
@@ -15,7 +15,7 @@
         }
     </style>
     <div class="row">
-        <form action="{{url('admin/post')}}" method="get">
+        <form action="{{url('admin/active')}}" method="get">
             <div class="col-md-2">
                             <div class="dataTables_length" id="editable_length">
                                 <label>
@@ -47,6 +47,9 @@
                                 </label>
                             </div>
             </div>
+              <div class="col-sm-1" style="margin-top: 13px">
+                            <a href="{{url('admin/active/create')}}" class="btn btn-info btn-sm" style="font-size:16px;">+</a>
+                        </div>
             <div class="col-md-2">
                 <div class="plates" id="editable_length">
                     <label>板块查询<br>
@@ -143,13 +146,13 @@
                                     {{$v->id}}
                                 </td>
                                 <td class="center">
-                                    <a href="#">{{$v->title}}</a>
+                                    <a href="/home/post/{{$v->id}}">{{$v->title}}</a>
                                 </td>
                                 <td class="center">
                                     {{$v->username}}
                                 </td>
                                 <td class="center">
-                                    {{$v->posttime}}
+                                    {{date('Y-m-d H:i:s',$v->posttime)}}
                                 </td>                   
                                 <td class="center">
                                     {{$v->pname}}
@@ -161,10 +164,11 @@
                                     {{$v->replaycount}}
                                 </td>                   
                                 <td class="center">
-                                    {{$statu[$v->status]}}
+                                    {{$statu[$v->postcode]}}
                                 </td>                   
                                 <td class="center">
-                                <a href="{{url('admin/post/'.$v->id)}}" class="btn btn-info btn-sm">详情</a>
+                                <a href="{{url('admin/active/'.$v->id.'/edit')}}" class="btn btn-info btn-sm">修改</a>
+                                <a href="{{url('admin/active/'.$v->id)}}" class="btn btn-info btn-sm">详情</a>
                                 <!-- <a href="javascript:void(0)" onclick="detail({{$v->id}})">详情</a> -->
                             @if($v->status == 0)
                                 <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="sta({{$v->id}})">禁用</a>
@@ -199,7 +203,7 @@
             layer.confirm('确认禁用？', {
                             btn: ['确认','取消'] //按钮
                         }, function(){
-                            $.post("{{url('admin/post/disables')}}"+'/'+id,{'_token':'{{csrf_token()}}','status':'{{$v->status}}'},function(data){
+                            $.post("{{url('admin/active/disables')}}"+'/'+id,{'_token':'{{csrf_token()}}','status':'{{$v->status}}'},function(data){
                                 if(data.status == 0){
                                     location.href = location.href;
                                     layer.msg(data.msg, {icon: 6});
@@ -217,7 +221,7 @@
             layer.confirm('确认开启？', {
                             btn: ['确认','取消'] //按钮
                         }, function(){
-                            $.post("{{url('admin/post/open')}}"+'/'+id,{'_token':'{{csrf_token()}}','status':'{{$v->status}}'},function(data){
+                            $.post("{{url('admin/active/open')}}"+'/'+id,{'_token':'{{csrf_token()}}','status':'{{$v->status}}'},function(data){
                                 if(data.status == 0){
                                     location.href = location.href;
                                     layer.msg(data.msg, {icon: 6});
@@ -239,7 +243,7 @@
 //                通过ajax 向服务器发送一个删除请求
 //                $.post('请求的路径'，携带的数据参数，执行后返回的数据)
 //                {'key':'value','key1':'value1'}
-                $.post("{{url('admin/post/')}}/"+id,{'_method':'delete','_token':"{{csrf_token()}}"},function(data){
+                $.post("{{url('admin/active/')}}/"+id,{'_method':'delete','_token':"{{csrf_token()}}"},function(data){
                     if(data.status == 0){
                         location.href = location.href;
                         layer.msg(data.msg, {icon: 6});
@@ -270,7 +274,7 @@
     type: 1,
     skin: 'layui-layer-rim',  
     area: ['80%', '90%'],  
-    content: '<iframe name="layr" width="100%" height="100%" src="/admin/post/show" frameborder="0"></iframe>'
+    content: '<iframe name="layr" width="100%" height="100%" src="/admin/active/show" frameborder="0"></iframe>'
     });
     // // $.get('admin/post/show',{'id':id},function(){})
     // $.ajax({

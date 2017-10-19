@@ -14,7 +14,7 @@ class UserHome extends Model
 
     public function posts()
     {
-        return $this->hasOne('App\Models\Post','uid','id');
+        return $this->hasMany('App\Models\Post','uid','id');
     }
 
     public function details()

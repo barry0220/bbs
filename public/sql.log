@@ -622,3 +622,258 @@ select * from `bbs_plates`[Array
 (
 )
 ]
+select * from `bbs_plates` limit 6[Array
+(
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_tags`[Array
+(
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `posttime` desc limit 5[Array
+(
+    [0] => 1
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `clickcount` asc[Array
+(
+    [0] => 0
+)
+]
+select * from `bbs_post` order by `clickcount` desc limit 2[Array
+(
+)
+]
+select * from `bbs_plates` order by `id` asc limit 4[Array
+(
+)
+]
+select * from `bbs_user`[Array
+(
+)
+]
+select * from `bbs_post` group by `uid` order by `clickcount` desc limit 10[Array
+(
+)
+]
+select * from `bbs_runimg` where `expiretime` > ? order by `expiretime` desc limit 3[Array
+(
+    [0] => 1508410701
+)
+]
+select * from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_adspace`[Array
+(
+)
+]
+select * from `bbs_plates` limit 6[Array
+(
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_tags`[Array
+(
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `posttime` desc limit 5[Array
+(
+    [0] => 1
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `clickcount` asc[Array
+(
+    [0] => 0
+)
+]
+select * from `bbs_post` order by `clickcount` desc limit 2[Array
+(
+)
+]
+select * from `bbs_plates` order by `id` asc limit 4[Array
+(
+)
+]
+select * from `bbs_user`[Array
+(
+)
+]
+select * from `bbs_post` group by `uid` order by `clickcount` desc limit 10[Array
+(
+)
+]
+select * from `bbs_runimg` where `expiretime` > ? order by `expiretime` desc limit 3[Array
+(
+    [0] => 1508410909
+)
+]
+select * from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_adspace`[Array
+(
+)
+]
+select * from `bbs_plates` limit 6[Array
+(
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_tags`[Array
+(
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `posttime` desc limit 5[Array
+(
+    [0] => 1
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `clickcount` asc[Array
+(
+    [0] => 0
+)
+]
+select * from `bbs_post` order by `clickcount` desc limit 2[Array
+(
+)
+]
+select * from `bbs_plates` order by `id` asc limit 4[Array
+(
+)
+]
+select * from `bbs_user`[Array
+(
+)
+]
+select * from `bbs_post` group by `uid` order by `clickcount` desc limit 10[Array
+(
+)
+]
+select * from `bbs_runimg` where `expiretime` > ? order by `expiretime` desc limit 3[Array
+(
+    [0] => 1508410932
+)
+]
+select * from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_adspace`[Array
+(
+)
+]
+select * from `bbs_plates` limit 6[Array
+(
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_tags`[Array
+(
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `posttime` desc limit 5[Array
+(
+    [0] => 1
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `clickcount` asc[Array
+(
+    [0] => 0
+)
+]
+select * from `bbs_post` order by `clickcount` desc limit 2[Array
+(
+)
+]
+select * from `bbs_plates` order by `id` asc limit 4[Array
+(
+)
+]
+select * from `bbs_user`[Array
+(
+)
+]
+select * from `bbs_post` group by `uid` order by `clickcount` desc limit 10[Array
+(
+)
+]
+select * from `bbs_runimg` where `expiretime` > ? order by `expiretime` desc limit 3[Array
+(
+    [0] => 1508411023
+)
+]
+select * from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_adspace`[Array
+(
+)
+]
+select * from `bbs_plates` limit 6[Array
+(
+)
+]
+select * from `bbs_plates`[Array
+(
+)
+]
+select * from `bbs_tags`[Array
+(
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `posttime` desc limit 5[Array
+(
+    [0] => 1
+)
+]
+select * from `bbs_post` where `postcode` = ? order by `clickcount` asc[Array
+(
+    [0] => 0
+)
+]
+select * from `bbs_post` order by `clickcount` desc limit 2[Array
+(
+)
+]
+select * from `bbs_plates` order by `id` asc limit 4[Array
+(
+)
+]
+select * from `bbs_user`[Array
+(
+)
+]
+select * from `bbs_post` group by `uid` order by `clickcount` desc limit 10[Array
+(
+)
+]
+select * from `bbs_runimg` where `expiretime` > ? order by `expiretime` desc limit 3[Array
+(
+    [0] => 1508411096
+)
+]
+select * from `bbs_links`[Array
+(
+)
+]
+select * from `bbs_adspace`[Array
+(
+)
+]

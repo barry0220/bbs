@@ -111,6 +111,11 @@ class LoginController extends Controller
             return redirect('home/login')->with('errors','帐户因违规已禁用,请联系管理员')->withInput();
         }
 
+        //获取用户头像并存在session中
+        $userface = UserDetail::where('uid',$user->id)->select('profile')->first();
+
+        $user['userface'] = $userface;
+
         //将登录用户的状态值保存到session中
 
         session(['homeuser'=>$user]);

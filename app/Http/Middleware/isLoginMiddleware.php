@@ -18,8 +18,10 @@ class isLoginMiddleware
         if(session('user')){
             return $next($request);
         }else{
-//            return redirect('admin/login')->with('errors','非法访问');
-            return $next($request);
+
+            $info = "非法访问";
+           return view('errors.error',compact('info'));
+//             return $next($request);
         }
 
     }
