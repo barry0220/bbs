@@ -74,7 +74,6 @@
                             <li><a href="#">个人信息</a></li>
                             {{--{{url('admin/user/'.(isset(session('user')) ? session('user')->id : '1') )}}--}}
 
-
                             <li><a href="{{url('admin/repass')}}">修改密码</a></li>
                             <li class="divider"></li>
                             <li><a href="javascript:;" onclick="loginOut()">退出登录</a></li>
@@ -84,6 +83,7 @@
                         </div>
                     </div>
                 </li>
+
                 <!--各种列表区域-->
                 <li>
                     <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span></a>
@@ -270,7 +270,7 @@
                 </div>
             </div>
         </div>
-    {{--</div>--}}
+    </div>
 </div>
 <script>
     function loginOut(){

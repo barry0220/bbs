@@ -6,9 +6,7 @@
             margin-top:20px;
         }
     </style>
-<<<<<<< HEAD
-    {{--<div class="ibox-content">--}}
-=======
+
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -23,7 +21,7 @@
         </div>
     @endif
     <div class="ibox-content">
->>>>>>> wss
+
         <form method="post" class="form-horizontal" action="{{url('admin/user')}}">
             {{csrf_field()}}
 
@@ -82,9 +80,7 @@
             </div>
             <div class="hr-line-dashed"></div>
         </form>
-<<<<<<< HEAD
-    {{--</div>--}}
-=======
+
     </div>
     <script>
 
@@ -111,5 +107,5 @@
 
 
     </script>
->>>>>>> wss
+
 @endsection
