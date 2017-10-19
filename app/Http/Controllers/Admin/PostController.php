@@ -210,5 +210,101 @@ class PostController extends Controller
 
 
     }
+         //更改状态为加精
+    public function good($id)
+    {
+        # code...
+
+        $re = Post::where('id',$id)->update(['good'=>'1']); 
+       
+         if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'失败'
+            ];
+        }
+          return  $data;
+
+
+
+
+    }
+         //更改状态为不加精
+    public function nogood($id)
+    {
+        # code...
+
+        $re = Post::where('id',$id)->update(['good'=>'0']); 
+       
+         if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'失败'
+            ];
+        }
+          return  $data;
+
+
+
+
+    }
+         //更改状态为置顶
+    public function stick($id)
+    {
+        # code...
+
+        $re = Post::where('id',$id)->update(['stick'=>'1'   ]); 
+       
+         if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'失败'
+            ];
+        }
+          return  $data;
+
+
+
+
+    }
+         //更改状态为不置顶
+    public function nostick($id)
+    {
+        # code...
+
+        $re = Post::where('id',$id)->update(['stick '=>'0']); 
+       
+         if($re){
+          $data=[
+              'status'=>0,
+              'msg'=>'禁用成功'
+          ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'禁用失败'
+            ];
+        }
+          return  $data;
+
+
+
+
+    }
 
 }

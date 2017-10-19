@@ -39,13 +39,14 @@ class ActiveController extends Controller
           
           $num = $request->input('pagea')?$request->input('pagea'): 10;
           $postcode = '2';
+          $postcode = '1 ';
 
         if ($pid == '0' || $pid == '' ||$cid == '0'|| $cid == '') {
             $res = DB::table('post')
             ->leftJoin('user', 'post.uid', '=', 'user.id')
             ->leftJoin('plates','post.pid','=','plates.id')
             ->leftJoin('childplates','post.cid','=','childplates.id')
-            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid','>',$pid)->where('post.postcode',$postcode)->where('post.cid','>',$cid)->where('title','like','%'.$input.'%')->orderBy('id','desc')->paginate($num);
+            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid','>',$pid)->where('post.postcode',$postcode||$postcodes)->where('post.cid','>',$cid)->where('title','like','%'.$input.'%')->orderBy('id','desc')->paginate($num);
         } else {
             $res = DB::table('post')
             ->leftJoin('user', 'post.uid', '=', 'user.id')
@@ -140,12 +141,14 @@ class ActiveController extends Controller
         $post = new Post();
         $post->title = $input['title'];
         $post->pid = $input['pid'];
-        $post->posttime = date('Ymd',time());
+        $post->tagid = $input['tid'];
+        $post->posttime = time();
         $post->keywords = $input['keywords'];
         $post->cid = $input['cid'];
         $post->good = $input['good'];
+        $post->goodtime =time();
         $post->stick = $input['stick'];
-        $post->stick = $input['stick'];
+        $post->sticktime =time();
         $post->status = $input['status'];
         $post->postcode = $input['postcode'];
         $post->content = $input['content'];
@@ -234,7 +237,7 @@ class ActiveController extends Controller
 
         $input = $request->except('_token','_method');
 
-
+        // dd($input);
         $rule=[
 
             'title'=>'required',
@@ -264,14 +267,16 @@ class ActiveController extends Controller
 
 
         $post = Post::find($id);
+        // dd($post);
         $post->title = $input['title'];
         $post->pid = $input['pid'];
-        $post->posttime = date('Ymd',time());
+        $post->posttime =time();
         $post->keywords = $input['keywords'];
         $post->cid = $input['cid'];
         $post->good = $input['good'];
+        $post->goodtime = $input['goodtime'];
         $post->stick = $input['stick'];
-        $post->stick = $input['stick'];
+        $post->sticktime = $input['sticktime'];
         $post->status = $input['status'];
         $post->postcode = $input['postcode'];
         $post->content = $input['content'];
@@ -283,7 +288,7 @@ class ActiveController extends Controller
             return redirect('admin/active');
         } else {
             // return back()->with('errors','发表活动贴失败');
-            return redirect('admin/active/create')->with('msg','发表活动贴失败');
+            return redirect('admin/active/edit')->with('msg','发表活动贴失败');
 
         }
 

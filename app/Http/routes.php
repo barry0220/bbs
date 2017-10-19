@@ -17,12 +17,25 @@ Route::get('/admin/index', function () {
 //    return view('Admin.index');
     return redirect('/home/login');
 });
-
+//前台帖子
 Route::resource('/home/post','Home\PostController');
+//前台猫眼显示
 Route::get('/home/cateye','Home\PostController@cateye');
+//标签列表显示
 Route::get('/home/list/{id}','Home\PostController@list');
+//板块列表显示
 Route::get('/home/plateslist/{id}','Home\PostController@plateslist');
-
+//评论帖子
+Route::post('/home/replay','Home\PostController@replay');
+//回复评论
+Route::post('/home/rep','Home\PostController@rep');
+// 收藏帖子
+Route::post('/home/collection','Home\PostController@collection');
+//点赞
+Route::post('/home/admire','Home\PostController@admire');
+//点踩
+Route::post('/home/tread','Home\PostController@tread');
+ 
 
 
 //后台登录页
@@ -77,6 +90,10 @@ Route::group(['middleware'=>'login','prefix'=>'admin','namespace'=>'Admin'],func
 
     Route::post('/post/disables/{id}','PostController@disables');
     Route::post('/post/open/{id}','PostController@open');
+    Route::post('/post/good/{id}','PostController@good');
+    Route::post('/post/nogood/{id}','PostController@nogood');
+    Route::post('/post/stick/{id}','PostController@stick');
+    Route::post('/post/nostick/{id}','PostController@nostick');
 
     // 敏感词管理
     Route::resource('/warwork','WarworkController');
