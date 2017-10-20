@@ -76,7 +76,9 @@ class LinksController extends Controller
         $res = $links -> save();
 
         if ($res) {
-        return redirect('admin/links');
+            //调用putfile方法写如配置文档
+            $this->putFile();
+            return redirect('admin/links');
         } else {
             return back()->with('errors','添加链接失败');
         }
@@ -185,7 +187,7 @@ class LinksController extends Controller
     {
         //将配置文件中的内容写入config目录下的webconfig.php文件   方便后期读取网站配置
         $links = Links::lists('linkname','link')->all();
-        dd($links);
+        // dd($links);
         //die;
         $str = '<?php return '.var_export($links,true).';';
         //要写入的路径

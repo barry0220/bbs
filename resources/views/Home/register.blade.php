@@ -334,14 +334,17 @@
 
             if (!reg.test(phone)) {
                 layer.msg('手机号格式不正确',{icon:5});
-                $('#inputEmailPhone').attr('disabled','disabled');
+//                $('#inputEmailPhone').attr('disabled','disabled');
+                $('#regphone').attr('disabled','disabled');
             }else {
                 $.post("{{url('/home/issetphone')}}",{'phone':phone,'_token':"{{csrf_token()}}"},function(data){
                     if (data.status == '1') {
                         layer.msg(data.msg, {icon: 5});
-                        $('#inputEmailPhone').attr('disabled','disabled');
+//                        $('#inputEmailPhone').attr('disabled','disabled');
+                        $('#regphone').attr('disabled','disabled');
                     }else {
-                        $('#inputEmailPhone').attr('disabled',false);
+//                        $('#inputEmailPhone').attr('disabled',false);
+                        $('#regphone').attr('disabled',false);
                     }
                 });
             }

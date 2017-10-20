@@ -13,8 +13,8 @@
                 <div class="title-list clearfix">
                     <div class="icon"></div>
                     <div class="title-cont c-main">
-                        [<a href="/home/plateslist/".{{$v->platesid}} target="_blank"><span class="f12px">{{$v->pname}}</span></a>]
-                        <a title="{{$v->title}}" href="/home/post/show/".{{$v->postid}} target="_blank">{{$v->title}}</a>
+                        [<a href="{{'/home/plateslist/'.$v->platesid}}" target="_blank"><span class="f12px">{{$v->pname}}</span></a>]
+                        <a title="{{$v->title}}" href="{{'/home/post/'.$v->postid}}" target="_blank">{{$v->title}}</a>
                     </div>
                     <div class="title-num c-alarm f10px"></div>
                     <div class="time c-sub">{{date('Y/m/d H:i:s',$v->posttime)}}</div>
@@ -24,7 +24,7 @@
                     <div id="replylist02" class="replylist-box">
                         <ul class="reply-list c-sub">
                             <li>
-                                <a title="{{$v->content}}" href="/home/post/show/".{{$v->postid}}target="_blank">{{$v->content}}</a>
+                                <a title="{{$v->content}}" href="{{'/home/post/'.$v->postid}}" target="_blank">{{$v->content}}</a>
                                 &nbsp;&nbsp;&nbsp;{{date('Y/d/d H:i:s',$v->time)}}
                             </li>
                         </ul>

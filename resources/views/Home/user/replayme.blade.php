@@ -22,21 +22,21 @@
                     </div>
                     <div class="followuser-act">
                         <div class="relist clearfix">
-                            <span class="c-main"><a target="_blank" href="javascript:;">{{$v->username}}</a></span>
+                            <span class="c-main"><a  href="javascript:;">{{$v->username}}</a></span>
                             <span>
-								<a target="_blank" href="/home/post/show/".{{$v->postid}}>{{$v->content}}</a>
+								<a target="_blank" href="{{'/home/post/'.$v->postid}}">{{$v->content}}</a>
                             </span>
                             <div class="f12px time">
                                 {{date('Y/d/d H:i:s',$v->time)}}&nbsp;&nbsp;&nbsp;来自
                                 <span class="c-main">
-                                    <a target="_blank" href="/home/plateslist/".{{$v->platesid}}>{{$v->pname}}</a>
+                                    <a target="_blank" href="{{'/home/plateslist/'.$v->platesid}}">{{$v->pname}}</a>
                                 </span>
                             </div>
                         </div>
                         <div class="c-sub bbstitle">
                             <span class="f12px">
-                                [<a target="_blank" href="/home/post/show/".{{$v->postid}}>{{$v->pname}}</a>]
-                            </span> <a target="_blank" href="/home/post/show/".{{$v->postid}}>{{$v->title}}</a>
+                                [<a target="_blank" href="{{'/home/plateslist/'.$v->platesid}}">{{$v->pname}}</a>]
+                            </span> <a target="_blank" href="{{'/home/post/'.$v->postid}}">{{$v->title}}</a>
                             {{--<span class="stat c-alarm f10px">91/14066</span>--}}
                         </div>
 

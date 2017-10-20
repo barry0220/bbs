@@ -20,8 +20,8 @@
         @foreach($info as $k => $v)
         <ul class="ccollect-list clearfix">
             <li class="ctitle c-main">
-                [<a title="[{{$v->tagname}}]{{$v->title}}" href="/home/plateslist/".{{$v->platesid}} target="_blank">{{$v->pname}}</a>]
-                <a title="[{{$v->tagname}}]{{$v->title}}" href="/home/post/show/".{{$v->postid}} target="_blank">[{{$v->tagname}}]{{$v->title}}</a>
+                [<a title="[{{$v->tagname}}]{{$v->title}}" href="{{'/home/plateslist/'.$v->platesid}}" target="_blank">{{$v->pname}}</a>]
+                <a title="[{{$v->tagname}}]{{$v->title}}" href="{{'/home/post/'.$v->postid}}" target="_blank">[{{$v->tagname}}]{{$v->title}}</a>
             </li>
             <li class="ctime f11px c-sub">{{date('Y/m/d H:i:s',$v->collecttime)}}</li>
             <li class="ccontrol c-main"><a href="javascript:;" onclick="discollect({{$v->id}})">取消收藏</a></li>

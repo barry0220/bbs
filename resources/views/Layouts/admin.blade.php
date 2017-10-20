@@ -65,14 +65,13 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">用户名</strong>
+                                    <strong class="font-bold">{{session('user')->username}}</strong>
                                 </span>
                                 <span class="text-muted text-xs block">管理员<b class="caret"></b></span>
                             </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="#">个人信息</a></li>
-                            {{--{{url('admin/user/'.(isset(session('user')) ? session('user')->id : '1') )}}--}}
+                            <li><a href="{{url('admin/user/'.session('user')->id )}}">个人信息</a></li>
                             <li><a href="{{url('admin/repass')}}">修改密码</a></li>
                             <li class="divider"></li>
                             <li><a href="javascript:;" onclick="loginOut()">退出登录</a></li>
@@ -173,70 +172,74 @@
                     <!--左上角绿色隐藏左侧区域功能按键-->
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     <!--搜索查询表单-->
-                    <form role="search" class="navbar-form-custom" action="search_results.html">
-                        <div class="form-group">
-                            <input type="text" placeholder="输入查询内容" class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
+                    {{--<form role="search" class="navbar-form-custom" action="search_results.html">--}}
+                        {{--<div class="form-group">--}}
+                            {{--<input type="text" placeholder="输入查询内容" class="form-control" name="top-search" id="top-search">--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
                         <span class="m-r-sm text-muted welcome-message">欢迎光临</span>
                     </li>
-                    <!--右上角私信位置-->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="{{asset('/admin/img/a7.jpg')}}">
-                                    </a>
-                                    <div class="media-body">
-                                        <small class="pull-right">46h ago</small>
-                                        <strong>XX用户</strong>XXXX<strong>XXXXXX</strong>. <br>
-                                        <small class="text-muted">2017年X月X日 XX时XX分XX秒</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="mailbox.html">
-                                        <i class="fa fa-envelope"></i> <strong>阅读所有来信</strong>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--右上角闹钟提醒位置-->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="mailbox.html">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
 
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="notifications.html">
-                                        <strong>查看所有提醒</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">{{session('user')->username}}</span>
                     </li>
+                    <!--右上角私信位置-->
+                    {{--<li class="dropdown">--}}
+                        {{--<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">--}}
+                            {{--<i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>--}}
+                        {{--</a>--}}
+                        {{--<ul class="dropdown-menu dropdown-messages">--}}
+                            {{--<li>--}}
+                                {{--<div class="dropdown-messages-box">--}}
+                                    {{--<a href="profile.html" class="pull-left">--}}
+                                        {{--<img alt="image" class="img-circle" src="{{asset('/admin/img/a7.jpg')}}">--}}
+                                    {{--</a>--}}
+                                    {{--<div class="media-body">--}}
+                                        {{--<small class="pull-right">46h ago</small>--}}
+                                        {{--<strong>XX用户</strong>XXXX<strong>XXXXXX</strong>. <br>--}}
+                                        {{--<small class="text-muted">2017年X月X日 XX时XX分XX秒</small>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
+                            {{--<li class="divider"></li>--}}
+                            {{--<li>--}}
+                                {{--<div class="text-center link-block">--}}
+                                    {{--<a href="mailbox.html">--}}
+                                        {{--<i class="fa fa-envelope"></i> <strong>阅读所有来信</strong>--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
+                    {{--<!--右上角闹钟提醒位置-->--}}
+                    {{--<li class="dropdown">--}}
+                        {{--<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">--}}
+                            {{--<i class="fa fa-bell"></i>  <span class="label label-primary">8</span>--}}
+                        {{--</a>--}}
+                        {{--<ul class="dropdown-menu dropdown-alerts">--}}
+                            {{--<li>--}}
+                                {{--<a href="mailbox.html">--}}
+                                    {{--<div>--}}
+                                        {{--<i class="fa fa-envelope fa-fw"></i> You have 16 messages--}}
+                                        {{--<span class="pull-right text-muted small">4 minutes ago</span>--}}
+                                    {{--</div>--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
+                            {{--<li class="divider"></li>--}}
+
+                            {{--<li>--}}
+                                {{--<div class="text-center link-block">--}}
+                                    {{--<a href="notifications.html">--}}
+                                        {{--<strong>查看所有提醒</strong>--}}
+                                        {{--<i class="fa fa-angle-right"></i>--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
 
 
                     <li>

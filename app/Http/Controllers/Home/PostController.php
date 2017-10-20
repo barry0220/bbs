@@ -31,6 +31,8 @@ class PostController extends Controller
     // 板块 原创帖文显示
     public function index()
     {
+        // dd(config('webconfig'));
+        // dd(config('linksconfig'));
         
         $plates = Plates::get();
         $author = \DB::table('post')
@@ -43,7 +45,10 @@ class PostController extends Controller
         //标签
         $tags = Tags::get();
         // 帖子信息 分页
-        $post = Post::where('tagid','2')->orderBy('id','desc')->paginate(8);
+        $post = \DB::table('post')
+            ->leftjoin('user','user.id','=','post.uid')
+            ->select('post.*','user.username')
+            ->where('tagid','2')->orderBy('id','desc')->paginate(8);
         //用户信息
         $users = UserHome::get();
 
@@ -75,7 +80,10 @@ class PostController extends Controller
         //所有标签信息
         $tags = Tags::get();
         //所有帖子信息   分页
-        $post = Post::where('tagid','4')->orderBy('id','desc')->paginate(8);
+        $post = \DB::table('post')
+            ->leftjoin('user','user.id','=','post.uid')
+            ->select('post.*','user.username')
+            ->where('tagid','4')->orderBy('id','desc')->paginate(8);
 
         $postplates = [];
         foreach ($plates as $k => $v) {
@@ -121,7 +129,13 @@ class PostController extends Controller
     {
         
         $plates = Plates::get();
-        $posts = Post::where('pid',$id)->orderBy('id','desc')->paginate(10);
+        // $posts = Post::where('pid',$id)->orderBy('id','desc')->paginate(10);
+
+        $posts = \DB::table('post')
+            ->leftjoin('user','user.id','=','post.uid')
+            ->select('post.*','user.username')
+            ->where('pid',$id)->orderBy('id','desc')->paginate(10);
+
         $tags = Tags::get();
         $author = \DB::table('post')
             ->leftjoin('user','user.id','=','post.uid')
@@ -143,21 +157,28 @@ class PostController extends Controller
     // 显示发表帖子页面
     public function create()
     {
-        //        
-        $pls = Plates::get();
-        $childPlates = new ChildPlates();
-        $cls = $childPlates ->get();
-        $id = 0;
+        if (session('homeuser')) {
+            $status = session('homeuser')->status;
+            if ($status == 2) {
+                $info = "您的帐号还没有激活,请先验证邮箱";
+                return view('errors.error',compact('info'));
+            }
+            $pls = Plates::get();
+            $childPlates = new ChildPlates();
+            $cls = $childPlates ->get();
+            $id = 0;
 
-        $tag = Tags::get();
+            $tag = Tags::get();
 
 
 
-    return view('home/post/add',compact('pls','cls','id','tag'));
+            return view('home/post/add',compact('pls','cls','id','tag'));
+        } else {
+            $info = "请先登录在进行此操作";
 
+            return view('errors.error',compact('info'));
+        }
 
-
-        // return view('/home/post/add');
     }
 
     /**
@@ -209,11 +230,29 @@ class PostController extends Controller
         $post->cid = $input['cid'];
         $post->postcode = '0';
         $post->content = $input['content'];
-        $post->uid = 1;
+        $post->uid = session('homeuser')->id;
         $res = $post -> save();
+
+        //记录增加积分的日志
+        $scoreinfo=[
+            'uid'=>session('homeuser')->id,
+            'time'=>time(),
+            'handle'=>'发表帖子增加10积分',
+            'scorelog'=>'+10'
+        ];
+        $details = UserDetail::where('uid',session('homeuser')->id)->first();
+        try{
+            $details -> score = $details['score']+10;
+            $details -> save();
+            Scorelog::create($scoreinfo);
+        }catch (\Exception $e){
+            // $e.message('服务器内部错误,请重新注册');
+            return back()->with('errors','意外错误，请重新发帖');
+        }
 
 
         if ($res) {
+
             return redirect('home/post');
         } else {
             // return back()->with('errors','发表活动贴失败');
@@ -236,39 +275,30 @@ class PostController extends Controller
     public function show($id)
     {
         //帖子详情页
-        $userinfo = UserHome::get();
-        $postinfo = Post::where('id',$id)->get();
-        $users = [];
-        foreach ($userinfo as $k => $v) {
-            
-            $users[$v->id] = $v->username;
-        }
 
-         $plates = Plates::get();
-
-        $postplates = [];
-        foreach ($plates as $k => $v) {
-            
-            $postplates[$v->id] = $v->pname;
-        }
-
-        $replay = Replay::where('postid',$id)->paginate(1);
-        // $arr = [];
-        // foreach ($replay as $k => $v) {
-            
-
-        //     if ($v->pid == $v->uid) {
-                
-        //         $arr[] = $v;
-        //     }
-
- 
-        // }
-        // dd($arr);
-     
+        $postinfo = \DB::table('post')
+            ->leftjoin('user','user.id','=','post.uid')
+            ->leftjoin('plates','plates.id','=','post.pid')
+            ->select('post.*','user.username','plates.pname')
+            ->where('post.id',$id)
+            ->first();
+        // dd($postinfo->username);
 
 
-        return view('/home/post/detail',compact('postinfo','users','postplates','replay','plates'));
+        $replay = \DB::table('replay')
+            ->leftjoin('user','user.id','=','replay.uid')
+            ->select('replay.*','user.username')
+            ->where('postid',$id)->paginate(3);
+
+
+
+        // dd($replay);
+        //点击量加一
+        $click = Post::where('id',$id)->first();
+        $click -> clickcount = $click['clickcount']+1;
+        $click->save();
+
+        return view('/home/post/detail',compact('postinfo','replay','plates'));
 
     }
 
@@ -281,7 +311,7 @@ class PostController extends Controller
 
 
         $replay = new Replay();        
-        $replay->uid = 1;
+        $replay->uid = session('homeuser')->id;
         $replay->postid = $input['id'];
         $replay->content = $input['content'];
         $replay->pid = 0;
@@ -314,7 +344,7 @@ class PostController extends Controller
 
 
         $replay = new Replay();        
-        $replay->uid = 1;
+        $replay->uid = session('homeuser')->id;
         $replay->postid = $input['postid'];
         $replay->content = $input['content'];
         $replay->pid = $input['author'];
@@ -383,7 +413,7 @@ class PostController extends Controller
         foreach ($info as $k => $v) {
             # code...
 
-            if($v->uid == 1 && $v->postid == $input['postid']){
+            if($v->uid == session('homeuser')->id && $v->postid == $input['postid']){
                 $data=[
                   'status'=>2,
                   'msg'=>'已收藏'
@@ -393,7 +423,7 @@ class PostController extends Controller
                 }
         }
         $mycollect = new Mycollect();        
-        $mycollect->uid = 1;
+        $mycollect->uid = session('homeuser')->id;
         $mycollect->postid = $input['postid'];
         $mycollect->collecttime = time();
  

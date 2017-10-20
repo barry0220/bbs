@@ -114,7 +114,7 @@ class LoginController extends Controller
         //获取用户头像并存在session中
         $userface = UserDetail::where('uid',$user->id)->select('profile')->first();
 
-        $user['userface'] = $userface;
+        $user->userface = $userface['profile'];
 
         //将登录用户的状态值保存到session中
 

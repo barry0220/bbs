@@ -27,17 +27,20 @@
                                           @endif>
                                             5
                                         </option>
-                                        <option value="10"    @if($num==10) 
+                                        <option value="10"
+                                                @if($num==10)
                                             selected="selected"
                                           @endif>
                                             10
                                         </option>
-                                        <option value="15"@if($num==15) 
+                                        <option value="15"
+                                                @if($num==15)
                                             selected="selected"
                                           @endif>
                                             15
                                         </option>
-                                        <option value="20"@if($num==20) 
+                                        <option value="20"
+                                            @if($num==20)
                                             selected="selected"
                                           @endif>
                                             20
@@ -51,10 +54,10 @@
                 <div class="plates" id="editable_length">
                     <label>板块查询<br>
                         <select class="form-control m-b input-sm" name="pid" id="type">
-                            <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
+                            <option value="" >|---顶级分类---|</option>
                             @foreach($pls as $k => $v)
 
-                                <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->pname}} </option>
+                                <option value="{{$v->id}}" {{ $pid==$v->id ? 'selected':'' }} > {{$v->pname}} </option>
                             @endforeach
                         </select>
                     </label>
@@ -64,10 +67,10 @@
                             <div class="plates" id="editable_length">
                                 <label>类别查询<br>
                                     <select class="form-control m-b input-sm" name="cid" id="type">
-                                         <option value="0" {{ $id=='0' ? 'selected':'' }} >|---顶级分类---|</option>
+                                         <option value="">|---顶级分类---|</option>
                                             @foreach($cls as $k => $v)
 
-                                            <option value="{{$v->id}}" {{ $id==$v->id ? 'selected':'' }} > {{$v->cname}} </option>
+                                            <option value="{{$v->id}}" {{ $cid==$v->id ? 'selected':'' }} > {{$v->cname}} </option>
                                             @endforeach
                                     </select>
                                 </label>

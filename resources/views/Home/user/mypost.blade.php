@@ -20,9 +20,9 @@
                             <a href="javascript:;" onclick="delpost({{$v->id}})" style="color:red;">删除</a>&nbsp;
                         </span>
                         <span class="f12px">
-                            [<a href="/home/post/show/".{{$v->id}} target="_blank">{{$v->pname}}</a>]
+                            [<a href="{{'/home/plateslist/'.$v->pid}}" target="_blank">{{$v->pname}}</a>]
                         </span>
-                        <a href="/home/post/show/".{{$v->id}} target="_blank">[{{$v->tagname}}]{{$v->title}}</a>
+                        <a href="{{'/home/post/'.$v->id}}" target="_blank">[{{$v->tagname}}]{{$v->title}}</a>
                     </div>
                 </div>
                 @endforeach

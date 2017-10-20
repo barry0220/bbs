@@ -10,7 +10,7 @@
                         <div class="dataTables_length" id="editable_length">
                             <label>
                                 每页显示
-                                <select name="pagea" aria-controls="editable" class="form-control input-sm">
+                                <select name="pagea" aria-controls="editable" class="form-control">
                                     <option value="5"
                                             @if($num==5)
                                             selected="selected"
@@ -37,7 +37,7 @@
                             </label>
                         </div>
                     </div>
-                     <div class="col-sm-4">
+                     <div class="col-sm-3">
                          <div id="editable_filter" class="dataTables_filter">
                              <label>
                                  是否为VIP用户：<select name="isvip" id="">
@@ -50,7 +50,7 @@
 
                          </div>
                      </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <div id="editable_filter" class="dataTables_filter">
                             <label>
                                 搜索：<input type="search" class="form-control input-sm" name="username" value="{{ !empty($_GET['username']) ? $_GET['username'] : '' }}" placeholder="输入用户名">
@@ -70,20 +70,16 @@
 
 
                 </form>
-
-
-
-
-
+                <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover  dataTable"
                        id="editable" role="grid" aria-describedby="editable_info">
                     <thead>
                     <tr role="row" >
                         <th class="sorting_asc" style="width: 45px;">ID号</th>
-                        <th class="sorting_asc"  style="width: 205px;">用户名</th>
-                        <th class="sorting_asc" style="width: 210px;">邮箱</th>
+                        <th class="sorting_asc"  style="width: 100px;">用户名</th>
+                        <th class="sorting_asc" style="width: 150px;">邮箱</th>
                         <th class="sorting_asc" style="width: 102px;">手机号</th>
-                        <th class="sorting_asc"  style="width: 175px;">是否为VIP用户</th>
+                        <th class="sorting_asc"  style="width: 75px;">VIP</th>
                         <th class="sorting_asc"  style="width: 175px;">操作</th>
 
                     </tr>
@@ -116,6 +112,7 @@
 
                     </tbody>
                 </table>
+                </div>
                 {{--<div class="row">--}}
                 {{--<div class="col-sm-4">--}}
 
@@ -127,7 +124,7 @@
                 {{--</div>--}}
                 {{--</div>--}}
                 {{--</div>--}}
-                <div>
+                <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
                     {!! $user->appends(['username'=>$input,'pagea'=>$num,'isvip'=>$isvip])->render()!!}
                 </div>
             </div>

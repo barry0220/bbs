@@ -453,12 +453,10 @@
 <div id="globalfooter" class="">
     <div class="footer-box clearfix">
         <div class="logo" title="凯迪网络 主流声音">
-            <a href="http://www.kdnet.net/">凯迪网络 主流声音</a>
+            <a href="javascript:;">凯迪网络</a>
         </div>
         <div class="copyright">
-            Copyright &#169; 2000~2017
-            <span class="c-main"><a href="javascript:;">kdnet.net</a></span>
-            corporation. All Rights Reserved
+            {{config('webconfig.copyright')}}
             <br>
             <span class="c-sub">
                 <a href="http://about.kdnet.net/brief.php">关于凯迪</a>|

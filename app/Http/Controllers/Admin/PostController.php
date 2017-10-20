@@ -23,40 +23,63 @@ class PostController extends Controller
     {
         // 查询
 
-          $input = $request->input('title')?$request->input('title'):'';
+        //   $input = $request->input('title')?$request->input('title'):'';
+        //
+        //
+        //   $pid = $request->input('pid')?$request->input('pid'):'';
+        //
+        //   $cid = $request->input('cid')?$request->input('cid'):'';
+        //
+        //   $num = $request->input('pagea')?$request->input('pagea'): 10;
+        //
+        // if ($pid == '0' || $pid == '' ||$cid == '0'|| $cid == '') {
+        //     $res = DB::table('post')
+        //     ->leftJoin('user', 'post.uid', '=', 'user.id')
+        //     ->leftJoin('plates','post.pid','=','plates.id')
+        //     ->leftJoin('childplates','post.cid','=','childplates.id')
+        //     ->select('post.*','plates.pname','user.username','childplates.cname')
+        //         ->where('post.pid','>',$pid)->where('post.cid','>',$cid)
+        //         ->where('title','like','%'.$input.'%')
+        //         ->paginate($num);
+        // } else {
+        //     $res = DB::table('post')
+        //     ->leftJoin('user', 'post.uid', '=', 'user.id')
+        //     ->leftJoin('plates','post.pid','=','plates.id')
+        //     ->leftJoin('childplates','post.cid','=','childplates.id')
+        //     ->select('post.*','plates.pname','user.username','childplates.cname')
+        //         ->where('post.pid',$pid)
+        //         ->where('post.cid',$cid)->where('title','like','%'.$input.'%')
+        //         ->paginate($num);
+        // }
 
 
-          $pid = $request->input('pid')?$request->input('pid'):'';
+        $input = $request->input('title');
 
-          $cid = $request->input('cid')?$request->input('cid'):'';
- 
-          $num = $request->input('pagea')?$request->input('pagea'): 10;
 
-        if ($pid == '0' || $pid == '' ||$cid == '0'|| $cid == '') {
-            $res = DB::table('post')
+        $pid = $request->input('pid');
+
+        $cid = $request->input('cid');
+
+        $num = $request->input('pagea')?$request->input('pagea'): 10;
+
+
+        $res = DB::table('post')
             ->leftJoin('user', 'post.uid', '=', 'user.id')
             ->leftJoin('plates','post.pid','=','plates.id')
             ->leftJoin('childplates','post.cid','=','childplates.id')
-            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid','>',$pid)->where('post.cid','>',$cid)->where('title','like','%'.$input.'%')->paginate($num);
-        } else {
-            $res = DB::table('post')
-            ->leftJoin('user', 'post.uid', '=', 'user.id')
-            ->leftJoin('plates','post.pid','=','plates.id')
-            ->leftJoin('childplates','post.cid','=','childplates.id')
-            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid',$pid)->where('post.cid',$cid)->where('title','like','%'.$input.'%')->paginate($num);
-        }
+            ->select('post.*','plates.pname','user.username','childplates.cname')
+            ->where('post.pid','like','%'.$pid.'%')
+            ->where('post.cid','like','%'.$cid.'%')
+            ->where('title','like','%'.$input.'%')
+            ->paginate($num);
         //转换状态
         $statu = ['普通帖','活动贴','公告贴'];
 
 
-        $plates = new Plates();
+        $pls = Plates::get();
 
-
-
-        $pls = $plates->get();
-        $childPlates = new ChildPlates();
-        $cls = $childPlates ->get();
-        $id = 0;
+        $cls = ChildPlates::get();
+        // $id = 0;
 
 
         //显示视图

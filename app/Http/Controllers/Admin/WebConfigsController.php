@@ -138,7 +138,7 @@ class WebConfigsController extends Controller
     {
         //将配置文件中的内容写入config目录下的webconfig.php文件   方便后期读取网站配置
         $config = WebConfigs::first()['attributes'];
-        dd($config);
+        // dd($config);
         //die;
         $str = '<?php return '.var_export($config,true).';';
         //要写入的路径

@@ -1,33 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=GB2312" />
-        <title>
-            详情
-        </title>
-        <meta http-equiv="mobile-agent" content="format=xhtml; url=http://m.kdnet.net/content-1-12447302.html"
-        />
-        <meta name="author" content="凯迪网络">
-        <link rel="icon" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon"
-        />
-        <link rel="shortcut icon" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon"
-        />
-        <link rel="bookmark" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon"
-        />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+        <title>详情</title>
+        <link rel="icon" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon"/>
+        <link rel="shortcut icon" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon"/>
+        <link rel="bookmark" href="{{asset('/home/img/favicon.ico')}}" type="image/x-icon"/>
         <link rel="apple-touch-icon" href="{{asset('/home/img/fav.png')}}" />
-        <link rel="apple-touch-icon-precomposed" href="{asset('/home/img/fav.png')}"
-        />
+        <link rel="apple-touch-icon-precomposed" href="{{asset('/home/img/fav.png')}}"/>
         <!-- sunny modify 20130710 收藏 begin -->
         <!-- link href="http://imgcdn.kdnet.net/webset/www/g_style/base8.css"
         rel="stylesheet" type="text/css" / -->
-        <link href="{{asset('/home/css/base.css')}}" tppabs="{{asset('/home/css/base.css')}}"
-        rel="stylesheet" type="text/css" />
+        <link href="{{asset('/home/css/base.css')}}"rel="stylesheet" type="text/css" />
         <!-- sunny modify 20130710 收藏 end -->
-        <link href="{{asset('/home/css/face.css')}}" tppabs="{{asset('/home/css/face.css')}}"
-        rel="stylesheet" type="text/css" />
-        <link href="{{asset('/home/css/club.css')}}" tppabs="{{asset('/home/css/club.css')}}"
-        rel="stylesheet" type="text/css" />
+        <link href="{{asset('/home/css/face.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('/home/css/club.css')}}" rel="stylesheet" type="text/css" />
         <style type="text/css">
             .wlad-list { border: 1px solid #fff; padding: 3px 10px; } .wlad-list li
             { float: left; width: 33%; line-height: 22px; }
@@ -40,67 +28,106 @@
         <div class="top-fixed-nav">
             <div class="nav-con ">
                 <div class="nav-menu-left ">
-                    <a href="../www.kdnet.net/index.htm" tppabs="http://www.kdnet.net/" target="_blank"
-                    class="lf nav-logo" title="凯迪网络 主流声音">
-                        凯迪网络 主流声音
+                    <a href="{{url('/')}}" target="_blank"
+                    class="lf nav-logo" title="凯迪网络">
+                        凯迪网络
                     </a>
                     <!-- 智能首页 -->
                     <ul class="nav-menu nav-menu-intelligent lf now-in-intelligent">
                         <!--<li class="btn-l"><a href="http://club.kdnet.net/myhome.asp" class="nav-option not-new"><b class="nav-icon nav-op-intelligent"></b>智能首页</a></li>-->
-                         
+
                         <!-- li class="btn-r thinker"><a href="http://special.kcis.cn">思享者</a></li -->
                     </ul>
                     <!-- 智能首页 END-->
                 </div>
                 <div class="nav-menu-right">
                     <div class="nav-user-msg-f rf">
-                        <div class="login-f">
-                            <a href="javascript:;">
-                                登录
-                            </a>
-                            <a href="javascript:;">
-                                注册新用户
-                            </a>
-                        </div>
-                        <div class="nav-menu-ex-f clearfix nav-menu-login">
-                            <div class="nav-menu-ex">
-                                <i class="dot-ex dot-ex-login">
-                                </i>
-                                <a href="javascript:;">
-                                    <b class="nav-icon nav-op-kdnet">
-                                    </b>
-                                    凯迪登录
-                                </a>
-                                <a href="javascript:;">
-                                    <b class="nav-icon nav-op-sina">
-                                    </b>
-                                    新浪微博登录
-                                </a>
-                                <a href="javascript:;">
-                                    <b class="nav-icon nav-op-qq">
-                                    </b>
-                                    QQ登录
-                                </a>
+                        @if (session('homeuser'))
+                            <div class="login-f">
+                            <!-- 头部登录后右一列表 -->
+                                <ul class="nav-menu nav-menu-other rf">
+
+                                    <li>
+                                        <a title="快速发帖" target="_blank" class="nav-option nav-icon nav-op-post nav-l" href="{{url('/home/post/create')}}"></a>
+                                    </li>
+
+
+                                </ul>
+                                <!-- 头部登录后右一列表 END-->
+
+                                <div class="nav-user-msg-f rf">
+
+                                    <!-- 头部登录后右二列表 -->
+                                    <a title="{{session('homeuser')->username}}" class="nav-user-logo" target="_blank" href="{{url('/home/userinfo')}}">
+                                        <img onerror="this.src = duf_40_40;" alt="{{session('homeuser')->username}}" src="{{session('homeuser')->userface}}">用户头像
+                                    </a>
+
+                                    <!-- 用户选项 -->
+                                    {{--<div class="nav-menu-ex-f clearfix" id="mentex" style="display: none;">--}}
+                                        {{--<div class="nav-menu-ex">--}}
+                                            {{--<i class="dot-ex"></i>--}}
+                                            {{--<a target="_blank" href="{{url('/home/mypost')}}"><b class="nav-icon nav-op-mypost"></b>我的主帖</a>--}}
+                                            {{--<a target="_blank" href="{{url('/home/myreplay')}}"><b class="nav-icon nav-op-myre"></b>我的回复</a>--}}
+                                            {{--<a target="_blank" href="{{url('/home/mycollect')}}"><b class="nav-icon nav-op-mycollect"></b>我的收藏</a>--}}
+
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    <!-- 用户选项 end -->
+                                </div>
                             </div>
-                        </div>
-                        <!-- 头部登录后右二列表 END-->
-                    </div>
-                    <form id="form1" action="http://search.kdnet.net/" method="get" target="_blank"
-                    class="sear-box-trans rf pore">
-                        <a href="javascript:;" class="sear-bg">
-                            <input type="submit" name="sa" id="searchsubmit" value="" class="sear-go"
-                            />
-                            <input name="q" type="text" id="s" onfocus="javascript:if(this.value==''){this.value='';this.className='sear-input sear-in';}"
-                            onblur="javascript:if(this.value==''){this.value='';this.className='sear-input'}"
-                            value="" class="sear-input" />
-                        </a>
-                    </form>
+                            <script>
+                                function loginOut(){
+                                    //询问框
+                                    layer.confirm('确认退出登录吗？', {
+                                        btn: ['确认','取消']
+                                    }, function(){
+                                        //                通过ajax 向服务器发送一个删除请求
+                                        $.post("{{url('/home/loginout')}}",{"_token":"{{csrf_token()}}"},function(data){
+
+                                            if(data.status == 0){
+                                                layer.msg(data.msg, {icon: 6});
+                                                setTimeout(function(){
+                                                    location.href = "{{url('/home/login')}}";
+                                                },3000)
+                                            }else{
+
+                                                layer.msg(data.msg, {icon: 5});
+                                            }
+
+                                        })
+
+                                    });
+                                }
+                            </script>
+                            @else
+                                <div class="login-f">
+                                    <a href="{{url('/home/login')}}">登录</a>
+                                    <a href="{{url('/home/register')}}">注册</a>
+                                </div>
+                        @endif
+                            {{--<form id="form1" action="#" method="get"--}}
+                                  {{--class="sear-box-trans rf pore">--}}
+                                {{--<a href="javascript:;" class="sear-bg">--}}
+                                    {{--<input type="submit" name="sa" id="searchsubmit" value="" class="sear-go"/>--}}
+                                    {{--<input name="q" type="text" id="s" onfocus="javascript:if(this.value==''){this.value='';this.className='sear-input sear-in';}"--}}
+                                           {{--onblur="javascript:if(this.value==''){this.value='';this.className='sear-input'}"--}}
+                                           {{--value="" class="sear-input" />--}}
+                                {{--</a>--}}
+                            {{--</form>--}}
+
                 </div>
+
+
+
+
+
+
             </div>
             <div class="nav-opacity">
             </div>
             <div class="nav-line-b">
             </div>
+        </div>
         </div>
         <div class="nav-space-t">
         </div>
@@ -200,14 +227,10 @@
             <div class="lf w840px">
                 <!--主导航-->
                 <div class="globalnav c-white clearfix">
-                    <span>
-                        <a href="javascript:;" onclick="setHomepage();">
-                            收藏
-                        </a>
-                    </span>
+
                     <ul class="globalnav-ul">
                         <li>
-                            <a href="{{url('home/index')}}" tppabs="http://www.kdnet.net/" class="current">
+                            <a href="{{url('/')}}" tppabs="http://www.kdnet.net/" class="current">
                                 首页
                             </a>
                             |
@@ -223,16 +246,16 @@
                 <!--//主导航-->
                 <!--头部-->
                 <div class="header clearfix">
-                    <div class="logo" title="凯迪社区：全球华人最具影响力的言论及媒体平台">
-                        <a href="{{url('home/index')}}">
+                    <div class="logo" title="凯迪社区">
+                        <a href="{{url('/')}}">
                           
                         </a>
                         <div class="logo-ms">
                         </div>
                     </div>
-                    <div class="forum" title="{{$postplates[$postinfo[0]->pid]}}">
+                    <div class="forum" title="{{$postinfo->pname}}">
                         <a href="javascript:;">
-                            {{$postplates[$postinfo[0]->pid]}}
+                            {{$postinfo->pname}}
                         </a>
                     </div>
                     <div style="width:550px;margin:0 auto; margin-top:10px; height:90px;overflow:hidden;">
@@ -246,14 +269,12 @@
                 <!--当前位置-->
                 <div class="club-location clearfix">
                     <div class="c-main">
-                        <a href="{{url('home/index')}}" tppabs="http://www.kdnet.net/">
-                            首页
-                        </a>
+                        <a href="{{url('/')}}" >首页</a>
                     </div>
                     <div class="arrow">
                     </div>
                     <div class="c-main">
-                        <a href="{{url('home/post')}}" tppabs="http://www.kdnet.net/club/index">
+                        <a href="{{url('home/post')}}" >
                             凯迪社区
                         </a>
                     </div>
@@ -262,16 +283,11 @@
                     <!--<div class="c-main"><a href="http://club.kdnet.net/index.asp#68" target="_blank">猫论天下</a></div>-->
                     <!--<div class="arrow"></div>-->
                     <div class="c-main">
-                        <a href="{{url('home/plateslist/'.$postinfo[0]->pid)}}">
-                            {{$postplates[$postinfo[0]->pid]}}
+                        <a href="{{url('home/plateslist/'.$postinfo->pid)}}">
+                            {{$postinfo->pname}}
                         </a>    
                     </div>
                     <div class="arrow">
-                    </div>
-                    <div>
-                        <a href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302&boardid=1">
-                            
-                        </a>
                     </div>
                 </div>
                 <!--//当前位置！-->
@@ -289,22 +305,16 @@
                         //]]>
                         
                     </script>
-                    <img src="/home/img/05ce64af34d70599737afcec1bfee292.png" alt="" style="width:822px;"
-                    />
-                    <script type="text/javascript" src="{{asset('/home/js/k.js')}}" tppabs="{{asset('/home/js/k.js')}}">
-                    </script>
+                    <img src="{{asset('/home/img/05ce64af34d70599737afcec1bfee292.png')}}" alt="" style="width:822px;"/>
+                    <script type="text/javascript" src="{{asset('/home/js/k.js')}}"></script>
                 </div>
                 <!--发帖等操作-->
                 <div class="operating clearfix">
                     <div class="btn-publish" title="发布新帖">
-                        <a   href="{{url('/home/post/create')}}" tppabs="{{url('/home/post/create')}}">
-                            发布新帖
-                        </a>
+                        <a   href="{{url('/home/post/create')}}">发布新帖</a>
                     </div>
                     <div class="btn-reply" title="跟帖回复">
-                        <a href="#Preply">
-                            跟帖回复
-                        </a>
+                        <a href="#Preply">跟帖回复</a>
                     </div>
      
             
@@ -319,38 +329,31 @@
                             <span class="name" id="userinfo_1">
                                 <div class="usertips clearfix box1" id="detailinfo_1">
                                 </div>
-                                <input id="input" type="hidden" value="{{$postinfo[0]->id}}" />
-                                <input id="author" type="hidden" value="{{$postinfo[0]->uid}}" />
+                                <input id="input" type="hidden" value="{{$postinfo->id}}" />
+                                <input id="author" type="hidden" value="{{$postinfo->uid}}" />
                                 <span class="name c-main">
-                                    <a href="javascript:;"
-                                    tppabs="http://user.kdnet.net/index.asp?userid=11849785" target="_blank">
-                                        {{$users[$postinfo[0]->uid]}}
+                                    <a href="javascript:;" target="_blank">
+                                        {{$postinfo->username}}
                                     
                                     </a>
                                 </span>
-                                <a href="javascript:if(confirm('http://user.kdnet.net/index.asp?userid=11849785  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp?userid=11849785'"
-                                tppabs="http://user.kdnet.net/index.asp?userid=11849785" target="_blank">
-                                    <img class="vip-icon" title="凯迪认证" src="{{asset('/home/img/transparent.gif')}}"
-                                    tppabs="http://qc-static.kdnet.net/webset/www/g_images/transparent.gif"
-                                    />
+                                <a href="javascript:;" target="_blank">
+                                    <img class="vip-icon" title="凯迪认证" src="{{asset('/home/img/transparent.gif')}}"/>
                                 </a>
                             </span>
                             &nbsp;
-                            <a href="javascript:if(confirm('http://user.kdnet.net/index.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://user.kdnet.net/index.asp#vip'"
-                            tppabs="http://user.kdnet.net/index.asp#vip" target="_blank">
+                            <a href="javascript:;" target="_blank">
                                 <img class="member-icon" title="凯迪会员" src="{{asset('/home/img/transparent.gif')}}"
                                 tppabs="{{asset('/home/img/transparent.gif')}}" />
                             </a>
                             &nbsp;
-                            <a href="dispbbs.asp-id=11953659&boardid=13.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=11953659&boardid=13"
-                            target="_blank">
-                                <img class="author-icon" title="原创作者" src="{{asset('/home/img/transparent.gif')}}"
-                                tppabs="{{asset('/home/img/transparent.gif')}}" />
+                            <a href="javascript:;" target="_blank">
+                                <img class="author-icon" title="原创作者" src="{{asset('/home/img/transparent.gif')}}" />
                             </a>
                             |&nbsp;
-                            <a onclick="openSesPopup_new()" href="javascript:;">
-                                只看此人
-                            </a>
+                            {{--<a onclick="openSesPopup_new()" href="javascript:;">--}}
+                                {{--只看此人--}}
+                            {{--</a>--}}
                         </div>
                         <div class="posted-floor">
                             <span class="c-sub">
@@ -369,63 +372,51 @@
                                     收藏
                                 </a>
                             </span>
-                            <span class="coll-pormpt prompt-ok" style="display:none;">
-                                <span class="prompt-content">
-                                    <i>
-                                    </i>
-                                    添加分类成功！
-                                </span>
-                            </span>
-                            <div class="coll-box coll-box-b">
-                                <a href="javascript:;" class="nav-icon-s2 close-coll">
-                                </a>
-                                <div class="coll-succeed">
-                                    <i>
-                                    </i>
-                                    收藏成功
-                                </div>
-                                <div class="add-tag clearfix">
-                                    <div class="input-box-f lf">
-                                        <label id="label1" class="label-msg" onMouseover="overInput('#addTag');"
-                                        onMouseout="outInput('#addTag')" onCLick="checkInput('#label1','#addTag')">
-                                            分类标签，6个字以内
-                                        </label>
-                                        <input name="addTag" id="addTag" type="text" class="input-text" maxlength="6"
-                                        onfocus="checkFocus('#label1','#addTag');" onKeyup="checkKeyDownUp('#label1','#addTag');seltag();"
-                                        onKeydown="checkKeyDownUp('#label1','#addTag');" onblur="checkBlur('#label1','#addTag');"
-                                        />
-                                    </div>
-                                    <a href="javascript:;" class="add-btn rf" onclick="addtag();">
-                                        添加
-                                    </a>
-                                </div>
-                                <div id="id_nowtag" class="now-tag">
-                                    添加标签来管理你的收藏吧！
-                                </div>
-                                <i class="nav-icon-s2 coll-dot">
-                                </i>
-                            </div>
+                            {{--<span class="coll-pormpt prompt-ok" style="display:none;">--}}
+                                {{--<span class="prompt-content">--}}
+                                    {{--<i>--}}
+                                    {{--</i>--}}
+                                    {{--添加分类成功！--}}
+                                {{--</span>--}}
+                            {{--</span>--}}
+                            {{--<div class="coll-box coll-box-b">--}}
+                                {{--<a href="javascript:;" class="nav-icon-s2 close-coll">--}}
+                                {{--</a>--}}
+                                {{--<div class="coll-succeed">--}}
+                                    {{--<i>--}}
+                                    {{--</i>--}}
+                                    {{--收藏成功--}}
+                                {{--</div>--}}
+                                {{--<div class="add-tag clearfix">--}}
+                                    {{--<div class="input-box-f lf">--}}
+                                        {{--<label id="label1" class="label-msg" onMouseover="overInput('#addTag');"--}}
+                                        {{--onMouseout="outInput('#addTag')" onCLick="checkInput('#label1','#addTag')">--}}
+                                            {{--分类标签，6个字以内--}}
+                                        {{--</label>--}}
+                                        {{--<input name="addTag" id="addTag" type="text" class="input-text" maxlength="6"--}}
+                                        {{--onfocus="checkFocus('#label1','#addTag');" onKeyup="checkKeyDownUp('#label1','#addTag');seltag();"--}}
+                                        {{--onKeydown="checkKeyDownUp('#label1','#addTag');" onblur="checkBlur('#label1','#addTag');"--}}
+                                        {{--/>--}}
+                                    {{--</div>--}}
+                                    {{--<a href="javascript:;" class="add-btn rf" onclick="addtag();">--}}
+                                        {{--添加--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
+                                {{--<div id="id_nowtag" class="now-tag">--}}
+                                    {{--添加标签来管理你的收藏吧！--}}
+                                {{--</div>--}}
+                                {{--<i class="nav-icon-s2 coll-dot">--}}
+                                {{--</i>--}}
+                            {{--</div>--}}
                         </div>
                         <!-- 收藏 end -->
                         <!-- sunny add 20130710 end -->
-                        <b class="c-sub">
-                            |
-                        </b>
-                        <a href="javascript:window.location.reload()">
-                            刷新
-                        </a>
-                        <b class="c-sub">
-                            |
-                        </b>
-                        <a href="javascript:doZoom(-2)">
-                            字体缩小
-                        </a>
-                        <b class="c-sub">
-                            |
-                        </b>
-                        <a href="javascript:doZoom(2)">
-                            字体变大
-                        </a>
+                        <b class="c-sub">|</b>
+                        <a href="javascript:window.location.reload()">刷新</a>
+                        <b class="c-sub">|</b>
+                        <a href="javascript:doZoom(-2)">字体缩小</a>
+                        <b class="c-sub">|</b>
+                        <a href="javascript:doZoom(2)">字体变大</a>
                     </div>
                     <!--针对内容页视频样式-->
                     <style>
@@ -457,7 +448,7 @@
                     </script>
                     <div class="postspecific">
                         <div class="posts-title">
-                            {{$postinfo[0]->title}}
+                            {{$postinfo->title}}
                         </div>
                         <div class="posts-stat-box">
                             <div class="posts-stat-t">
@@ -465,16 +456,16 @@
                             <div class="posts-stat-c">
                                 <div>
                                     <span class="f10px fB c-alarm">
-                                        {{$postinfo[0]->clickcount}}
+                                        {{$postinfo->clickcount}}
                                     </span>
                                     次点击
                                 </div>
-                                <div class="forward-wblog">
-                                    <span class="f10px fB c-alarm">
-                                        {{$postinfo[0]->replaycount}}
-                                    </span>
-                                    个回复
-                                </div>
+                                {{--<div class="forward-wblog">--}}
+                                    {{--<span class="f10px fB c-alarm">--}}
+                                        {{--{{$postinfo->replaycount}}--}}
+                                    {{--</span>--}}
+                                    {{--个回复--}}
+                                {{--</div>--}}
                                 <div>
                                 </div>
                                 <div class="forward-wblog">
@@ -487,34 +478,32 @@
                             <span class="c-main">
                                 <a href="javascript:;"
                                 tppabs="http://user.kdnet.net/index.asp?userid=11849785" target="_blank">
-                                    {{$users[$postinfo[0]->uid]}}
+                                    {{$postinfo->username}}
                                 </a>
                             </span>
-                            于    {{date('Y-m-d H:i:s',$postinfo[0]->posttime)}}发布在
+                            于    {{date('Y-m-d H:i:s',$postinfo->posttime)}}发布在
                             <span class="c-main">
                                 <a href="{{url('/admin')}}" tppabs="http://club.kdnet.net/">
                                     迷之社区
                                 </a>
                                 &gt;
                                 <a href="{{url('admin')}}" tppabs="http://club.kdnet.net/list.asp?boardid=1">
-                                    {{$postplates[$postinfo[0]->pid]}}
+                                    {{$postinfo->pname}}
                                 </a>
                             </span>
                         </div>
                         <div class="posts-cont" style="word-spacing: 2px;">
                             <br>
                             <img src="{{asset('/home/img/15076016546630413.jpg-imageView2-0-h-600.jpg')}}"
-                            tppabs="http://qc-cache.kdnet.net/upload/2017/10/10/15076016546630413.jpg?imageView2/0/h/600"
                             onclick="if(this.width==600) window.open('/home/img/15076016546630413.jpg')"
                             onload="imgload(this, 600)">
                             <br>
-                            {!!$postinfo[0]->content!!}
+                            {!!$postinfo->content!!}
                             <br>
                             <span class="name c-main">
-                                <a target="_blank" href="javascript:;"
-                                tppabs="http://user.kdnet.net/?username=风青杨V" class="tips" title="风青杨V"
+                                <a target="_blank" href="javascript:;" class="tips" title="风青杨V"
                                 onMouseOut="mOut();">
-                                    @ {{$users[$postinfo[0]->uid]}}V
+
                                 </a>
                             </span>
                             &nbsp;&nbsp;
@@ -569,13 +558,7 @@
                                     </div>
                                 </span>
                             </div>
-                            <div class="kd-app-download">
-                                <a href="javascript:if(confirm('http://3g.kdnet.net/app.php  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://3g.kdnet.net/app.php'"
-                                tppabs="http://3g.kdnet.net/app.php" target="_blank" title="凯迪社区APP下载">
-                                    <img src="{{asset('/home/img/kd_app_download.gif')}}" tppabs="{{asset('/home/img/kd_app_download.gif')}}"
-                                    alt="凯迪社区APP下载" />
-                                </a>
-                            </div>
+
                         </div>
                         <!--分享、app下载 E-->
                         <!-- sunny 20131021 share end -->
@@ -702,12 +685,12 @@
     <!--chung 打赏 E -->
     <!--sunny 打赏 E -->
     </div>
- 
 
-  
-    
+
+
+
     </div>
-  
+
     <div class="banner b-border">
         <div id="dispbbs29" style="width:822px;height:0;visibility:hidden;overflow:hidden;">
             <div style="width:822px;margin:0 auto; height:90px; overflow:hidden;">
@@ -773,17 +756,17 @@
                                 <div class="usertips clearfix box1" id="detailinfo_2">
                                 </div>
                                 <span class="name c-main">
-                                    <a href="#" tppabs="http://user.kdnet.net/index.asp?userid=8439893" target="_blank">
-                                        {{$users[$replay[0]->uid]}}
+                                    <a href="#">
+                                        {{$v->username}}
                                     </a>
                                 </span>
-                                <a href="#" tppabs="http://user.kdnet.net/index.asp?userid=8439893" target="_blank">
+                                <a href="#">
                                     <img class="phone-icon" title="手机绑定用户" src="{{asset('/home/img/transparent.gif')}}"
                                     tppabs="{{asset('/home/img/transparent.gif')}}" />
                                 </a>
                                 &nbsp;
                             </div>
-                                     {{date('Y-m-d H:i:s',$replay[0]->time)}}
+                                     {{date('Y-m-d H:i:s',$v->time)}}
                             <!-- 2017/10/10 10:24:31 &nbsp;&nbsp; -->
                             <a href=""
                             tppabs="http://3g.kdnet.net/app.php" target="_blank">
@@ -832,7 +815,7 @@
                         <span id="ding_72000998">
                         </span>
                         <!--<b class="c-sub">|</b>-->
-                        <!-- <a href="{{url('home/post/relative/'.$postinfo[0]->uid)}}" onclick="openLoginPopup();"> -->
+                        <!-- <a href="{{url('home/post/relative/'.$v->uid)}}" onclick="openLoginPopup();"> -->
                         <a href="#Preply"  id="re" onclick="replay()">
                             回复
                         </a>
@@ -888,13 +871,15 @@
     <!-- sunny 20130925 end -->
     <!-- 弹窗 end -->
     <!--发帖/分页-->
+    <link href="{{asset('/home/css/paginate.css')}}" rel="stylesheet" type="text/css">
+    <div class="pagination">
+        {!! $replay->render()!!}
+    </div>
 
-                       {!! $replay->render()!!}
 
     <div class="operating clearfix">
         <div class="btn-publish" title="发布新帖">
-            <a   href="{{url('/home/post/create')}}"
-            tppabs="http://upfile2.kdnet.net/textareaeditor/post_ubb.asp?action=new&boardid=1">
+            <a   href="{{url('/home/post/create')}}">
                 发布新帖
             </a>
         </div>
@@ -904,16 +889,16 @@
                 <span class="c-sub">
                     共
                     <span class="c-alarm">
-                        {{$postinfo[0]->clickcount}}
+                        {{$postinfo->clickcount}}
                     </span>
                     次点击，
                     <span class="c-alarm">
-                        {{$postinfo[0]->replaycount}}
+                        {{$postinfo->replaycount}}
                     </span>
                     个回复
                 </span>
                 &nbsp;
-              
+
             </div>
         </div>
     </div>
@@ -944,7 +929,14 @@
                 </script>
 
                    <!-- <div id="btn" href="javascript:;">发布</div>s -->
-                   <button id="btn">评论</button>
+                   {{--<button id="btn">评论</button>--}}
+
+        <div class="btn-publish" title="评论">
+            <a   href="javascript:;" id="btn">评论</a>
+        </div>
+        {{--<div style="display:none" id="hideuid">{{session('homeuser')->id}}</div>--}}
+
+
 
                 <!-- 实例化编辑器 -->
                 <script type="text/javascript">
@@ -967,19 +959,21 @@
                         ue.ready(function() {
                                 var id = $('#input').val();
                                 $('#btn').click(function() {
-                                    // 获取html内容，返回: <p>hello</p>
+//                                     获取html内容
                                      var content = ue.getContent();
+//                                    var uid = $('#hideuid').text();
 
                                     $.post("{{url('home/replay')}}",{'_token':"{{csrf_token()}}",'content':content,'id':id},function(data){
                                         if(data.status == 0){
                                             location.href = location.href;
 
                                             layer.msg(data.msg, {icon: 6});
+
                                         }else{
                                             location.href = location.href;
                                             layer.msg(data.msg, {icon: 5});
                                         }
-                                    console.log(data);
+//                                    console.log(data);
                                     });
 
                                 });   
@@ -987,7 +981,7 @@
                    
                 
             </script>
-          
+
     </div>
     <!--发表回复-->
   
@@ -1024,8 +1018,9 @@
                                 var postid = $('#input').val();
                                 var author = $('#author').val();
                                 $('#btn3').click(function() {
-                                    // 获取html内容，返回: <p>hello</p>
+                                    // 获取html内容
                                      var content = uea.getContent();
+//                                     var uid = $('#hideuid').text();
 
                                     $.post("{{url('home/rep')}}",{'_token':"{{csrf_token()}}",'content':content,'postid':postid,'author':author},function(data){
                                         if(data.status == 0){
@@ -1072,55 +1067,22 @@
 
     </script>
     <!-- //发表回复 -->
-    <!--声明-->
-    <div class="site-statement">
-        <span class="c-alarm">
-            本站声明：
-        </span>
-        本站BBS互动社区的文章由网友自行帖上，文责自负，对于网友的贴文本站均未主动予以提供、组织或修改；本站对网友所发布未经确证的商业宣传信息、广告信息、要约、要约邀请、承诺以及其他文字表述的真实性、准确性、合法性等不作任何担保和确认。因此本站对于网友发布的信息内容不承担任何责任，网友间的任何交易行为与本站无涉。任何网络媒体或传统媒体如需刊用转帖转载，必须注明来源及其原创作者。特此声明！
-        <br />
-        <br />
-        <span class="c-alarm">
-            【管理员特别提醒】
-        </span>
-        发布信息时请注意首先阅读 ( 琼B2-20060022 )：
-        <br />
-        <a href="../www.kdnet.net/club/decide.htm" tppabs="http://www.kdnet.net/club/decide"
-        target="_blank">
-            1.全国人大常委会关于维护互联网安全的决定
-        </a>
-        ；
-        <a href="../www.kdnet.net/club/rule.htm" tppabs="http://www.kdnet.net/club/rule"
-        target="_blank">
-            2.凯迪网络BBS互动区用户注册及管理条例
-        </a>
-        。谢谢！
-    </div>
-    <!--声明 End-->
+
     <div class="banner b-border" id="club_dispbbs_l_5">
     </div>
     <!--尾部-->
     <div class="footer-club">
-        本站律师声明：本站互动区域原创内容版权属作者和本站共同所有。
-        <br />
-        网络非盈利转载须注明作者姓名和文章的来源出处，其他媒体利用除注明作者姓名和文章的来源出处外还须按规定付酬。侵权必究。
-        <br />
-        法律顾问：广信君达律师事务所 刘东栓 赵广群律师
-        <br />
-        <br />
-        Copyright &copy; 2000~2017
-        <span class="c-main">
-            <a href="" http://www.kdnet.net ">kdnet.net</a></span> corporation. All Rights Reserved<br />
-            <span class="c-sub "><a href="" tppabs="http://about.kdnet.net/brief.php
-            " target=_blank>关于凯迪</a> <span class="c-secsub ">|</span> <a href="# " tppabs="http://about.kdnet.net/join.php
-            " target=_blank>联系我们</a> <span class="c-secsub ">|</span> <a href="# " tppabs="http://about.kdnet.net/join.php
-            " target=_blank>广告服务</a> <span class="c-secsub ">|</span> <a href="# " tppabs="http://about.kdnet.net/copyright.php
-            " target=_blank>法律声明</a> <span class="c-secsub ">|
-            </span> <a href="#" tppabs="http://about.kdnet.net/join-us.php " target=_blank>加入凯迪</a>
-            <!--<span class="c-secsub ">|</span>-->
-            <!--<a href="http://about.kdnet.net/sitemap.php " target=_blank>网站地图</a>-->
-            </span>
-            </div>
+        <p class="links">
+            友情链接：
+        </p>
+        @foreach(config('linksconfig') as $k => $v)
+            <a target="_blank" href="{{$k}}">{{$v}}</a>
+        @endforeach
+        <p class="state">{{config('webconfig.law')}}</p>
+        <div class="copyright">
+            {{config('webconfig.copyright')}}
+        </div>
+    </div>
             <!--尾部 End-->
             </div>
             <!-- // 左边内容 -->
@@ -1164,7 +1126,7 @@
             </div>
             </div>
             <div class="space10 "></div>
-           
+
             <div style="position:relative; z-index:1; ">
             <div id="dispbbs40 " style="width:0;height:0;visibility:hidden;overflow:hidden; ">
             <!--内容页右矩形3：2014-7-4-->
@@ -1187,8 +1149,7 @@
             <div class="gb-coffee ">
             <div class="gb-t ">
             <div class="gb-tl "></div>
-            <div class="title "><a href=" ../www.kdnet.net/index.htm " tppabs="http://www.kdnet.net/
-            " target="_blank ">精彩推荐</a></div>
+            <div class="title "><a href="javascript:;">精彩推荐</a></div>
             <div class="gb-tr "></div>
             </div>
             <div class="gb-c ">
@@ -1210,11 +1171,11 @@
             </li>
             </ul>
             </div>
-  
 
-            
+
+
                 </body>
 
-    
+
 
 </html>

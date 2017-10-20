@@ -68,8 +68,8 @@
                         <ul>
                     @foreach($post as $k=> $v)
                             <li>
-                                <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
-                                    <img src="{{asset('/home//img/59dc45910faf4.jpg')}}" tppabs="{{asset('/home//img/59dc45910faf4.jpg')}}">
+                                <a target="_blank" href="/home/post/{{$v->id}}">
+                                    <img src="{{asset('/home//img/59dc45910faf4.jpg')}}" >
                                 </a>
                                 <div class="list-title">
                                     <a target="_blank" href="/home/post/{{$v->id}}" tppabs="/home/post/{{$v->id}}">
@@ -82,26 +82,17 @@
                                     </a>
                                 </div>
                                 <div class="list-author">
-                                    <a target="_blank" href="javascript:;" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
-                                        {{$postusers["$v->uid"]}}
-                                    </a>
+                                    <a target="_blank" href="javascript:;" >{{$v->username}}</a>
                                     <span>
                                       {{date('Y-m-d H:i:s',$v->posttime)}}
                                     </span>
                                     <span>
-                                        点击
-                                        <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
-                                            {{$v->clickcount}}
-                                        </a>
+                                        点击<a href="javascript:;">{{$v->clickcount}}</a>
                                     </span>
                                     <span>
-                                        回复
-                                        <a target="_blank" href="dispbbs.asp-id=12447302&boardid=1.htm" tppabs="http://club.kdnet.net/dispbbs.asp?id=12447302">
-                                            {{$v->replaycount}}
-                                        </a>
+                                        回复<a href="javascript:;">{{$v->replaycount}}</a>
                                     </span>
-                                    <a href="{{url('/home/plateslist/'.$v->pid)}}" tppabs="http://club.kdnet.net/list.asp?boardid=1"
-                                    class="plate">
+                                    <a href="{{url('/home/plateslist/'.$v->pid)}}" class="plate">
                                         来自：{{$postplates[$v->pid]}}
                                     </a>
                                 </div>
@@ -112,7 +103,7 @@
 
 
                         
-                        <div style="margin-left:500px" class="postlist-page">
+                        <div style="margin-left:500px" class="pagination">
                             <!-- <form class="c_pager">
                                 <span class="numInfo">
                                     共1140个记录，页次1/38页

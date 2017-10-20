@@ -119,8 +119,6 @@ Route::post('/resetsendcode','Home\CommonController@sendCode');
 //分组去掉命名空间,前缀
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
-    //前台帖子
-    Route::resource('/post','PostController');
 //前台猫眼显示
     Route::get('/cateye','PostController@cateye');
 //标签列表显示
@@ -189,25 +187,29 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
         //我的积分记录
         Route::get('/myscorelog','UserInfoController@myscorelog');
 
-        //--------------帖子相关路由  发帖 回帖单独写规则
-        //发帖 回帖 需要验证帐号是否已经激活邮箱
-        Route::group(['middleware'=>'isactive'],function(){
-            //评论帖子
-            Route::post('/replay','PostController@replay');
-            //回复评论
-            Route::post('/rep','PostController@rep');
-        });
         // 收藏帖子
-        Route::post('//collection','PostController@collection');
+        Route::post('/collection','PostController@collection');
         //点赞
         Route::post('/admire','PostController@admire');
         //点踩
         Route::post('/tread','PostController@tread');
     });
 
+    //--------------帖子相关路由  发帖 回帖单独写规则
+    //发帖 回帖 需要验证帐号是否已经登录 或者激活邮箱
+    Route::group(['middleware'=>'isactive'],function(){
+        //发表帖子 发表帖子改为控制器内判断
+        // Route::get('/posting','PostController@posting');
+        //评论帖子
+        Route::post('/replay','PostController@replay');
+        //回复评论
+        Route::post('/rep','PostController@rep');
+    });
+
     // 网络服务协议和声明
     // Route::get('/agreement','CommonController@agreement');
-
+    //前台帖子
+    Route::resource('/post','PostController');
 
 
 });
@@ -215,7 +217,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
 
 
-//记录执行的sql语句
+// 记录执行的sql语句
 // Event::listen('illuminate.query', function($sql,$param) {
 //     file_put_contents(public_path().'/sql.log',$sql.'['.print_r($param, 1).']'."\r\n",8);
 // });

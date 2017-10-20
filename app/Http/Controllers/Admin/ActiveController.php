@@ -38,22 +38,46 @@ class ActiveController extends Controller
           // $pid = $pid!=0?$pid:'';
           
           $num = $request->input('pagea')?$request->input('pagea'): 10;
-          $postcode = '2';
+          $postcodes = '2';
           $postcode = '1 ';
 
-        if ($pid == '0' || $pid == '' ||$cid == '0'|| $cid == '') {
-            $res = DB::table('post')
+        // if ($pid == '0' || $pid == '' ||$cid == '0'|| $cid == '') {
+        //     $res = DB::table('post')
+        //     ->leftJoin('user', 'post.uid', '=', 'user.id')
+        //     ->leftJoin('plates','post.pid','=','plates.id')
+        //     ->leftJoin('childplates','post.cid','=','childplates.id')
+        //     ->select('post.*','plates.pname','user.username','childplates.cname')
+        //         ->where('post.pid','>',$pid)
+        //         ->whereIn('post.postcode',['1','2'])
+        //         ->where('post.cid','>',$cid)
+        //         ->where('title','like','%'.$input.'%')
+        //         ->orderBy('id','desc')
+        //         ->paginate($num);
+        // } else {
+        //     $res = DB::table('post')
+        //     ->leftJoin('user', 'post.uid', '=', 'user.id')
+        //     ->leftJoin('plates','post.pid','=','plates.id')
+        //     ->leftJoin('childplates','post.cid','=','childplates.id')
+        //     ->select('post.*','plates.pname','user.username','childplates.cname')
+        //         ->where('post.pid',$pid)
+        //         ->where('post.postcode',$postcode)
+        //         ->where('post.cid',$cid)
+        //         ->where('title','like','%'.$input.'%')
+        //         ->orderBy('id','desc')
+        //         ->paginate($num);
+        // }
+
+        $res = DB::table('post')
             ->leftJoin('user', 'post.uid', '=', 'user.id')
             ->leftJoin('plates','post.pid','=','plates.id')
             ->leftJoin('childplates','post.cid','=','childplates.id')
-            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid','>',$pid)->where('post.postcode',$postcode||$postcodes)->where('post.cid','>',$cid)->where('title','like','%'.$input.'%')->orderBy('id','desc')->paginate($num);
-        } else {
-            $res = DB::table('post')
-            ->leftJoin('user', 'post.uid', '=', 'user.id')
-            ->leftJoin('plates','post.pid','=','plates.id')
-            ->leftJoin('childplates','post.cid','=','childplates.id')
-            ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.pid',$pid)->where('post.postcode',$postcode)->where('post.cid',$cid)->where('title','like','%'.$input.'%')->orderBy('id','desc')->paginate($num);
-        }
+            ->select('post.*','plates.pname','user.username','childplates.cname')
+            ->where('post.pid','like','%'.$pid.'%')
+            ->whereIn('post.postcode',['1','2'])
+            ->where('post.cid','like','%'.$cid.'%')
+            ->where('title','like','%'.$input.'%')
+            ->orderBy('id','desc')
+            ->paginate($num);
         //转换状态
         $statu = ['普通帖','活动贴','公告贴'];
 

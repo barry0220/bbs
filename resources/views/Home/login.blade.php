@@ -78,7 +78,7 @@
 <div class="login-wrap pc-login-wrap" data-key="0.76460900 1507623358">
     <header>
         <h1>
-            <a href="{{url('/home/index')}}" target="_blank">
+            <a href="{{url('/')}}" target="_blank">
                 <img src="{{asset('/home/img/logo_login@2x.e634babc.png')}}" class="img-responsive" alt="凯迪 - 客观 公正 理性 宽容">
             </a>
         </h1>

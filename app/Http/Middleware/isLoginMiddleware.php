@@ -18,10 +18,9 @@ class isLoginMiddleware
         if(session('user')){
             return $next($request);
         }else{
-
+            // return $next($request);
             $info = "非法访问";
            return view('errors.error',compact('info'));
-//             return $next($request);
         }
 
     }

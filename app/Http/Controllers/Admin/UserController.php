@@ -303,7 +303,7 @@ class UserController extends Controller
             return redirect('admin/repass')->with('errors','原密码错误')->withInput();
         }
         //修改密码
-        $user->password = Hash::make($input['password_o']);
+        $user->password = Hash::make($input['password_n']);
         $re = $user->save();
         if($re){
             return redirect('admin/user')->with('msg','密码修改成功');

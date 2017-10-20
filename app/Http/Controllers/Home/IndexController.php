@@ -8,6 +8,7 @@ use App\Models\Plates;
 use App\Models\Post;
 use App\Models\Runimg;
 use App\Models\Tags;
+use App\Models\UserDetail;
 use App\Models\UserHome;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,8 +35,9 @@ class IndexController extends Controller
             $tagname[$v->id] = $v->tagname;
 
         }
+
         //活动帖子
-        $huodong = Post::where('postcode', '1')->orderBy('posttime', 'desc')->limit(5)->get();
+        $huodong = Post::whereIn('postcode', ['1','2'])->orderBy('posttime', 'desc')->limit(5)->get();
 
         //普通帖子
         $post = Post::where('postcode', '0')->orderBy('clickcount')->get();
@@ -55,6 +57,7 @@ class IndexController extends Controller
             }
         }
 
+        // dd($tagpost);
 //        dd($arr);
         $maxtwo = Post::orderBy('clickcount', 'desc')->limit(2)->get();
         //影像板块
@@ -69,6 +72,13 @@ class IndexController extends Controller
             $username[$v->id] = $v->username;
 
         }
+        $userdetail = UserDetail::get();
+        $userface = [];
+        foreach ($userdetail as $k => $v) {
+            $userface[$v->uid] = $v->profile;
+
+        }
+        // dd($userface);
 //      dd($username);
         //作者推荐
         $auther = Post::orderBy('clickcount', 'desc')->groupBy('uid')->limit(10)->get();
@@ -95,7 +105,7 @@ class IndexController extends Controller
 //        $post = Post::get();
 
 //        return view('home/index',compact('plates','runimg','post','posts1','posts2','posts3','posts4','posts5','posts6','posts7','posts8'));
-        return view('home/index', compact('plates', 'platess', 'runimg', 'arr', 'huodong', 'maxtwo', 'plate', 'auther', 'username', 'link', 'tagname','adspace'));
+        return view('home/index', compact('plates', 'platess','userface','runimg', 'arr', 'huodong', 'maxtwo', 'plate', 'auther', 'username', 'link', 'tagname','adspace'));
 
 
 //        return view('home/index',compact('plates'));

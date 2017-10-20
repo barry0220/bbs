@@ -22,7 +22,7 @@ class UserInfoController extends Controller
     //引入用户信息页面
     public function index()
     {
-        // dd(session('testuser'));
+        // dd(session('homeuser'));
         if (!session('homeuser')) {
             return redirect('/home/login');
         }
@@ -149,7 +149,7 @@ class UserInfoController extends Controller
             //获取用户头像并存在session中
             $userface = UserDetail::where('uid',$newuser->id)->select('profile')->first();
 
-            $newuser['userface'] = $userface;
+            $newuser->userface = $userface['profile'];
             //存入新的session
             session(['homeuser'=>$newuser]);
         }else{
@@ -279,6 +279,7 @@ class UserInfoController extends Controller
             ->select('replay.*','post.title','post.posttime','plates.pname','plates.id as platesid','user.username' )
             ->where('replay.uid',session('homeuser')->id)
             ->paginate(3);
+        // dd($info);
 
 
         return view('home.user.myreplay',compact('details','plates','info'));

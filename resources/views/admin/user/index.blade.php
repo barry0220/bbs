@@ -12,7 +12,7 @@
                             <div class="dataTables_length" id="editable_length">
                                 <label>
                                     每页显示
-                                    <select name="pagea" aria-controls="editable" class="form-control input-sm">
+                                    <select name="pagea" aria-controls="editable" class="form-control ">
                                         <option value="5"
                                                 @if($num==5)
                                                 selected="selected"
@@ -39,10 +39,10 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <a href="{{url('admin/user/create')}}" class="btn btn-info btn-sm" style="font-size:16px;">+</a>
+                        <div class="col-sm-2">
+                            <a href="{{url('admin/user/create')}}" class="btn btn-info btn-sm" style="font-size:16px;">添加管理员</a>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div id="editable_filter" class="dataTables_filter">
                                 <label>
                                     搜索：<input type="search" class="form-control input-sm" name="user" value="{{ !empty($_GET['user']) ? $_GET['user'] : '' }}" placeholder="输入用户名">
@@ -53,7 +53,6 @@
                                 <input type="submit" class="btn btn-primary btn-sm" value="查询">
 
                                 <!-- </div> -->
-
 
 
                             </div>

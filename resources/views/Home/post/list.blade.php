@@ -167,7 +167,7 @@
                                     </i>
                                     发布新帖
                                 </a>
-                                <div class="postlist-page" style="margin-top:-15px;margin-right:10px;">
+                                <div class="pagination" style="margin-top:-15px;margin-right:10px;">
                                  {!!$posts->render()!!}
                                 </div>
                             </div>
