@@ -211,6 +211,7 @@ class ActiveController extends Controller
         //转换状态
         // $postcode = ['普通帖','活动贴','公告贴'];
         // $status=['正常','已删除'];
+               // dd($res[0]->status);
 
         return view('Admin.active.show',compact('res','status','postcode'));
 
@@ -236,7 +237,7 @@ class ActiveController extends Controller
         $postcode = ['普通帖','活动贴','公告贴'];
         $status=['正常','已删除'];
 
-         $tag = Tags::get();
+        $tag = Tags::get();
         $pls = Plates::get();
         $childPlates = new ChildPlates();
         $cls = $childPlates ->get();
@@ -291,16 +292,15 @@ class ActiveController extends Controller
 
 
         $post = Post::find($id);
-        // dd($post);
         $post->title = $input['title'];
         $post->pid = $input['pid'];
         $post->posttime =time();
         $post->keywords = $input['keywords'];
         $post->cid = $input['cid'];
         $post->good = $input['good'];
-        $post->goodtime = $input['goodtime'];
+        $post->goodtime = time();
         $post->stick = $input['stick'];
-        $post->sticktime = $input['sticktime'];
+        $post->sticktime = time();
         $post->status = $input['status'];
         $post->postcode = $input['postcode'];
         $post->content = $input['content'];

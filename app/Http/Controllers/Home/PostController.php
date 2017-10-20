@@ -17,6 +17,9 @@ use App\Models\ChildPlates;
 use App\User;
 use DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\UserDetail;
+use App\Models\Scorelog;
+
 
 
 

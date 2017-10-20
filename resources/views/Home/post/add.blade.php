@@ -55,10 +55,11 @@
                     <div class="p-plank">
                         猫眼看人
                     </div>
+
                 </div>
                 <div class="p-msg-r">
                 </div>
-            </div>
+            </div>  
             <form  method="post" action="{{url('home/post')}}"
             target="sfid"  style="width:620px; margin:0 auto;">
                 <div style="height: 100%;" id="postPageC" class="post-page-c">
@@ -71,7 +72,7 @@
                                         昵　　称：
                                     </div>
                                     <div class="col-sm-4">
-                                    <input name="username" value="" class="input-boder" "
+                                    <input name="username" value="{{session('homeuser')->username}}" class="input-boder" "
                                     id="username" onkeypress="enter_onkeypress(event)" type="text">
                                     </div>
 

@@ -123,24 +123,22 @@
                     </div>
 
                             <!-- 实例化编辑器 -->
-                    <script>
-                            var ue = UE.getEditor('container');
-                            //对编辑器的操作最好在编辑器ready之后再做
-                            // ue.ready(function() {
-                            //     //设置编辑器的内容
-                            //     // ue.setContent('{{$res[0]->content}}');
-                            //     //获取html内容，返回: <p>hello</p>
-                            //     // var html = ue.getContent();
-                            //     //获取纯文本内容，返回: hello
-                            //     var txt = ue.getContentTxt();
-                            //     var txts = htmlspecialchars(txt);
-                            //         $.post('/admin/active/create',{'_token':'{{csrf_token()}}','content':'txts'},function(data){
-                                                                   
-                            //         });
-
-                            // });
-
-                    </script>
+                          <script>
+                                                   
+                        var ue = UE.getEditor('container',{    
+                            //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个    
+                            toolbars:[['FullScreen', 'Source', 'Undo', 'Redo','bold','test','simpleupload','fontfamily','fontsize','bold','italic','justifyleft','justifycenter','horizontal']],    
+                            //focus时自动清空初始化时的内容    
+                            // autoClearinitialContent:true,    
+                            //关闭字数统计    
+                            // wordCount:false,    
+                            //关闭elementPath    
+                            elementPathEnabled:false,    
+                            //默认的编辑区域高度    
+                            initialFrameHeight:300    
+                            //更多其他参数，请参考ueditor.config.js中的配置项    
+                        });  
+                          </script>
                     <div class="hr-line-dashed">
                     </div>
                     <div class="form-group">
@@ -149,19 +147,19 @@
 
                                 <label  style="margin-left: 10px">
                                     加　精
-                                     <input type="radio" name="good" 
+                                     <input type="radio" name="good"  
                                     @if($res[0]->good == 1)
-                                        checked="checked"
+                                        checked 
                                     @endif
                                       id="optionsRadios1" >
 
                                 </label>
                                 <label>
-                                    不加精<input type="radio" 
+                                    不加精<input type="radio" name="good"
                                      @if($res[0]->good == 0)
-                                        checked="checked"
+                                        checked 
                                     @endif
-                                    name="good" id="optionsRadios2"
+                                     id="optionsRadios2"
                                       value="1" >
                                     
                                </label>                      
@@ -170,35 +168,28 @@
 
                     <div class="hr-line-dashed">
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">
-                             加精时间:
-                        </label>
-                        <div class="col-sm-4">
-                            <input type="text" readonly="readonly" name="goodtime" value="{{date('Y-m-d H:i:s',$res[0]->goodtime)}}" class="form-control">
-                        </div>
-                    </div>
+ 
                     <div class="hr-line-dashed">
                     </div>
                       <div class="form-group">
-                        <div class="col-sm-3 control-label" style="margin-left: 50px" >
+                        <div class="col-sm-3 control-label" style="margin-left: 30px" >
                        <b>是否置顶:</b>
 
                                 <label  style="margin-left: 10px">
                                     置顶
-                                     <input type="radio" name="stick" 
+                                     <input type="radio" name="stick"  
                                     @if($res[0]->stick == 1)
-                                        checked="checked"
+                                        checked
                                     @endif
                                       id="optionsRadios1" >
 
                                 </label>
                                 <label>
-                                    不置顶<input type="radio" 
+                                    不置顶<input type="radio" name="stick"
                                      @if($res[0]->stick == 0)
-                                        checked="checked"
+                                        checked
                                     @endif
-                                    name="stick" id="optionsRadios2"
+                                     id="optionsRadios2"
                                       value="1" >
                                     
                                </label>                      
@@ -206,15 +197,7 @@
                     </div>
                     <div class="hr-line-dashed">
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">
-                             置顶时间:
-                        </label>
-                        <div class="col-sm-4">
-                            <input type="text" readonly="readonly" name="sticktime" value="{{date('Y-m-d H:i:s',$res[0]->sticktime)}}"  class="form-control">
-                        </div>
-                    </div>
-
+ 
 
 
                     <div class="hr-line-dashed">
@@ -248,11 +231,26 @@
                     </div>
  
                          <div class="form-group">
-                        <div class="col-sm-2 control-label" style="margin-left: 55px">
+                        <div class="col-sm-3 control-label" style="margin-left:30px">
                        <b>帖子类型:</b> 
                                 <label>
-                                    公告帖<input type="radio" checked="checked" value="2" name="postcode">
-                               </label>                      
+                                    活动贴<input type="radio" name="postcode"
+                                     @if($res[0]->postcode == 1)
+                                        checked="checked"
+                                    @endif
+                                     id="optionsRadios2"
+                                      value="1" >
+                                    
+                               </label> 
+                                <label>
+                                    公告帖<input type="radio" name="postcode"
+                                     @if($res[0]->postcode == 2)
+                                        checked="checked"
+                                    @endif
+                                   id="optionsRadios2"
+                                      value="2" >
+                                    
+                               </label>                     
                         </div>
                     </div>
 

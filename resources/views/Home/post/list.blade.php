@@ -123,7 +123,7 @@
                                 </thead>
                                 <tbody>
                      
-                     @foreach($posts as $k=>$v)
+                     @foreach($author as $k=>$v)
                                     <tr class="list-folder">
                                         <td class="table-state">
                                             <i title="{{$statu[$v->postcode]}}">
@@ -138,17 +138,17 @@
                                         <td class="table-author">
                                             <a target="_blank"  href="javascript:;"
                                             tppabs="http://user.kdnet.net/index.asp?userid=14835782">
-                                                {{$postusers[$v->uid]}}
+                                                {{$v->username}}
                                             </a>
                                         </td>
                                         <td class="table-read">
                                             {{$v->replaycount}}/{{$v->clickcount}}
                                         </td>
                                         <td class="table-update">
-                                            {{date('Y-m-d H:i:s',$v->posttime)}}|
+                                            {{date('Y-m-d H:i:s',intval($v->posttime))}}|
                                             <a target="_blank" href="javascript:;"
                                             tppabs="#">
-                                               {{$postusers[$v->uid]}}
+                                               {{$v->username}}
                                             </a>
                                         </td>
                                     </tr>
