@@ -190,9 +190,13 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
         // 收藏帖子
         Route::post('/collection','PostController@collection');
         //点赞
-        Route::post('/admire','PostController@admire');
+        Route::post('/doadmire','PostController@doadmire');
         //点踩
-        Route::post('/tread','PostController@tread');
+        Route::post('/dotread','PostController@dotread');
+        //取消点赞
+        Route::post('/downadmire','PostController@downadmire');
+        //取消点踩
+        Route::post('/downtread','PostController@downtread');
     });
 
     //--------------帖子相关路由  发帖 回帖单独写规则

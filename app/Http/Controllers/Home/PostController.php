@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Models\Admireortread;
 use Illuminate\Http\Request;
 
 
@@ -278,7 +279,7 @@ class PostController extends Controller
     public function show($id)
     {
         //帖子详情页
-
+//    dd(session('testid'));
         $postinfo = \DB::table('post')
             ->leftjoin('user','user.id','=','post.uid')
             ->leftjoin('plates','plates.id','=','post.pid')
@@ -301,7 +302,15 @@ class PostController extends Controller
         $click -> clickcount = $click['clickcount']+1;
         $click->save();
 
-        return view('/home/post/detail',compact('postinfo','replay','plates'));
+        //判断当前用户对帖子是赞还是踩
+        //默认为0 未点击状态  判断是否登录
+        $admireortread = 0;
+        if (session('homeuser')) {
+            $admireortread = Admireortread::where('postid',$id)->where('uid',session('homeuser')->id)->first()['status'];
+        }
+//        dd($admireortread);
+
+        return view('/home/post/detail',compact('postinfo','replay','plates','admireortread'));
 
     }
 
@@ -447,42 +456,20 @@ class PostController extends Controller
 
     }
      //帖子点赞
-    public function admire(Request $request){
+    public function doadmire(Request $request){
 
-               // $re = Post::where('id',$id)->update(['status'=>'0']); 
-
- 
-              
+        //获取上传的数据
         $input = $request->except('_token');
+        $postid = $input['postid'];
+        $uid = session('homeuser')->id;
 
+        //增加到点赞表并且修改帖子的点赞数量
+        $res = Admireortread::create(['postid'=>$postid,'uid'=>$uid,'status'=>1]);
 
-        $postinfo = Post::where('id',$input['postid'])->get();
-        $admire = ($postinfo[0]->admire)+1;
-
-
-
-
-
-
-          // $info = Mycollect::get();
-        // foreach ($info as $k => $v) {
-        //     # code...
-
-        //     if($v->uid == 1 && $v->postid == $input['postid']){
-        //         $data=[
-        //           'status'=>2,
-        //           'msg'=>'已收藏'
-        //          ];
-
-        //          return $data;
-        //         }
-        // }
-        $posts = new Post();        
-        $posts->admire = $admire;
- 
-        $re = $posts->save();
-
-         if($re){
+         if($res){
+             $post = Post::find($postid);
+             $post->admire = intval($post->admire) +1;
+             $post -> save();
           $data=[
               'status'=>0,
               'msg'=>'点赞成功'
@@ -497,47 +484,89 @@ class PostController extends Controller
 
     }
 
-     //帖子点赞
-    public function tread(Request $request){
+     //帖子点踩
+    public function dotread(Request $request){
+        //获取上传的数据
+        $input = $request->except('_token');
+        $postid = $input['postid'];
+        $uid = session('homeuser')->id;
 
-               // $re = Post::where('id',$id)->update(['status'=>'0']); 
+        //增加到点赞表并且修改帖子的点踩数量
+        $res = Admireortread::create(['postid'=>$postid,'uid'=>$uid,'status'=>2]);
 
- 
-              
-        $data = $request->except('_token');
+        if($res){
+            $post = Post::find($postid);
+            $post->tread = intval($post->tread)+1;
+            $post -> save();
+            $data=[
+                'status'=>0,
+                'msg'=>'点踩成功'
+            ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'点踩失败'
+            ];
+        }
+        return  $data;
 
-        // $info = Mycollect::get();
-        // foreach ($info as $k => $v) {
-        //     # code...
+    }
 
-        //     if($v->uid == 1 && $v->postid == $input['postid']){
-        //         $data=[
-        //           'status'=>2,
-        //           'msg'=>'已收藏'
-        //          ];
+    //帖子取消点赞
+    public function downadmire(Request $request){
+        //获取上传的数据
+        $input = $request->except('_token');
+        $postid = $input['postid'];
+        $uid = session('homeuser')->id;
 
-        //          return $data;
-        //         }
-        // }
-        // $mycollect = new Mycollect();        
-        // $mycollect->uid = 1;
-        // $mycollect->postid = $input['postid'];
-        // $mycollect->collecttime = time();
- 
-        // $re = $mycollect->save();
+        //从点赞表删除并且修改帖子的点赞数量
+        $admire = Admireortread::where('postid',$postid)->where('uid',$uid)->first();
+        $res = $admire -> delete();
 
-        //  if($re){
-        //   $data=[
-        //       'status'=>0,
-        //       'msg'=>'收藏成功'
-        //   ];
-        // }else{
-        //     $data=[
-        //         'status'=>1,
-        //         'msg'=>'收藏失败'
-        //     ];
-        // }
-          return  $data;
+        if($res){
+            $post = Post::find($postid);
+            $post->admire = intval($post->admire)-1;
+            $post -> save();
+            $data=[
+                'status'=>0,
+                'msg'=>'取消点赞成功'
+            ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'取消点赞失败'
+            ];
+        }
+        return  $data;
+
+    }
+
+    //帖子取消点踩
+    public function downtread(Request $request){
+        //获取上传的数据
+        $input = $request->except('_token');
+        $postid = $input['postid'];
+        $uid = session('homeuser')->id;
+
+        //从点赞表删除并且修改帖子的点踩数量
+        $admire = Admireortread::where('postid',$postid)->where('uid',$uid)->first();
+        $res = $admire -> delete();
+
+        if($res){
+            $post = Post::find($postid);
+            $post->tread = intval($post->tread)-1;
+            $post -> save();
+            $data=[
+                'status'=>0,
+                'msg'=>'取消点踩成功'
+            ];
+        }else{
+            $data=[
+                'status'=>1,
+                'msg'=>'取消点踩失败'
+            ];
+        }
+        return  $data;
 
     }
 }

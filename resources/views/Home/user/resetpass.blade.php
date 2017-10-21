@@ -86,7 +86,7 @@
 							<input type="hidden" name="phonenum" id="phonenum" value="">
 							<button type="submit" class="btn btn-primary btn-block btn-lg"
 									data-loading-text="<i class='fa fa-refresh fa-spin'></i> 正在提交…">
-								注册
+								重置密码
 							</button>
 						</div>
 						{{csrf_field()}}

@@ -59,7 +59,12 @@ class IndexController extends Controller
 
         // dd($tagpost);
 //        dd($arr);
-        $maxtwo = Post::orderBy('clickcount', 'desc')->limit(2)->get();
+        $maxtwo = \DB::table('post')
+            ->leftjoin('plates','plates.id','=','post.pid')
+            ->select('post.*','plates.pname')
+            ->orderBy('post.clickcount', 'desc')
+            ->limit(2)
+            ->get();
         //影像板块
         $plate = Plates::orderBy('id')->limit(4)->get();
 

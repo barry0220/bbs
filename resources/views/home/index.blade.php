@@ -69,7 +69,7 @@
                         <a id="login" href="{{url('/home/login')}}">登录</a>
                     </li>
                     <li>
-                        <a id="reg" href="{{url('/home/regsiter')}}">注册</a>
+                        <a id="reg" href="{{url('/home/register')}}">注册</a>
                     </li>
                 </ul>
             @endif
@@ -164,10 +164,10 @@
                         <img src="{{asset('/home/img/59dc6338e9938.png')}}"/>
                         <a target="_blank" href="{{url('/home/post/'.$v->id)}}">
                             <p class="topnews-title">
-                                {{$v->title}}
+                                {{$v->pname}}
                             </p>
                             <p class="topnews-content">
-                                {{$v->content}}
+                                {{$v->title}}
                             </p>
                         </a>
                     </li>

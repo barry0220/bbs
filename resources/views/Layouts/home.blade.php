@@ -96,7 +96,7 @@
                 @else
                     <div class="login-box">
                         <a id="login" href="{{url('/home/login')}}">登录</a>
-                        <a id="reg" href="{{url('/home/regsiter')}}">注册</a>
+                        <a id="reg" href="{{url('/home/register')}}">注册</a>
                     </div>
                 @endif
             </div>
