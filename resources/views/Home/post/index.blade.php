@@ -103,7 +103,7 @@
 
 
                         
-                        <div style="margin-left:500px" class="pagination">
+                        <div style="margin-left:100px" class="pagination">
                             <!-- <form class="c_pager">
                                 <span class="numInfo">
                                     共1140个记录，页次1/38页

@@ -38,7 +38,7 @@
                              发帖时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" value="{{date('Y-m-d H:i:s',$res[0]->posttime)}}" disabled="disabled" class="form-control">
+                            <input type="text" value="{{date('Y-m-d H:i:s',intval($res[0]->posttime))}}" disabled="disabled" class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -176,7 +176,7 @@
                              加精时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text"  value="{{date('Y-m-d H:i:s',$res[0]->goodtime)}}" class="form-control">
+                            <input type="text"  value="{{date('Y-m-d H:i:s',intval($res[0]->goodtime))}}" class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -218,7 +218,7 @@
                              置顶时间:
                         </label>
                         <div class="col-sm-4">
-                            <input type="text"  value="{{date('Y-m-d H:i:s',$res[0]->sticktime)}}"  disabled="disabled" class="form-control">
+                            <input type="text"  value="{{date('Y-m-d H:i:s',intval($res[0]->sticktime))}}"  disabled="disabled" class="form-control">
                         </div>
                     </div>
                     <div class="hr-line-dashed">
@@ -249,19 +249,19 @@
 
                                 <label  style="margin-left: 10px">
                                     正常
-                                     <input type="radio" name="status" 
+                                     <input type="radio" name="status"    
                                     @if($res[0]->status == 0)
-                                        checked="checked"
+                                        checked
                                     @endif
                                       id="optionsRadios1" >
 
                                 </label>
                                 <label>
-                                    已删除<input type="radio" 
+                                    已删除<input type="radio"   name="status" 
                                      @if($res[0]->status == 1)
-                                        checked="checked"
+                                        checked
                                     @endif
-                                    name="status" id="optionsRadios2"
+                                   id="optionsRadios2"
                                       value="1" >
                                     
                                </label>                      
@@ -285,20 +285,20 @@
 
                                 </label>
                                 <label>
-                                    活动贴<input type="radio" 
+                                    活动贴<input type="radio" name="postcode"
                                      @if($res[0]->postcode == 1)
                                         checked="checked"
                                     @endif
-                                    name="postcode" id="optionsRadios2"
+                                     id="optionsRadios2"
                                       value="1" >
                                     
                                </label> 
                                 <label>
-                                    公告帖<input type="radio" 
+                                    公告帖<input type="radio" name="postcode"
                                      @if($res[0]->postcode == 2)
                                         checked="checked"
                                     @endif
-                                    name="status" id="optionsRadios2"
+                                   id="optionsRadios2"
                                       value="2" >
                                     
                                </label>                      

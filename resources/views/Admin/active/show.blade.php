@@ -251,15 +251,15 @@
                                     正常
                                      <input type="radio" name="status" 
                                     @if($res[0]->status == 0)
-                                        checked="checked"
+                                        checked
                                     @endif
                                       id="optionsRadios1" >
 
                                 </label>
                                 <label>
-                                    已删除<input type="radio" 
+                                    已删除<input type="radio"  name="status" 
                                      @if($res[0]->status == 1)
-                                        checked="checked"
+                                        checked
                                     @endif
                                     name="status" id="optionsRadios2"
                                       value="1" >
@@ -285,7 +285,7 @@
 
                                 </label>
                                 <label>
-                                    活动贴<input type="radio" 
+                                    活动贴<input type="radio"  name="postcode"
                                      @if($res[0]->postcode == 1)
                                         checked="checked"
                                     @endif
@@ -294,7 +294,7 @@
                                     
                                </label> 
                                 <label>
-                                    公告帖<input type="radio" 
+                                    公告帖<input type="radio"  name="postcode"
                                      @if($res[0]->postcode == 2)
                                         checked="checked"
                                     @endif

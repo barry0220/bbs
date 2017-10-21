@@ -122,7 +122,10 @@ class PostController extends Controller
             ->leftJoin('plates','post.pid','=','plates.id')
             ->leftJoin('childplates','post.cid','=','childplates.id')
             ->select('post.*','plates.pname','user.username','childplates.cname')->where('post.id',$id)->get();
-        //转换状态
+               //转换int类型
+            // dd($res[0]->status);
+             // $time = intval($res[0]->posttime);
+         //转换状态
         $postcode = ['普通帖','活动贴','公告贴'];
         $status=['正常','已删除'];
 
@@ -286,7 +289,7 @@ class PostController extends Controller
     {
         # code...
 
-        $re = Post::where('id',$id)->update(['stick'=>'1'   ]); 
+        $re = Post::where('id',$id)->update(['stick'=>'1']); 
        
          if($re){
           $data=[
@@ -310,7 +313,7 @@ class PostController extends Controller
     {
         # code...
 
-        $re = Post::where('id',$id)->update(['stick '=>'0']); 
+        $re = Post::where('id',$id)->update(['stick'=>'0']); 
        
          if($re){
           $data=[

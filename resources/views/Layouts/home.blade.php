@@ -132,13 +132,30 @@
                             <div class="active item" data-slide="1">
                                 <ul>
                                     @foreach($author as $k=>$v)
-                                    <li>
+                                    <!-- <li>
                                         <div class=" a-w40">
                                             <a href="">
                                                 <img src="{{asset($v->profile)}}" onerror="this.src='{{asset('/home/img/200x200.png')}}'">
                                             </a>
                                         </div>
                                         <div class="area">
+                                            <h5>
+                                                <a target="_blank" href="{{url('home/post/'.$v->id)}}">{{$v->title}}</a>
+                                            </h5>
+                                            <h6>
+                                                <a target="_blank" href="">
+                                                    {{$v->username}}
+                                                </a>
+                                            </h6>
+                                        </div>
+                                    </li> -->
+                                     <li>
+                                        <div class=" a-w40" style="float: left" >
+                                            <a href="">
+                                                <img src="{{asset($v->profile)}}" onerror="this.src='{{asset('/home/img/200x200.png')}}'">
+                                            </a>
+                                        </div>
+                                        <div class="area" style="float: left;margin-left: 20px">
                                             <h5>
                                                 <a target="_blank" href="{{url('home/post/'.$v->id)}}">{{$v->title}}</a>
                                             </h5>
