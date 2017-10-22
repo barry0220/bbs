@@ -21,8 +21,6 @@ class HomeIsLoginMiddleware
                 return $next($request);
         } else {
 
-            $info = "请先登录在进行此操作";
-
             return view('errors.error',compact('info'));
         }
     }

@@ -375,7 +375,7 @@
                                         <img src="{{$userface[$v->uid]}}"/>
                                     </a>
                                     <p class="indexside-title">
-                                        <a target="_blank" href="javascript:;">
+                                        <a  href="javascript:;">
                                             {{$username[$v->uid]}}
                                         </a>
                                     </p>

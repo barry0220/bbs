@@ -145,7 +145,7 @@ class LoginController extends Controller
         // session(['test'=>$r]);
 
         //进入前台首页
-        return redirect('/home/userinfo');
+        return redirect('/');
     }
     //退出登录方法
     public function loginOut()

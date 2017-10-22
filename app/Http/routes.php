@@ -151,6 +151,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
     Route::post('/forgetrepass','CommonController@forgetrepass');
     //执行检测帐号是否有发帖 回帖权限
     Route::post('/checkpostauth','PostController@checkpostauth');
+    //用户激活或修改邮件地址
+    Route::get('/active','UserInfoController@activeuser');
 
     //必须验证是否登录才能执行的路由规则
     Route::group(['middleware'=>'homelogin'],function(){
@@ -164,8 +166,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
         Route::post('/updateface','UserInfoController@updateface');
         //用户发送验证邮件
         Route::post('/sendmail','UserInfoController@sendmail');
-        //用户激活或修改邮件地址
-        Route::get('/active','UserInfoController@activeuser');
+
         //用户退出登录
         Route::post('/loginout','LoginController@loginOut');
         //我的回复

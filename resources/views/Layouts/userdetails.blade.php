@@ -459,12 +459,12 @@
             {{config('webconfig.copyright')}}
             <br>
             <span class="c-sub">
-                <a href="http://about.kdnet.net/brief.php">关于凯迪</a>|
-                <a href="http://about.kdnet.net/join.php">合作联系</a>|
-                <a href="http://about.kdnet.net/join.php">广告服务</a>|
-                <a href="http://about.kdnet.net/copyright.php">法律声明</a>|
-                <a href="http://about.kdnet.net/join-us.php">加入凯迪</a>|
-                <a href="http://about.kdnet.net/sitemap.php">网站地图</a>
+                <a href="javascript:;">关于凯迪</a>|
+                <a href="javascript:;">合作联系</a>|
+                <a href="javascript:;">广告服务</a>|
+                <a href="javascript:;">法律声明</a>|
+                <a href="javascript:;">加入凯迪</a>|
+                <a href="javascript:;">网站地图</a>
             </span>
         </div>
     </div>
