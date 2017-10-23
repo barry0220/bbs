@@ -179,6 +179,17 @@ class UserInfoController extends Controller
                 'status'=>0,
                 'msg'=>'用户头像修改成功'
             ];
+
+            //获取新的用户信息
+            $newuser = UserHome::find(session('homeuser')->id);
+            //清空旧的session
+            Session::forget('homeuser');
+            //获取用户头像并存在session中
+            $userface = UserDetail::where('uid',$newuser->id)->select('profile')->first();
+
+            $newuser->userface = $userface['profile'];
+            //存入新的session
+            session(['homeuser'=>$newuser]);
         }else {
             $data=[
                 'status'=>1,
@@ -210,6 +221,17 @@ class UserInfoController extends Controller
 
         $email = $input['email'];
         $user = session('homeuser');
+
+        //判断邮箱是否存在
+        $ema = UserHome::where('email',$email)->first();
+
+        if($ema){
+            $data=[
+                'status'=>1,
+                'msg'=>'该邮箱已存在,请使用另外一个邮箱'
+            ];
+            return $data;
+        }
 
         $res = Mail::send('home.activemail', ['user' => $user,'email'=>$email], function ($message) use ($user,$email) {
             $message->to($email, $user->username)->subject('谜之论坛帐号激活邮件!');

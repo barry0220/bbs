@@ -267,7 +267,7 @@
 //                        alert($('#regphone').text());
                                 $('#regphone').text("发送成功请稍候.."+time+'S');
                             } else {
-                                $('#regphone').text("请重新验证手机");
+                                $('#regphone').text("重新验证手机");
                                 $('#regphone').attr('disabled',false);
                                 clearInterval(wait);
                                 wait=null;

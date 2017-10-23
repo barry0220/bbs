@@ -469,28 +469,11 @@
             </a>
         </div>
         <div class="copyright">
-            <p class="copyright-link">
-                <a target="_blank" href="javascript:;">
-                    琼ICP备09005089号-1
-                </a>
-                |
-                <a target="_blank" href="javascript:;">
-                    琼公网安备 46010802000011号
-                </a>
-                |
-                <a target="_blank" href="javascript:;">
-                    增值电信业务经营许可证琼B2-20170044
-                </a>
-                |
-                <a target="_blank" href="javascript:;">
-                    网络文化经营许可证 琼网文（2017）5780-224号
-                </a>
+            <p>
+                {{config('webconfig.law')}}
             </p>
             <p>
-                违法和不良信息举报电话：12377 0898-68555596 举报邮箱：jubao@12377.cn 广州广告热线：020-87386049
-            </p>
-            <p>
-                Copyright &copy;2017&nbsp;kdnet.net corporation. All Rights Reserved
+                {{config('webconfig.copyright')}}
             </p>
         </div>
         <div class="footer-app-download">
